@@ -47,3 +47,11 @@ button {
 *{
   box-sizing: border-box;
 }
+
+.d-block {
+  display: block !important;
+}
+
+.mx-10 {
+  margin: 0 10px;
+}
