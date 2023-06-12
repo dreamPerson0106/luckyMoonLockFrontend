@@ -14,7 +14,9 @@ const Footer = () => {
         <FacebookLogo width={15} height={29} />
         <WhatsappLogo width={33} height={29} />
       </div>
-      <p>Terms and Conditions | Privacy Policy</p>
+      <p>
+        Terms and Conditions <span className="mx-10">|</span> Privacy Policy
+      </p>
     </footer>
   );
 };
