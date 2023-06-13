@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import rootReducer from "./reducer";
+import rootReducer from "./reducers";
 // import setAuthToken from './utils/setAuthToken';
 
 const initialState = {
-  address: "",
+  wallet_address: "",
 };
 const middleware = [thunk];
 

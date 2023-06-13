@@ -4,10 +4,13 @@ import "./navbar.css";
 import { toast } from "react-hot-toast";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
+import { useDispatch } from "react-redux";
+import { addAddress } from "../../../actions";
 
 function Connect() {
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const { ethereum } = window;
+  const dispatch = useDispatch();
 
   detectEthereumProvider().then((provider) => {
     console.log(provider.isMetaMask);
@@ -21,8 +24,9 @@ function Connect() {
       await provider
         .send("eth_requestAccounts", [])
         .then((res) => {
-          console.log(res);
-          const address = res.toString();
+          console.log(res[0]);
+          const address = res[0].toString();
+          dispatch(addAddress(address));
           setWalletAddress(
             address.slice(0, 4) +
               "..." +
