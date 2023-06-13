@@ -4,4 +4,33 @@
     justify-content: space-between;
     width: 100%;
     height: 70px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.conbtn{
+    color: #fff;
+    background-color: #2A3666;    
+    align-items: center;
+    border-radius: 3px;
+    display: flex;
+    padding: 11px;
+    gap: 5px;
+}
+
+.conbtn:hover{
+    background-color: #3b4c93;
+    cursor: pointer;
+}
+
+.mode {
+    border-radius: 50%;
+    background-color: #2A3666; 
+    padding: 10px;
+
+}
+
+.mode:hover{
+    background-color: #3b4c93;
+    cursor: pointer;
 }
