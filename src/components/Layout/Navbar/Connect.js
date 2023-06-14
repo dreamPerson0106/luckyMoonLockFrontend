@@ -11,9 +11,9 @@ import { addAddress } from "../../../actions/index";
 function Connect() {
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const [connection, setConnection] = useState(null);
+  const [firstLoginTime, setFirstLoginTime] = useState();
   const { ethereum } = window;
   const dispatch = useDispatch();
-  
 
   let alerted = false;
   window.ethereum.on("accountsChanged", async () => {
@@ -24,37 +24,52 @@ function Connect() {
   });
 
   let provider = new ethers.providers.Web3Provider(window.ethereum);
-  // Check connection when the component mounts
-  useEffect(() => {
-    if (!ethereum || !ethereum.isMetaMask) {
-      return;
-    }
-
-    // Set the connection
-    setConnection(provider);
-  }, []);
 
   // On refresh, check connection again
   useEffect(() => {
-    async function getSignerAddress () {
-      const signer = await provider.getSigner()
-      let string = (await signer.getAddress()).toString();
-      setWalletAddress(
-        string.slice(0, 4) +  
-          "..." +
-          string.slice(string.length - 3, string.length)
-      );
+    async function getSignerAddress() {
+      try {
+        const signer = await provider.getSigner().getAddress();
+        let string = signer.toString();
+        setWalletAddress(
+          string.slice(0, 4) +
+            "..." +
+            string.slice(string.length - 3, string.length)
+        );
+      } catch (error) {
+        toast.error("Couldn't find your wallet address")
+      }
     }
+
+    let currentTime = new Date().getTime();
+    let storedFirstLoginTime = localStorage.getItem('firstLoginTime');
+    if (storedFirstLoginTime) {
+      // setFirstLoginTime(storedFirstLoginTime);
+      // localStorage.setItem('firstLoginTime', currentTime);
+      if(currentTime - storedFirstLoginTime > (0.1 * 60 * 1000)){
+        //disconnect wallet
+        console.log("sdfsdfadsf");
+        localStorage.setItem('firstLoginTime', currentTime);
+      }else{
+        setFirstLoginTime(storedFirstLoginTime);
+        // localStorage.setItem('firstLoginTime', currentTime);
+      }
+      
+    } else {
+      localStorage.setItem('firstLoginTime', currentTime);
+      setFirstLoginTime(currentTime);
+    }
+
     if (!ethereum || !ethereum.isMetaMask) {
       return;
     }
+
     // Check if connection is still valid
     if (!connection) {
       setConnection(provider);
-      getSignerAddress()
-      
+      getSignerAddress();
     }
-})  
+  });
 
   const connectWallet = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
