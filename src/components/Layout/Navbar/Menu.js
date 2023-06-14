@@ -32,8 +32,10 @@ const Menu = ({ menu_status, refs }) => {
       >
         <button
           className={`menu_rows ${
-            theme === "light" ? `text-[#0784c3]` : `text-[${font}]`
-          } hover:bg-[${hover}] `}
+            theme === "light"
+              ? `text-[#0784c3]`
+              : `text-[${font}] hover:bg-[${hover}] `
+          }`}
           onClick={clickChangeTheme("light")}
         >
           <LightLogo
@@ -48,8 +50,10 @@ const Menu = ({ menu_status, refs }) => {
         </button>
         <button
           className={`menu_rows text-[${font}] ${
-            theme === "dim" ? `text-[#0784c3]` : `text-[${font}]`
-          } hover:bg-[${hover}]`}
+            theme === "dim"
+              ? `text-[#0784c3]`
+              : `text-[${font}] hover:bg-[${hover}]`
+          }`}
           onClick={clickChangeTheme("dim")}
         >
           <DimLogo
@@ -64,8 +68,10 @@ const Menu = ({ menu_status, refs }) => {
         </button>
         <button
           className={`menu_rows text-[${font}] ${
-            theme === "dark" ? `text-[#0784c3]` : `text-[${font}]`
-          } hover:bg-[${hover}]`}
+            theme === "dark"
+              ? `text-[#0784c3]`
+              : `text-[${font}] hover:bg-[${hover}]`
+          }`}
           onClick={clickChangeTheme("dark")}
         >
           <DarkLogo
