@@ -1,6 +1,6 @@
 import React from "react";
 
-const Logo = ({width, height}) => {
+const Logo = ({ width, height }) => {
   return (
     <svg
       width={width}
@@ -50,8 +50,8 @@ const Logo = ({width, height}) => {
           y2="16.5618"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E08326" />
-          <stop offset="1" stop-color="#F3D431" />
+          <stop stopColor="#E08326" />
+          <stop offset="1" stopColor="#F3D431" />
         </linearGradient>
       </defs>
     </svg>
