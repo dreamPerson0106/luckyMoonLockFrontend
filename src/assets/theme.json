@@ -1,0 +1,20 @@
+{
+  "light": {
+    "font": "#212529",
+    "fontHolder": "#6c757d",
+    "backgoround": "#fff",
+    "backgroundHolder": "#162138"
+  },
+  "dim": {
+    "font": "#e3e9f1",
+    "fontHolder": "#93a3b8",
+    "backgoround": "#111a2e",
+    "backgroundHolder": "#162138"
+  },
+  "dark": {
+    "font": "#f5f5f5",
+    "fontHolder": "#bbbbbb",
+    "backgoround": "#111111",
+    "backgroundHolder": "#151515"
+  }
+}

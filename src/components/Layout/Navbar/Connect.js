@@ -16,7 +16,9 @@ function Connect() {
     console.log(provider.isMetaMask);
   });
 
-  console.log(ethereum.isMetaMask);
+  
+
+  console.log(window.ethereum.isConnected())
 
   const connectWallet = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
