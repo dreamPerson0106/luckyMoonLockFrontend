@@ -9,7 +9,7 @@ import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer d-block">
+    <footer className="footer d-block fixed bottom-0 w-full">
       <div className="footer">
         <TwitterLogo width={33} height={29} />
         <TelegramLogo width={33} height={29} />
