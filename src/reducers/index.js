@@ -1,7 +1,9 @@
-import { ADD_ADDRESS, REMOVE_ADDRESS } from "../actions/types";
+import { ADD_ADDRESS, REMOVE_ADDRESS, CHANGE_THEME } from "../actions/types";
+import theme from "../assets/theme.json";
 
 const initialState = {
   wallet_address: "",
+  ...theme.dark,
 };
 
 function rootReducer(state = initialState, action) {
@@ -13,6 +15,9 @@ function rootReducer(state = initialState, action) {
 
     case REMOVE_ADDRESS:
       return { ...state, wallet_address: "" };
+
+    case CHANGE_THEME:
+      return { ...state, ...payload };
 
     default:
       return state;

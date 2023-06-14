@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Cryptologo from "../../Logos/Cryptologo";
+import { Cryptologo } from "../../../assets/Icons";
 import "./navbar.css";
 import { toast } from "react-hot-toast";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addAddress } from "../../../actions";
 
 function Connect() {
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const { ethereum } = window;
+  const { button, hover, font, background, backgroundHolder } = useSelector(
+    (state) => state
+  );
   const dispatch = useDispatch();
 
   detectEthereumProvider().then((provider) => {
     console.log(provider.isMetaMask);
   });
-
-  
-
-  console.log(window.ethereum.isConnected())
 
   const connectWallet = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
@@ -26,7 +25,6 @@ function Connect() {
       await provider
         .send("eth_requestAccounts", [])
         .then((res) => {
-          console.log(res[0]);
           const address = res[0].toString();
           dispatch(addAddress(address));
           setWalletAddress(
@@ -42,8 +40,11 @@ function Connect() {
   };
   return (
     <>
-      <button className="conbtn" onClick={connectWallet}>
-        <Cryptologo width={11} height={18} />
+      <button
+        className={`conbtn bg-[${button}] text-[${font}] border-[${backgroundHolder}] hover:bg-[${hover}]`}
+        onClick={connectWallet}
+      >
+        <Cryptologo width={11} height={18} color={font} />
         {walletAddress}
       </button>
     </>

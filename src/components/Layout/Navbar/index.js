@@ -1,12 +1,15 @@
 import React from "react";
-import Logo from "../../Logos/Logo.js";
+import { Logo } from "../../../assets/Icons";
 import Connect from "./Connect.js";
 import Mode from "./Mode.js";
 import "./navbar.css";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const { background, backgroundHolder, theme } = useSelector((state) => state);
+
   return (
-    <nav className="navbar">
+    <nav className={`border-[${backgroundHolder}] bg-[${background}] navbar `}>
       <Logo width={"301"} height={"55"} />
       <div style={{ display: "inline-flex", gap: 30, alignItems: "center" }}>
         <Connect />

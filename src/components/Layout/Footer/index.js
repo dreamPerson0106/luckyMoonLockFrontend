@@ -1,8 +1,10 @@
 import React from "react";
-import TwitterLogo from "../../Logos/TwitterLogo.js";
-import TelegramLogo from "../../Logos/TelegramLogo.js";
-import FacebookLogo from "../../Logos/FacebookLogo.js";
-import WhatsappLogo from "../../Logos/WhatsappLogo.js";
+import {
+  TwitterLogo,
+  TelegramLogo,
+  FacebookLogo,
+  WhatsappLogo,
+} from "../../../assets/Icons.js";
 import "./footer.css";
 
 const Footer = () => {

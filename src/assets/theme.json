@@ -2,19 +2,28 @@
   "light": {
     "font": "#212529",
     "fontHolder": "#6c757d",
-    "backgoround": "#fff",
-    "backgroundHolder": "#162138"
+    "background": "#fff",
+    "backgroundHolder": "#e9ecef",
+    "button": "#fff",
+    "hover": "#e9ecef",
+    "theme": "light"
   },
   "dim": {
     "font": "#e3e9f1",
     "fontHolder": "#93a3b8",
-    "backgoround": "#111a2e",
-    "backgroundHolder": "#162138"
+    "background": "#111a2e",
+    "button": "#162138",
+    "backgroundHolder": "#495057",
+    "hover": "#3a4759",
+    "theme": "dim"
   },
   "dark": {
     "font": "#f5f5f5",
     "fontHolder": "#bbbbbb",
-    "backgoround": "#111111",
-    "backgroundHolder": "#151515"
+    "background": "#111111",
+    "button": "#151515",
+    "backgroundHolder": "#1b1b1b",
+    "hover": "#252525",
+    "theme": "dark"
   }
 }
