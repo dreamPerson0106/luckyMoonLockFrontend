@@ -9,6 +9,7 @@ const initialState = {
   wallet_address: "",
   ...theme.dark,
 };
+
 const middleware = [thunk];
 
 const store = createStore(
