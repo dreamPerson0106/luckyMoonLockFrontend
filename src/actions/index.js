@@ -1,5 +1,4 @@
-import { ADD_ADDRESS, CHANGE_THEME } from "./types.js";
-import { REMOVE_ADDRESS } from "../actions/types";
+import { ADD_ADDRESS, CHANGE_THEME, REMOVE_ADDRESS } from "./types.js";
 
 export const addAddress = (address) => ({
   type: ADD_ADDRESS,

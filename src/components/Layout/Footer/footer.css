@@ -1,10 +1,14 @@
 .footer {
   display: flex;
-  color: #ffffff;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
   gap: 47px;
   padding: 22px;
   text-align: center;
+}
+
+.mainfooter {
+  border-style: solid;
+  border-top-width: 1px;
+  box-shadow: 0 -3px 10px rgba(151, 164, 175, 0.05);
 }
