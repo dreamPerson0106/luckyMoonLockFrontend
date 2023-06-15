@@ -11,19 +11,40 @@ import { addAddress } from "../../../actions/index";
 function Connect() {
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const [connection, setConnection] = useState(null);
+  const [currentWalletAddress, setCurrentWalletAddress] = useState("");
   const [firstLoginTime, setFirstLoginTime] = useState();
   const { ethereum } = window;
   const dispatch = useDispatch();
 
-  let alerted = false;
-  window.ethereum.on("accountsChanged", async () => {
-    if (!alerted) {
-      alert("kkkkk");
-      alerted = true;
-    }
-  });
-
   let provider = new ethers.providers.Web3Provider(window.ethereum);
+
+  const convStr = (str) => {
+    const temp =
+      str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
+    return temp;
+  };
+ 
+
+  window.ethereum.on("accountsChanged", async (accounts) => {
+    if (
+      (await provider.getSigner()) &&
+      currentWalletAddress === window.ethereum.selectedAddress &&
+      window.ethereum.selectedAddress
+    ) {
+      console.log("Found the address");
+      setWalletAddress(convStr(window.ethereum.selectedAddress));
+    } else if (
+      (await provider.getSigner()) &&
+      currentWalletAddress !== window.ethereum.selectedAddress &&
+      window.ethereum.selectedAddress
+    ) {
+      setWalletAddress(convStr(window.ethereum.selectedAddress));
+    } else {
+      console.log("disconnected");
+      setWalletAddress("CONNECT");
+    }
+    setCurrentWalletAddress(window.ethereum.selectedAddress);
+  });
 
   // On refresh, check connection again
   useEffect(() => {
@@ -37,35 +58,35 @@ function Connect() {
             string.slice(string.length - 3, string.length)
         );
       } catch (error) {
-        toast.error("Couldn't find your wallet address")
+        toast.error("Couldn't find your wallet address");
       }
-    }
-
-    let currentTime = new Date().getTime();
-    let storedFirstLoginTime = localStorage.getItem('firstLoginTime');
-    if (storedFirstLoginTime) {
-      // setFirstLoginTime(storedFirstLoginTime);
-      // localStorage.setItem('firstLoginTime', currentTime);
-      if(currentTime - storedFirstLoginTime > (0.1 * 60 * 1000)){
-        //disconnect wallet
-        console.log("sdfsdfadsf");
-        localStorage.setItem('firstLoginTime', currentTime);
-      }else{
-        setFirstLoginTime(storedFirstLoginTime);
-        // localStorage.setItem('firstLoginTime', currentTime);
-      }
-      
-    } else {
-      localStorage.setItem('firstLoginTime', currentTime);
-      setFirstLoginTime(currentTime);
     }
 
     if (!ethereum || !ethereum.isMetaMask) {
       return;
     }
 
+    let currentTime = new Date().getTime();
+    let storedFirstLoginTime = localStorage.getItem("firstLoginTime");
+    if (storedFirstLoginTime) {
+      if (currentTime - storedFirstLoginTime > 0.1 * 60 * 1000) {
+        //disconnect wallet
+        console.log(currentTime - storedFirstLoginTime);
+        localStorage.setItem("firstLoginTime", currentTime);
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        setWalletAddress("CONNECT");
+        setConnection(null);
+      } else {
+        setFirstLoginTime(storedFirstLoginTime);
+      }
+    } else {
+      localStorage.setItem("firstLoginTime", currentTime);
+      setFirstLoginTime(currentTime);
+    }
+
     // Check if connection is still valid
     if (!connection) {
+      console.log("checking connection");
       setConnection(provider);
       getSignerAddress();
     }
@@ -81,10 +102,9 @@ function Connect() {
           const address = res[0].toString();
           dispatch(addAddress(address));
           setWalletAddress(
-            address.slice(0, 4) +
-              "..." +
-              address.slice(address.length - 3, address.length)
+            convStr(address)
           );
+          setCurrentWalletAddress(address);
         })
         .catch((err) => toast.error(err.message));
     } else {
