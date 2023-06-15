@@ -1,12 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import Menu from "./Menu";
-import { useSelector } from "react-redux";
-import { LightLogo, DarkLogo, DimLogo } from "../../../assets/Icons";
+import themes from "../../../assets/theme.json";
+import { useDispatch, useSelector } from "react-redux";
+import { changeTheme } from "../../../actions/index";
+import { LightLogo, DarkLogo, DimLogo, Setting } from "../../../assets/Icons";
 
 function Mode() {
-  const { button, hover, backgroundHolder, theme } = useSelector(
-    (state) => state
-  );
+  const dispatch = useDispatch();
+  const {
+    font,
+    fontHolder,
+    button,
+    hover,
+    background,
+    backgroundHolder,
+    theme,
+  } = useSelector((state) => state);
   const menu_bar = useRef(null);
   const mode_button = useRef(null);
   const [menu_status, setMenuStatus] = useState(false);
@@ -61,6 +69,77 @@ function Mode() {
     }
   };
 
+  const clickChangeTheme = (state) => () => {
+    switch (state) {
+      case "light":
+        return dispatch(changeTheme(themes.light));
+      case "dim":
+        return dispatch(changeTheme(themes.dim));
+      case "dark":
+        return dispatch(changeTheme(themes.dark));
+
+      default:
+        break;
+    }
+  };
+
+  const buttonArray = [
+    {
+      component: (
+        <LightLogo
+          width={22}
+          height={22}
+          twidth={0}
+          theight={22}
+          color={theme === "light" ? "#0784c3" : fontHolder}
+          scale={0.01}
+        />
+      ),
+      text: "Light",
+    },
+    {
+      component: (
+        <DimLogo
+          width={22}
+          height={22}
+          twidth={0}
+          theight={22}
+          color={theme === "dim" ? "#0784c3" : fontHolder}
+          scale={0.01}
+        />
+      ),
+      text: "Dim",
+    },
+    {
+      component: (
+        <DarkLogo
+          width={22}
+          height={22}
+          twidth={0}
+          theight={22}
+          color={theme === "dark" ? "#0784c3" : fontHolder}
+          scale={0.01}
+        />
+      ),
+      text: "Dark",
+    },
+    {
+      component: (
+        <Setting
+          width={22}
+          height={22}
+          twidth={9}
+          theight={22}
+          color={fontHolder}
+          scale={0.025}
+        />
+      ),
+      text: "Setting",
+    },
+  ];
+
+  const spliter_idex = 3;
+
   useEffect(() => {
     function handleOutsideClick(event) {
       if (
@@ -94,13 +173,34 @@ function Mode() {
       >
         {themeModeIcon()}
       </button>
-      <Menu
-        menu_status={menu_status}
-        onBlur={() => {
-          setMenuStatus(false);
-        }}
-        refs={menu_bar}
-      />
+      {menu_status ? (
+        <div
+          className={`menu_box bg-[${background}] border-[${backgroundHolder}]`}
+          ref={menu_bar}
+        >
+          {buttonArray.map((item, index) => {
+            return (
+              <>
+                <button
+                  key={index}
+                  className={`menu_rows ${
+                    theme === item.text.toLowerCase()
+                      ? `text-[#0784c3]`
+                      : `text-[${font}] hover:bg-[${hover}] `
+                  }`}
+                  onClick={clickChangeTheme(item.text.toLowerCase())}
+                >
+                  {item.component}
+                  {item.text}
+                </button>
+                {spliter_idex - 1 === index ? <hr /> : <></>}
+              </>
+            );
+          })}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

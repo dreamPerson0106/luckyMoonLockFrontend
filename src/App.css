@@ -38,6 +38,10 @@
 }
 
 button {
+  border-color: #e9ecef;
+}
+
+input {
   outline: none;
   border: none;
   border-radius: 0;
