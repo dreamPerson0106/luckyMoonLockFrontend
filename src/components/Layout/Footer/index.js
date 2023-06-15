@@ -12,7 +12,7 @@ const Footer = () => {
   const { font, background, backgroundholder } = useSelector((state) => state);
   return (
     <footer
-      className={`footer d-block fixed bottom-0 w-full bg-[${background}] text-[${font}] border-[${backgroundholder}] border-t-2`}
+      className={`footer d-block fixed bottom-0 w-full bg-[${background}] text-[${font}] border-[${backgroundholder}] border-t-[1px]`}
     >
       <div className="footer">
         <TwitterLogo width={33} height={29} color={font} />

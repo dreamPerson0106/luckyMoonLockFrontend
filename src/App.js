@@ -4,7 +4,7 @@ import "./App.css";
 import Footer from "./Components/Layout/Footer";
 import Navbar from "./Components/Layout/Navbar";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./store";
 
 function App() {
@@ -18,6 +18,11 @@ function App() {
           <Footer />
         </>
       ),
+      children: [
+        {
+          path: "/",
+        },
+      ],
     },
   ]);
 

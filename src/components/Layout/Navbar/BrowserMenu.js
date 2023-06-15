@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { UniswapIcon, PancakeIcon, CamelotIcon } from "../../../assets/Icons";
+import { Link } from "react-router-dom";
 
 const BrowserMenu = ({ children }) => {
   const { font, fontHolder, background, backgroundHolder, hover, theme } =
@@ -7,7 +9,41 @@ const BrowserMenu = ({ children }) => {
   const [menu_status, setMenuStatus] = useState(false);
   const btn_self = useRef(null);
   const browser_menu = useRef(null);
-  const buttonArray = [{ component: "ss", text: "ss" }];
+  const buttonArray = [
+    {
+      component: <UniswapIcon width={"30px"} height={"30px"} />,
+      text: "Uniswap v2",
+    },
+    {
+      component: <PancakeIcon width={"30px"} height={"30px"} />,
+      text: "Pancakeswap v2",
+    },
+    {
+      component: <CamelotIcon width={"30px"} height={"30px"} />,
+      text: "Camelot",
+    },
+  ];
+
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (
+        browser_menu.current &&
+        !browser_menu.current.contains(event.target) &&
+        btn_self.current &&
+        !btn_self.current.contains(event.target)
+      ) {
+        // Clicked outside the div
+        setMenuStatus(false);
+      }
+    }
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [browser_menu]);
+
   return (
     <div className=" relative">
       <button
@@ -21,20 +57,21 @@ const BrowserMenu = ({ children }) => {
       {menu_status ? (
         <div
           className={`menu_box bg-[${background}] border-[${backgroundHolder}]`}
-          style={{ top: 30, right: "-70%" }}
+          style={{ top: 30, right: "-70%", minWidth: 250 }}
           ref={browser_menu}
         >
           <input
             type="text"
             placeholder="Select an exchange"
-            className={`text-xs text-[${font}] border-b-2 border-[${backgroundHolder}]`}
+            className={`px-4 text-xs text-[${font}] border-b-[1px] border-[${backgroundHolder}] bg-[${background}]`}
           />
 
           {buttonArray.map((item, index) => {
             return (
               <>
                 <hr />
-                <button
+                <Link
+                  to={item.text.replace(" ", "").toLowerCase()}
                   key={index}
                   className={`menu_rows ${
                     theme === item.text.toLowerCase()
@@ -45,10 +82,14 @@ const BrowserMenu = ({ children }) => {
                 >
                   {item.component}
                   {item.text}
-                </button>
+                </Link>
               </>
             );
           })}
+          <hr />
+          <div className={`flex text-xs px-4 py-1 text-[${fontHolder}]`}>
+            other exchanges
+          </div>
         </div>
       ) : (
         <></>
