@@ -5,6 +5,7 @@ import Mode from "./Mode.js";
 import "./navbar.css";
 import { useSelector } from "react-redux";
 import BrowserMenu from "./BrowserMenu.js";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const { font, background, backgroundHolder, theme } = useSelector(
@@ -15,7 +16,8 @@ function Navbar() {
     <nav className={`border-[${backgroundHolder}] bg-[${background}] navbar `}>
       <div className={`text-[${font}] inline-flex items-center gap-9`}>
         <Logo width={"301"} height={"55"} />
-        <p>SERVICES</p> <BrowserMenu>BROWSER</BrowserMenu> <p>Doc</p>
+        <Link to={"#"}>SERVICES</Link> <BrowserMenu>BROWSER</BrowserMenu>{" "}
+        <Link to={"#"}>Doc</Link>
       </div>
       <div style={{ display: "inline-flex", gap: 30, alignItems: "center" }}>
         <Connect />
