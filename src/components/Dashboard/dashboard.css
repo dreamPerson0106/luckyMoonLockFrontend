@@ -1,0 +1,4 @@
+.box {
+  @apply gap-5 flex flex-col border-2 border-solid p-4 rounded-lg;
+  box-shadow: 0 5px 10px rgba(151, 164, 175, 0.05);
+}

@@ -10,9 +10,12 @@ import {
   NewLockIcon,
   RegularLockerIcon,
 } from "../../assets/Icons";
+import "./dashboard.css";
 
 const Dashboard = () => {
-  const { font, fontHolder, backgroundHolder } = useSelector((state) => state);
+  const { font, fontHolder, background, backgroundHolder } = useSelector(
+    (state) => state
+  );
   return (
     <div className=" container mx-auto pt-28">
       <div className="flex w-full justify-betweens mb-5">
@@ -44,7 +47,7 @@ const Dashboard = () => {
         <div className="w-1/2">
           <h3 className={`text-[${font}] text-xl pb-3`}>LuckyMoon Services</h3>
           <div
-            className={`gap-5 flex flex-col border-[${backgroundHolder}] border-2 border-solid p-4 rounded-lg`}
+            className={`box bg-[${background}] border-[${backgroundHolder}]`}
           >
             <div className="flex gap-5 items-center">
               <LockedLiquidityTokenIcon width={76} height={76} />
@@ -91,7 +94,7 @@ const Dashboard = () => {
             </h3>
           </div>
           <div
-            className={`flex flex-col gap-5 border-[${backgroundHolder}] border-2 border-solid p-4 rounded-lg`}
+            className={`box bg-[${background}] border-[${backgroundHolder}] `}
           >
             <div className="flex gap-5 items-center text-xs w-full">
               <NewLockIcon width={45} height={45} />
