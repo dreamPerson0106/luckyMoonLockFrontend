@@ -91,66 +91,72 @@ const Dashboard = () => {
             </h3>
           </div>
           <div
-            className={`gap-5 flex flex-col gap-5 flex flex-col border-[${backgroundHolder}] border-2 border-solid p-4 rounded-lg`}
+            className={`flex flex-col gap-5 border-[${backgroundHolder}] border-2 border-solid p-4 rounded-lg`}
           >
-            <div className="flex gap-5 items-center text-xs">
+            <div className="flex gap-5 items-center text-xs w-full">
               <NewLockIcon width={45} height={45} />
-              <div>
-                <h3 className={`text-[${font}]`}>USDC</h3>
-                <p className={`text-[${fontHolder}]`}>KIRA</p>
-              </div>
-              <div>
-                <p className={`text-[${fontHolder}]`}>Liquidity</p>
-                <h3 className={`text-[${font}]`}>$352K</h3>
-              </div>
-              <div className="text-right">
-                <h3 className={`text-[${font}] inline-flex gap-1`}>
-                  <LittleLockerIcon width={12} height={14} />
-                  352K
-                </h3>
-                <p className={`text-[${fontHolder}]`}>
-                  99.9% - next in 5 months
-                </p>
+              <div className="flex justify-between w-full">
+                <div>
+                  <h3 className={`text-[${font}]`}>USDC</h3>
+                  <p className={`text-[${fontHolder}]`}>KIRA</p>
+                </div>
+                <div>
+                  <p className={`text-[${fontHolder}]`}>Liquidity</p>
+                  <h3 className={`text-[${font}]`}>$352K</h3>
+                </div>
+                <div className="text-right">
+                  <h3 className={`text-[${font}] inline-flex gap-1`}>
+                    <LittleLockerIcon width={12} height={14} />
+                    352K
+                  </h3>
+                  <p className={`text-[${fontHolder}]`}>
+                    99.9% - next in 5 months
+                  </p>
+                </div>
               </div>
             </div>
             <div className="flex gap-5 items-center text-xs">
               <NewLockIcon width={45} height={45} />
-              <div>
-                <h3 className={`text-[${font}]`}>USDC</h3>
-                <p className={`text-[${fontHolder}]`}>KIRA</p>
-              </div>
-              <div>
-                <p className={`text-[${fontHolder}]`}>Liquidity</p>
-                <h3 className={`text-[${font}]`}>$352K</h3>
-              </div>
-              <div className="text-right">
-                <h3 className={`text-[${font}] inline-flex gap-1`}>
-                  <LittleLockerIcon width={12} height={14} />
-                  352K
-                </h3>
-                <p className={`text-[${fontHolder}]`}>
-                  99.9% - next in 5 months
-                </p>
+              <div className="flex justify-between w-full">
+                <div>
+                  <h3 className={`text-[${font}]`}>USDC</h3>
+                  <p className={`text-[${fontHolder}]`}>KIRA</p>
+                </div>
+                <div>
+                  <p className={`text-[${fontHolder}]`}>Liquidity</p>
+                  <h3 className={`text-[${font}]`}>$352K</h3>
+                </div>
+                <div className="text-right">
+                  <h3 className={`text-[${font}] inline-flex gap-1`}>
+                    <LittleLockerIcon width={12} height={14} />
+                    352K
+                  </h3>
+                  <p className={`text-[${fontHolder}]`}>
+                    99.9% - next in 5 months
+                  </p>
+                </div>
               </div>
             </div>
             <div className="flex gap-5 items-center text-xs w-full">
               <NewLockIcon width={45} height={45} />
-              <div>
-                <h3 className={`text-[${font}]`}>USDC</h3>
-                <p className={`text-[${fontHolder}]`}>KIRA</p>
-              </div>
-              <div>
-                <p className={`text-[${fontHolder}]`}>Liquidity</p>
-                <h3 className={`text-[${font}]`}>$352K</h3>
-              </div>
-              <div className="text-right">
-                <h3 className={`text-[${font}] inline-flex gap-1`}>
-                  <LittleLockerIcon width={12} height={14} />
-                  352K
-                </h3>
-                <p className={`text-[${fontHolder}]`}>
-                  99.9% - next in 5 months
-                </p>
+              <div className="flex justify-between w-full">
+                <div>
+                  <h3 className={`text-[${font}]`}>USDC</h3>
+                  <p className={`text-[${fontHolder}]`}>KIRA</p>
+                </div>
+                <div>
+                  <p className={`text-[${fontHolder}]`}>Liquidity</p>
+                  <h3 className={`text-[${font}]`}>$352K</h3>
+                </div>
+                <div className="text-right">
+                  <h3 className={`text-[${font}] inline-flex gap-1`}>
+                    <LittleLockerIcon width={12} height={14} />
+                    352K
+                  </h3>
+                  <p className={`text-[${fontHolder}]`}>
+                    99.9% - next in 5 months
+                  </p>
+                </div>
               </div>
             </div>
           </div>
