@@ -11,10 +11,12 @@ import {
   RegularLockerIcon,
 } from "../../assets/Icons";
 import "./dashboard.css";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const { font, fontHolder, background, backgroundHolder, border } =
-    useSelector((state) => state);
+  const { font, fontHolder, background, border } = useSelector(
+    (state) => state
+  );
   return (
     <div className=" container max-w-7xl mx-auto ">
       <div className="flex w-full justify-betweens my-16">
@@ -46,17 +48,19 @@ const Dashboard = () => {
         <div className="w-1/2">
           <h3 className={`text-[${font}] text-xl pb-3`}>LuckyMoon Services</h3>
           <div className={`box bg-[${background}] border-[${border}]`}>
-            <div className="flex gap-5 items-center">
-              <LockedLiquidityTokenIcon width={76} height={76} />
-              <div>
-                <h3 className={`text-xl font-medium text-[${font}]`}>
-                  Locked liquidities and tokens
-                </h3>
-                <p className={`text-[${fontHolder}]`}>
-                  Read about all of our services.
-                </p>
+            <Link to="services">
+              <div className="flex gap-5 items-center">
+                <LockedLiquidityTokenIcon width={76} height={76} />
+                <div>
+                  <h3 className={`text-xl font-medium text-[${font}]`}>
+                    Locked liquidities and tokens
+                  </h3>
+                  <p className={`text-[${fontHolder}]`}>
+                    Read about all of our services.
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
             <div className="flex gap-5 items-center">
               <LockerIcon width={76} height={76} />
               <div>

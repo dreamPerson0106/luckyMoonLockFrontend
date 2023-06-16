@@ -2,7 +2,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function DialogHeader({ children, close }) {
-  const { font, background, backgroundHolder } = useSelector((state) => state);
+  const { font, background, backgroundHolder, border } = useSelector(
+    (state) => state
+  );
 
   return (
     <div

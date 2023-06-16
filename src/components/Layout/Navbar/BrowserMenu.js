@@ -4,8 +4,15 @@ import { UniswapIcon, PancakeIcon, CamelotIcon } from "../../../assets/Icons";
 import { Link } from "react-router-dom";
 
 const BrowserMenu = ({ children }) => {
-  const { font, fontHolder, background, backgroundHolder, hover, theme } =
-    useSelector((state) => state);
+  const {
+    font,
+    fontHolder,
+    background,
+    backgroundHolder,
+    border,
+    hover,
+    theme,
+  } = useSelector((state) => state);
   const [menu_status, setMenuStatus] = useState(false);
   const btn_self = useRef(null);
   const browser_menu = useRef(null);

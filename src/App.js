@@ -1,10 +1,7 @@
 // import logo from './logo.svg';
-import { Toaster } from "react-hot-toast";
 import "./App.css";
-import Footer from "./Components/Layout/Footer";
-import Navbar from "./Components/Layout/Navbar";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
@@ -22,13 +19,17 @@ function App() {
           element: <Dashboard />,
         },
         {
-          path: "liqlock",
+          path: "services/liqlock",
           element: <LiqLock />,
         },
         {
           path: "services",
           element: <Services />,
         },
+        // {
+        //   path: "tokenlock"
+        //   element: <TokenLock />
+        // }
       ],
     },
   ]);

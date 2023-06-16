@@ -181,9 +181,8 @@ function Mode() {
         >
           {buttonArray.map((item, index) => {
             return (
-              <>
+              <div key={index}>
                 <button
-                  key={index}
                   className={`menu_rows ${
                     theme === item.text.toLowerCase()
                       ? `text-[#0784c3]`
@@ -195,7 +194,7 @@ function Mode() {
                   {item.text}
                 </button>
                 {spliter_idex - 1 === index ? <hr /> : <></>}
-              </>
+              </div>
             );
           })}
         </div>
