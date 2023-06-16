@@ -127,20 +127,20 @@ function Connect() {
         <Cryptologo width={11} height={18} color={font} />
         {walletAddress}
       </button>
-      {/* <WalletConnectDialog
-        modalState={walletDialogStatus}
-        closeModal={() => {
-          setWalletDialogStatus(false);
-        }}
-        buttonRef={btnSelf}
-      /> */}
-      <SwitchNetDialog
+      <WalletConnectDialog
         modalState={walletDialogStatus}
         closeModal={() => {
           setWalletDialogStatus(false);
         }}
         buttonRef={btnSelf}
       />
+      {/* <SwitchNetDialog
+        modalState={walletDialogStatus}
+        closeModal={() => {
+          setWalletDialogStatus(false);
+        }}
+        buttonRef={btnSelf}
+      /> */}
     </>
   );
 }

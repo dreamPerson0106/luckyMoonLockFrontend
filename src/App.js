@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
+import LiqLock from "./Components/LiquidityLock";
 import Layout from "./Components/Layout";
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
         {
           path: "",
           element: <Dashboard />,
+        },
+        {
+          path: "liqlock",
+          element: <LiqLock />,
         },
       ],
     },
