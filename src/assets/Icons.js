@@ -240,8 +240,8 @@ export const UniswapIcon = ({ width, height }) => {
           y2="11.5169"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E08326" />
-          <stop offset="1" stop-color="#F3D431" />
+          <stop stopColor="#E08326" />
+          <stop offset="1" stopColor="#F3D431" />
         </linearGradient>
       </defs>
     </svg>
@@ -426,9 +426,9 @@ export const BitcoinIcon = ({ width, height }) => {
           width="42.9958"
           height="43"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -463,7 +463,7 @@ export const BitcoinIcon = ({ width, height }) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#F9AA4B" />
-          <stop offset="1" stop-color="#F7931A" />
+          <stop offset="1" stopColor="#F7931A" />
         </linearGradient>
       </defs>
     </svg>
@@ -513,7 +513,7 @@ export const LockedLiquidityTokenIcon = ({ width, height }) => {
           y2="28.4024"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E08326" />
+          <stop stopColor="#E08326" />
           <stop offset="1" stopColor="#F3D431" />
         </linearGradient>
       </defs>
@@ -892,8 +892,8 @@ export const GroupLogo = ({ width, height }) => {
           y2="28.4024"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E08326" />
-          <stop offset="1" stop-color="#F3D431" />
+          <stop stopColor="#E08326" />
+          <stop offset="1" stopColor="#F3D431" />
         </linearGradient>
       </defs>
     </svg>

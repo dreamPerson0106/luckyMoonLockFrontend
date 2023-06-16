@@ -100,7 +100,7 @@ function Connect() {
   });
 
   const connectWallet = async () => {
-    setWalletDialogStatus(!walletDialogStatus);
+    // setWalletDialogStatus(!walletDialogStatus);
     const provider = new ethers.providers.Web3Provider(ethereum);
     if (typeof ethereum !== "undefined") {
       await provider
@@ -130,7 +130,7 @@ function Connect() {
       <WalletConnectDialog
         modalState={walletDialogStatus}
         closeModal={() => {
-          setWalletDialogStatus(false);
+          // setWalletDialogStatus(false);
         }}
         buttonRef={btnSelf}
       />

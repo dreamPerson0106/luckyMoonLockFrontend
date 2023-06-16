@@ -65,7 +65,7 @@ const LiqLock = () => {
         style={{ boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)" }}
       >
         <label
-          for="large"
+          htmlFor="large"
           className="block mb-2 text-base font-medium text-[#8C8C8C]"
         >
           Selected Network
@@ -94,9 +94,9 @@ const LiqLock = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M19 9l-7 7-7-7"
               ></path>
             </svg>
@@ -145,7 +145,7 @@ const LiqLock = () => {
           )}
         </div>
         <label
-          for="large"
+          htmlFor="large"
           className="block mt-10 mb-2 text-base font-medium text-[#8C8C8C]"
         >
           Lock Liquidity on which exchange?
