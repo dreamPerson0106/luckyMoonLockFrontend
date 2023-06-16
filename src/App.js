@@ -10,6 +10,7 @@ import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
 import SushiLock from "./Components/SushiLock";
 import Layout from "./Components/Layout";
+import Services from "./Components/Services";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ function App() {
         {
           path: "sushi-v1/locker",
           element: <SushiLock />,
+        },
+        {
+          path: "services",
+          element: <Services />,
         },
       ],
     },

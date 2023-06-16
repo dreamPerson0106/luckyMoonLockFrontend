@@ -8,15 +8,17 @@ import BrowserMenu from "./BrowserMenu.js";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const { font, background, backgroundHolder, theme } = useSelector(
+  const { font, background, backgroundHolder, border } = useSelector(
     (state) => state
   );
 
   return (
-    <nav className={`border-[${backgroundHolder}] bg-[${background}] navbar `}>
+    <nav className={`border-[${border}] bg-[${background}] navbar `}>
       <div className={`text-[${font}] inline-flex items-center gap-9`}>
-        <Logo width={"301"} height={"55"} />
-        <Link to={"#"}>SERVICES</Link> <BrowserMenu>BROWSER</BrowserMenu>{" "}
+        <Link to="/">
+          <Logo width={"301"} height={"55"} />
+        </Link>
+        <Link to={"services"}>SERVICES</Link> <BrowserMenu>BROWSER</BrowserMenu>{" "}
         <Link to={"#"}>Doc</Link>
       </div>
       <div style={{ display: "inline-flex", gap: 30, alignItems: "center" }}>

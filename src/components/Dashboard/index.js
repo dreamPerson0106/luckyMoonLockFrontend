@@ -10,13 +10,15 @@ import {
   NewLockIcon,
   RegularLockerIcon,
 } from "../../assets/Icons";
+import "./dashboard.css";
 
 const Dashboard = () => {
-  const { font, fontHolder, backgroundHolder } = useSelector((state) => state);
+  const { font, fontHolder, background, backgroundHolder, border } =
+    useSelector((state) => state);
   return (
-    <div className=" container mx-auto pt-28">
-      <div className="flex w-full justify-betweens mb-5">
-        <div className="w-1/2">
+    <div className=" container max-w-7xl mx-auto ">
+      <div className="flex w-full justify-betweens my-16">
+        <div className="w-2/3">
           <h1 className={`text-2xl text-[${font}] mb-2 font-medium`}>
             Popular LuckyMoon Locker
           </h1>
@@ -40,12 +42,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-around gap-4">
+      <div className="flex justify-between gap-10">
         <div className="w-1/2">
           <h3 className={`text-[${font}] text-xl pb-3`}>LuckyMoon Services</h3>
-          <div
-            className={`gap-5 flex flex-col border-[${backgroundHolder}] border-2 border-solid p-4 rounded-lg`}
-          >
+          <div className={`box bg-[${background}] border-[${border}]`}>
             <div className="flex gap-5 items-center">
               <LockedLiquidityTokenIcon width={76} height={76} />
               <div>
@@ -90,9 +90,7 @@ const Dashboard = () => {
               {"New Liquidity Locks (>100k)"}
             </h3>
           </div>
-          <div
-            className={`flex flex-col gap-5 border-[${backgroundHolder}] border-2 border-solid p-4 rounded-lg`}
-          >
+          <div className={`box bg-[${background}] border-[${border}] `}>
             <div className="flex gap-5 items-center text-xs w-full">
               <NewLockIcon width={45} height={45} />
               <div className="flex justify-between w-full">
@@ -104,10 +102,10 @@ const Dashboard = () => {
                   <p className={`text-[${fontHolder}]`}>Liquidity</p>
                   <h3 className={`text-[${font}]`}>$352K</h3>
                 </div>
-                <div className="text-right">
+                <div className="text-right ">
                   <h3 className={`text-[${font}] inline-flex gap-1`}>
                     <LittleLockerIcon width={12} height={14} />
-                    352K
+                    <span className="text-[#1ECD84]">352K</span>
                   </h3>
                   <p className={`text-[${fontHolder}]`}>
                     99.9% - next in 5 months
@@ -126,10 +124,10 @@ const Dashboard = () => {
                   <p className={`text-[${fontHolder}]`}>Liquidity</p>
                   <h3 className={`text-[${font}]`}>$352K</h3>
                 </div>
-                <div className="text-right">
+                <div className="text-right text-[#1ECD84]">
                   <h3 className={`text-[${font}] inline-flex gap-1`}>
                     <LittleLockerIcon width={12} height={14} />
-                    352K
+                    <span className="text-[#1ECD84]">352K</span>
                   </h3>
                   <p className={`text-[${fontHolder}]`}>
                     99.9% - next in 5 months
@@ -148,10 +146,10 @@ const Dashboard = () => {
                   <p className={`text-[${fontHolder}]`}>Liquidity</p>
                   <h3 className={`text-[${font}]`}>$352K</h3>
                 </div>
-                <div className="text-right">
+                <div className="text-right text-[#1ECD84]">
                   <h3 className={`text-[${font}] inline-flex gap-1`}>
                     <LittleLockerIcon width={12} height={14} />
-                    352K
+                    <span className="text-[#1ECD84]">352K</span>
                   </h3>
                   <p className={`text-[${fontHolder}]`}>
                     99.9% - next in 5 months

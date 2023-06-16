@@ -18,9 +18,8 @@ function Connect() {
   const [firstLoginTime, setFirstLoginTime] = useState();
   const btnSelf = useRef(null);
   const { ethereum } = window;
-  const { button, hover, font, background, backgroundHolder } = useSelector(
-    (state) => state
-  );
+  const { button, hover, font, background, backgroundHolder, border } =
+    useSelector((state) => state);
   const dispatch = useDispatch();
 
   let provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -105,7 +104,7 @@ function Connect() {
   return (
     <>
       <button
-        className={`conbtn bg-[${button}] text-[${font}] border-[${backgroundHolder}] hover:bg-[${hover}]`}
+        className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}]`}
         onClick={connectWallet}
         ref={btnSelf}
       >

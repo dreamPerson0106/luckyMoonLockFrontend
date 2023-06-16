@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import { useSelector } from "react-redux";
 
 const Layout = () => {
-  const { background } = useSelector((state) => state);
+  const { background, mainBg } = useSelector((state) => state);
   useEffect(() => {
     document.body.classList.add(`bg-[${background}]`);
 
@@ -17,7 +17,15 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div
+        style={{
+          backgroundImage: mainBg,
+          minHeight: "calc(50rem - 80px)",
+          paddingTop: 80,
+        }}
+      >
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

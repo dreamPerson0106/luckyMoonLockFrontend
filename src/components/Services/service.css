@@ -1,0 +1,5 @@
+.serviceBox {
+  @apply gap-2 flex flex-col border-solid p-4 rounded-lg;
+  border-width: 1px;
+  box-shadow: 0 5px 10px rgba(151, 164, 175, 0.05);
+}
