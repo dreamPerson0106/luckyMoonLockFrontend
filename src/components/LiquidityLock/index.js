@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { GroupLogo, EthereumIcon } from "../../assets/Icons";
+import { LockedLiquidityTokenIcon, EthereumIcon } from "../../assets/Icons";
 import { Link } from "react-router-dom";
 import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
 
@@ -41,7 +41,7 @@ const LiqLock = () => {
         role="alert"
       >
         <div className=" justify-center flex-shrink-0 rounded-lg ">
-          <GroupLogo width={"77"} height={"77"}></GroupLogo>
+          <LockedLiquidityTokenIcon width={"77"} height={"77"} />
         </div>
         <div className="col-span-5">
           <h6 className="text-2xl text-[#121C44]  font-bold">
