@@ -27,7 +27,7 @@ const Menu = ({ menu_status, refs }) => {
   if (menu_status) {
     return (
       <div
-        className={`menu_box bg-[${background}] border-[${backgroundHolder}]`}
+        className={`z-50 menu_box bg-[${background}] border-[${backgroundHolder}]`}
         ref={refs}
       >
         <button

@@ -9,7 +9,9 @@ function Navbar() {
   const { background, backgroundHolder, theme } = useSelector((state) => state);
 
   return (
-    <nav className={`border-[${backgroundHolder}] bg-[${background}] navbar `}>
+    <nav
+      className={`border-[${backgroundHolder}] bg-[${background}] navbar z-50`}
+    >
       <Logo width={"301"} height={"55"} />
       <div style={{ display: "inline-flex", gap: 30, alignItems: "center" }}>
         <Connect />

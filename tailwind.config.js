@@ -15,6 +15,7 @@ module.exports = {
     "bg-[#162138]",
     "bg-[#151515]",
     "text-[#212529]",
+    "text-[#111111]",
     "text-[#e3e9f1]",
     "text-[#6c757d]",
     "text-[#bbbbbb]",
@@ -26,5 +27,6 @@ module.exports = {
     "hover:bg-[#252525]",
     "hover:bg-[#e9ecef]",
     "hover:bg-[#3a4759]",
+    "hover:bg-[#1b1b1b]",
   ],
 };
