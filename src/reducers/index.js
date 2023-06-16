@@ -3,7 +3,7 @@ import theme from "../assets/theme.json";
 
 const initialState = {
   wallet_address: "",
-  ...theme.dark,
+  ...theme.dim,
 };
 
 function rootReducer(state = initialState, action) {

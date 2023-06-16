@@ -8,6 +8,7 @@ import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import Layout from "./Components/Layout";
+import Services from "./Components/Services";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ function App() {
         {
           path: "",
           element: <Dashboard />,
+        },
+        {
+          path: "services",
+          element: <Services />,
         },
       ],
     },

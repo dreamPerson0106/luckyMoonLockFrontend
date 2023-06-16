@@ -20,7 +20,8 @@ const Layout = () => {
       <div
         style={{
           backgroundImage: mainBg,
-          minHeight: "80rem",
+          minHeight: "calc(50rem - 80px)",
+          paddingTop: 80,
         }}
       >
         <Outlet />
