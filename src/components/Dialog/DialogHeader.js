@@ -8,7 +8,8 @@ function DialogHeader({ children, close }) {
 
   return (
     <div
-      className={`text-[${font}] bg-[${background}] px-6 py-2 border-t-[1px] border-[${border}] rounded-t-lg`}
+      className={`text-[${font}] bg-[${backgroundHolder}] px-6 py-2 border-t-[1px] border-x-[1px] border-[${border}] border-x-[1px] rounded-t-lg`}
+      style={{ boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)" }}
     >
       {children}
     </div>

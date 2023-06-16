@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
+import SushiLock from "./Components/SushiLock";
 import Layout from "./Components/Layout";
 import Services from "./Components/Services";
 
@@ -21,6 +22,10 @@ function App() {
         {
           path: "services/liqlock",
           element: <LiqLock />,
+        },
+        {
+          path: "sushi-v1/locker",
+          element: <SushiLock />,
         },
         {
           path: "services",

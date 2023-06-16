@@ -9,8 +9,8 @@ const BrowserMenu = ({ children }) => {
     fontHolder,
     background,
     backgroundHolder,
-    border,
     hover,
+    border,
     theme,
   } = useSelector((state) => state);
   const [menu_status, setMenuStatus] = useState(false);
@@ -75,11 +75,10 @@ const BrowserMenu = ({ children }) => {
 
           {buttonArray.map((item, index) => {
             return (
-              <>
+              <div key={index}>
                 <hr />
                 <Link
                   to={item.text.replace(" ", "").toLowerCase()}
-                  key={index}
                   className={`menu_rows ${
                     theme === item.text.toLowerCase()
                       ? `text-[#0784c3]`
@@ -90,7 +89,7 @@ const BrowserMenu = ({ children }) => {
                   {item.component}
                   {item.text}
                 </Link>
-              </>
+              </div>
             );
           })}
           <hr />
