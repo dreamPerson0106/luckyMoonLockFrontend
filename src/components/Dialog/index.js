@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Dialog = ({ children, modalState, closeModal, button }) => {
-  const { background, fontHolder } = useSelector((state) => state);
+  const { background, fontHolder, border } = useSelector((state) => state);
 
   const modal = React.useRef(null);
   const closeBtn = React.useRef(null);
@@ -35,7 +35,7 @@ const Dialog = ({ children, modalState, closeModal, button }) => {
         className="fixed mt-20 top-0 left-0 right-0 z-10 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(80%)] max-h-full"
       >
         <div className=" flex justify-center w-full h-full max-h-[96%]">
-          <div className="relative w-full max-w-2xl py-6" ref={modal}>
+          <div className={`relative w-full max-w-2xl py-6`} ref={modal}>
             <button
               type="button"
               className={`z-20 absolute top-8 right-2.5 text-gray-400 bg-transparent rounded-full hover:bg-[${background}] hover:text-[#FC5252] text-sm p-1.5 ml-auto inline-flex items-center`}

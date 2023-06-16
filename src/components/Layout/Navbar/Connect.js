@@ -100,22 +100,7 @@ function Connect() {
   });
 
   const connectWallet = async () => {
-    // setWalletDialogStatus(!walletDialogStatus);
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    if (typeof ethereum !== "undefined") {
-      await provider
-        .send("eth_requestAccounts", [])
-        .then((res) => {
-          console.log(res);
-          const address = res[0].toString();
-          dispatch(addAddress(address));
-          setWalletAddress(convStr(address));
-          setCurrentWalletAddress(address);
-        })
-        .catch((err) => toast.error(err.message));
-    } else {
-      toast.error("Please install MetaMask");
-    }
+    setWalletDialogStatus(!walletDialogStatus);
   };
   return (
     <>
@@ -130,7 +115,7 @@ function Connect() {
       <WalletConnectDialog
         modalState={walletDialogStatus}
         closeModal={() => {
-          // setWalletDialogStatus(false);
+          setWalletDialogStatus(false);
         }}
         buttonRef={btnSelf}
       />

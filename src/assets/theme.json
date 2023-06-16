@@ -5,6 +5,8 @@
     "background": "#fff",
     "backgroundHolder": "#e9ecef",
     "button": "#fff",
+    "mainBg": "linear-gradient(#fafbfd 0,rgba(246,247,248, 0) 85rem)",
+    "border": "#e9ecef",
     "hover": "#e9ecef",
     "theme": "light"
   },
@@ -13,7 +15,9 @@
     "fontHolder": "#93a3b8",
     "background": "#111a2e",
     "button": "#162138",
-    "backgroundHolder": "#495057",
+    "mainBg": "linear-gradient(#162138 0,rgba(255, 255, 255, 0) 85rem)",
+    "backgroundHolder": "#162138",
+    "border": "#273343",
     "hover": "#3a4759",
     "theme": "dim"
   },
@@ -22,8 +26,10 @@
     "fontHolder": "#bbbbbb",
     "background": "#111111",
     "button": "#151515",
+    "mainBg": "linear-gradient(#181818 0,rgba(255, 255, 255, 0) 85rem)",
     "backgroundHolder": "#1b1b1b",
     "hover": "#252525",
+    "border": "#222",
     "theme": "dark"
   }
 }
