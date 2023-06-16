@@ -9,6 +9,7 @@ import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
 import Layout from "./Components/Layout";
+import Services from "./Components/Services";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
         {
           path: "liqlock",
           element: <LiqLock />,
+        },
+        {
+          path: "services",
+          element: <Services />,
         },
       ],
     },

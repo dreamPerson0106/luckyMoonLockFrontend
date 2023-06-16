@@ -56,14 +56,14 @@ const BrowserMenu = ({ children }) => {
       </button>
       {menu_status ? (
         <div
-          className={`menu_box bg-[${background}] border-[${backgroundHolder}]`}
-          style={{ top: 30, right: "-70%", minWidth: 250 }}
+          className={`menu_box bg-[${background}] border-[${border}]`}
+          style={{ top: 30, right: -80, minWidth: 250 }}
           ref={browser_menu}
         >
           <input
             type="text"
             placeholder="Select an exchange"
-            className={`px-4 text-xs text-[${font}] border-b-[1px] border-[${backgroundHolder}] bg-[${background}]`}
+            className={`px-4 text-xs text-[${font}] border-b-[1px] border-[${border}] bg-[${background}]`}
           />
 
           {buttonArray.map((item, index) => {

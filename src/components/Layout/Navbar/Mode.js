@@ -13,6 +13,7 @@ function Mode() {
     hover,
     background,
     backgroundHolder,
+    border,
     theme,
   } = useSelector((state) => state);
   const menu_bar = useRef(null);
@@ -163,7 +164,7 @@ function Mode() {
   return (
     <div style={{ position: "relative" }}>
       <button
-        className={`mode bg-[${button}] border-[${backgroundHolder}] hover:bg-[${hover}] ${
+        className={`mode bg-[${button}] border-[${border}] hover:bg-[${hover}] ${
           menu_status ? `bg-[${hover}]` : ""
         }`}
         onClick={() => {
@@ -175,7 +176,7 @@ function Mode() {
       </button>
       {menu_status ? (
         <div
-          className={`menu_box bg-[${background}] border-[${backgroundHolder}]`}
+          className={`menu_box bg-[${background}] border-[${border}]`}
           ref={menu_bar}
         >
           {buttonArray.map((item, index) => {
