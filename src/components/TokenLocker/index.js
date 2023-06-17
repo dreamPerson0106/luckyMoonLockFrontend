@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { EthereumIcon } from "../../assets/Icons";
+import LiquidityLock from "./LiquidityLock";
+import "./tokenlocker.css";
 
-const SushiLock = () => {
+const TokenLocker = () => {
   const { font, fontHolder, background, backgroundHolder } = useSelector(
     (state) => state
   );
@@ -155,20 +157,12 @@ const SushiLock = () => {
       </div>
       <div id="myTabContent">
         <div
-          className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+          className=" p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
           id="tokens"
           role="tabpanel"
           aria-labelledby="tokens-tab"
         >
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the{" "}
-            <strong className="font-medium text-gray-800 dark:text-white">
-              Tokens tab's associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
-          </p>
+          <LiquidityLock />
         </div>
         <div
           className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
@@ -207,4 +201,4 @@ const SushiLock = () => {
   );
 };
 
-export default SushiLock;
+export default TokenLocker;

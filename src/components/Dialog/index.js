@@ -9,14 +9,16 @@ const Dialog = ({ children, modalState, closeModal, button }) => {
 
   React.useEffect(() => {
     function handleOutsideClick(event) {
-      if (
-        modal.current &&
-        !modal.current.contains(event.target) &&
-        button.current &&
-        !button.current.contains(event.target)
-      ) {
-        // Clicked outside the div
-        closeModal();
+      if (button) {
+        if (
+          modal.current &&
+          !modal.current.contains(event.target) &&
+          button.current &&
+          !button.current.contains(event.target)
+        ) {
+          // Clicked outside the div
+          closeModal();
+        }
       }
     }
 

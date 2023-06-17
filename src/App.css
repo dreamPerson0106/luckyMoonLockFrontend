@@ -36,25 +36,18 @@
     transform: rotate(360deg);
   }
 }
-
+/* 
 button {
   border-color: #e9ecef;
-}
-
-input {
-  outline: none;
-  border: none;
-  border-radius: 0;
-}
+} */
 
 * {
   box-sizing: border-box;
 }
 
+* input {
+  outline: none;
+}
 .d-block {
   display: block !important;
-}
-
-.mx-10 {
-  margin: 0 10px;
 }

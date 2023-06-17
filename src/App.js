@@ -5,9 +5,10 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
-import SushiLock from "./Components/SushiLock";
+import TokenLocker from "./Components/TokenLocker";
 import Layout from "./Components/Layout";
 import Services from "./Components/Services";
+import LiquidityLocker from "./Components/LiquidityLocker";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,16 +26,16 @@ function App() {
         },
         {
           path: "sushi-v1/locker",
-          element: <SushiLock />,
+          element: <TokenLocker />,
         },
         {
           path: "services",
           element: <Services />,
         },
-        // {
-        //   path: "tokenlock"
-        //   element: <TokenLock />
-        // }
+        {
+          path: "/tokenlocker",
+          element: <LiquidityLocker />,
+        },
       ],
     },
   ]);

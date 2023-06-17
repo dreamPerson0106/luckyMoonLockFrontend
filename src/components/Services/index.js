@@ -69,7 +69,7 @@ const Services = () => {
           </div>
         </Link>
         <hr className={`text-[${backgroundHolder}]`} />
-        <Link to="liqlock">
+        <Link to="/tokenlocker">
           <div className="flex py-2 items-center gap-3">
             <Tokenlocker width={76} height={76} />
             <div>
