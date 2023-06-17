@@ -151,7 +151,7 @@ const LiqLock = () => {
           <span className="flex-1 ml-3 whitespace-nowrap">LuckyMoon</span>
         </Link>
         <Link
-          href="#"
+          to="/sushi-v1/locker"
           className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-gray-100 group hover:shadow`}
         >
           <EthereumIcon width={"35"} height={"35"}></EthereumIcon>

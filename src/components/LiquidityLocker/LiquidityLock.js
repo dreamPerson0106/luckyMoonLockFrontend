@@ -13,7 +13,6 @@ const LiquidityLock = () => {
     dialogStatus: false,
   });
 
-  console.log(state);
   const handleLock = () => {
     setState({
       ...state,

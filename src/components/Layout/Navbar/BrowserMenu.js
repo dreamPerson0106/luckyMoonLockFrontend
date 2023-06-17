@@ -18,15 +18,15 @@ const BrowserMenu = ({ children }) => {
   const browser_menu = useRef(null);
   const buttonArray = [
     {
-      component: <UniswapIcon width={"30px"} height={"30px"} />,
+      component: <UniswapIcon width={30} height={30} />,
       text: "Uniswap v2",
     },
     {
-      component: <PancakeIcon width={"30px"} height={"30px"} />,
+      component: <PancakeIcon width={30} height={30} />,
       text: "Pancakeswap v2",
     },
     {
-      component: <CamelotIcon width={"30px"} height={"30px"} />,
+      component: <CamelotIcon width={30} height={30} />,
       text: "Camelot",
     },
   ];

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { EthereumIcon, SettingsIcon } from "../../assets/Icons";
+import { EthereumIcon, Setting } from "../../assets/Icons";
 
 function LockedPanel() {
   const {
@@ -31,7 +31,7 @@ function LockedPanel() {
             </p>
           </div>
           <button className="mr-5">
-            <SettingsIcon />
+            <Setting />
           </button>
         </div>
         <button
@@ -51,7 +51,7 @@ function LockedPanel() {
             </p>
           </div>
           <button className="mr-5">
-            <SettingsIcon />
+            <Setting />
           </button>
         </div>
         <button

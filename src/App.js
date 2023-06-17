@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
-import LiquidityLocker from "./Components/LiquidityLocker";
 import TokenLocker from "./Components/TokenLocker";
 import Layout from "./Components/Layout";
 import Services from "./Components/Services";
