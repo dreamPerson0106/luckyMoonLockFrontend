@@ -26,7 +26,7 @@ function App() {
         },
         {
           path: "sushi-v1/locker",
-          element: <TokenLocker />,
+          element: <LiquidityLocker />,
         },
         {
           path: "services",
@@ -34,7 +34,7 @@ function App() {
         },
         {
           path: "/tokenlocker",
-          element: <LiquidityLocker />,
+          element: <TokenLocker />,
         },
       ],
     },
