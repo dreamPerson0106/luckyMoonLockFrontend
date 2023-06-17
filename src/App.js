@@ -6,8 +6,10 @@ import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
 import LiquidityLocker from "./Components/LiquidityLocker";
+import TokenLocker from "./Components/TokenLocker";
 import Layout from "./Components/Layout";
 import Services from "./Components/Services";
+import LiquidityLocker from "./Components/LiquidityLocker";
 
 function App() {
   const router = createBrowserRouter([
@@ -31,10 +33,10 @@ function App() {
           path: "services",
           element: <Services />,
         },
-        // {
-        //   path: "tokenlock"
-        //   element: <TokenLock />
-        // }
+        {
+          path: "/tokenlocker",
+          element: <TokenLocker />,
+        },
       ],
     },
   ]);
