@@ -5,6 +5,11 @@ export const addAddress = (address) => ({
   payload: address,
 });
 
+export const removeAddress = () => ({
+  type: REMOVE_ADDRESS,
+  payload: "",
+});
+
 export const changeTheme = (theme) => ({
   type: CHANGE_THEME,
   payload: theme,

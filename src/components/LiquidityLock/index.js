@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
 
 const LiqLock = () => {
-  const { font, fontHolder, background, backgroundHolder } = useSelector(
-    (state) => state
-  );
+  const { font, fontHolder, background, backgroundHolder, button, hover } =
+    useSelector((state) => state);
   const [selecterStatus, setSeleterStatus] = useState(false);
   const ref = useRef();
   const btnref = useRef();
@@ -71,14 +70,14 @@ const LiqLock = () => {
           <button
             id="dropdownDividerButton"
             data-dropdown-toggle="dropdownDivider"
-            className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+            className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
             type="button"
             ref={btnref}
             onClick={() => {
               setSeleterStatus(!selecterStatus);
             }}
           >
-            <div className="flex gap-2 items-center">
+            <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
               <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
               Ethereum
             </div>
@@ -102,16 +101,16 @@ const LiqLock = () => {
             <div
               id="dropdownDivider"
               ref={ref}
-              className="z-10 w-full bg-white divide-y divide-gray-100 rounded-lg shadow max-w-xl absolute top-14 left-0"
+              className={`z-10 w-full bg-[${background}] divide-y divide-gray-100 rounded-lg shadow max-w-xl absolute top-14 left-0`}
             >
               <ul
-                className="py-2 text-black font-bold text-lg"
+                className={`py-2 text-[${font}] font-bold text-lg`}
                 aria-labelledby="dropdownDividerButton"
               >
                 <li>
                   <a
                     href="#"
-                    className={` flex gap-2 items-center block px-4 py-2 hover:bg-[${backgroundHolder}]`}
+                    className={` flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
                   >
                     <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
                     Dashboard
@@ -120,7 +119,7 @@ const LiqLock = () => {
                 <li>
                   <a
                     href="#"
-                    className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${backgroundHolder}]`}
+                    className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
                   >
                     <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
                     Settings
@@ -129,7 +128,7 @@ const LiqLock = () => {
                 <li>
                   <a
                     href="#"
-                    className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${backgroundHolder}]`}
+                    className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
                   >
                     <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
                     Earnings
