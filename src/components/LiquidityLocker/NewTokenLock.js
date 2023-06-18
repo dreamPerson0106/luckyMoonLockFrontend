@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { EthereumIcon } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 import EditLock from "./EditLock";
 import NewLockContents from "./NewLockContents";
+import WalletConnectDialog from "../WalletConnectDialog";
 
 const NewTokenLock = ({ innerLockStatus }) => {
   const {
@@ -15,8 +16,13 @@ const NewTokenLock = ({ innerLockStatus }) => {
     backgroundHolder,
     mainBg,
   } = useSelector((state) => state);
+  const [wallet_status, setWalletStatus] = useState(false);
   return (
     <div id="innerTabContent" className="p-3">
+      <WalletConnectDialog
+        modalState={wallet_status}
+        closeModal={() => setWalletStatus(false)}
+      />
       {innerLockStatus ? (
         <div
           className={`p-4 rounded-lg bg-[${background}]`}
@@ -66,6 +72,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
               <button
                 type="button"
                 className={`inline-block  py-2.5 px-5 mt-10 font-medium text-[${font}] bg-[${background} hover:bg-[${hover}] hover:text-[${fontHolder}]] rounded-lg border border-[${border}]-200 hover:bg-{${backgroundHolder}} hover:text-[${fontHolder}]`}
+                onClick={() => setWalletStatus(true)}
               >
                 Connect Wallet
               </button>

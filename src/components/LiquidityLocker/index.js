@@ -4,7 +4,7 @@ import { EthereumIcon } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 import NewTokenLock from "./NewTokenLock";
 
-const TokenLocker = () => {
+const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);
   const [liquidityTab, setLiquidityTab] = useState(false);
   const [launchpadTab, setLaunchPadTab] = useState(false);
@@ -46,7 +46,7 @@ const TokenLocker = () => {
   }, [ref]);
   return (
     <div className=" container mx-auto pt-10 pb-7 text-white max-w-xl">
-      <div className="relative z-10">
+      <div className="relative z-0">
         <button
           id="dropdownDividerButton"
           data-dropdown-toggle="dropdownDivider"
@@ -288,4 +288,4 @@ const TokenLocker = () => {
   );
 };
 
-export default TokenLocker;
+export default LiquidityLocker;

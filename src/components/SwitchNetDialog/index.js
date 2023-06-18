@@ -14,7 +14,7 @@ import {
   XDaiLogo,
 } from "../../assets/Icons";
 
-const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
+const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
   const { fontHolder } = useSelector((state) => state);
 
   return (
@@ -100,4 +100,4 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
   );
 };
 
-export default WalletConnectDialog;
+export default SwitchNetDialog;
