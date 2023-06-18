@@ -59,6 +59,7 @@ function Connect() {
       try {
         const signer = await provider.getSigner().getAddress();
         let string = signer.toString();
+        dispatch(addAddress(string));
         setWalletAddress(
           string.slice(0, 4) +
             "..." +
