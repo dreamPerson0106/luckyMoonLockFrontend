@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dialog from "../Dialog";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
 import DialogFooter from "../Dialog/DialogFooter";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
 import { addAddress } from "../../actions";
@@ -16,6 +16,8 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
   const { ethereum } = window;
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const [currentWalletAddress, setCurrentWalletAddress] = useState("");
+
+  const dispatch = useDispatch();
 
   const convStr = (str) => {
     const temp =
@@ -31,7 +33,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
         .then((res) => {
           console.log(res);
           const address = res[0].toString();
-          dispatchEvent(addAddress(address));
+          dispatch(addAddress(address));
           setWalletAddress(convStr(address));
           setCurrentWalletAddress(address);
         })
@@ -40,6 +42,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
       toast.error("Please install MetaMask");
     }
   };
+
   return (
     <Dialog modalState={modalState} closeModal={closeModal} button={buttonRef}>
       <DialogHeader>
@@ -52,36 +55,38 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
           </p>
           <ul className="my-4 space-y-3">
             <li>
-              <Link
+              <button
                 href="#"
                 onClick={connectMetaMask}
-                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
               >
                 <MetaMask></MetaMask>
-                <span className="flex-1 ml-3 whitespace-nowrap">MetaMask</span>
-              </Link>
+                <span className="flex-1 ml-3 whitespace-nowrap text-start">
+                  MetaMask
+                </span>
+              </button>
             </li>
             <li>
-              <Link
+              <button
                 href="#"
-                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg  group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg  group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
               >
                 <Coinbase></Coinbase>
-                <span className="flex-1 ml-3 whitespace-nowrap">
+                <span className="flex-1 ml-3 whitespace-nowrap text-start">
                   Coinbase Wallet
                 </span>
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
+              <button
                 href="#"
-                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
               >
                 <WalletConnect></WalletConnect>
-                <span className="flex-1 ml-3 whitespace-nowrap">
+                <span className="flex-1 ml-3 whitespace-nowrap text-start">
                   WalletConnect
                 </span>
-              </Link>
+              </button>
             </li>
             <li></li>
           </ul>

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
-import SushiLock from "./Components/SushiLock";
+import TokenLocker from "./Components/TokenLocker";
 import Layout from "./Components/Layout";
 import Services from "./Components/Services";
 
@@ -25,7 +25,7 @@ function App() {
         },
         {
           path: "sushi-v1/locker",
-          element: <SushiLock />,
+          element: <TokenLocker />,
         },
         {
           path: "services",
