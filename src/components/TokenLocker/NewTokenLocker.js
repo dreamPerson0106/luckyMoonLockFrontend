@@ -52,7 +52,7 @@ const NewTokenLocker = () => {
           View Locks
         </p>
       </div>
-      <div className={`box p-0 bg-[${background}] border-[${border}]`}>
+      <div className={`box_1 p-0 bg-[${background}] border-[${border}]`}>
         <div className="p-5 gap-5 flex flex-col">
           <div
             className={`flex justify-between items-center border-b-[1px] border-[${border}] pb-2`}

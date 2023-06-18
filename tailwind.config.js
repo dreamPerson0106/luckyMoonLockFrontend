@@ -1,5 +1,11 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/react-datetime/dist/**/*.{js,jsx,ts,tsx,css}",
+    "./node_modules/react-datetime/typings/**/*.{js,jsx,ts,tsx,css}",
+    "./node_modules/react-datetime/css/**/*.{js,jsx,ts,tsx,css}",
+    "./node_modules/react-datetime/**/*.{js,jsx,ts,tsx,css}",
+  ],
   theme: {
     extend: {},
   },
