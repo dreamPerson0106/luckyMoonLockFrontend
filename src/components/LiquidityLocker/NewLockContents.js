@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { EthereumIcon } from "../../assets/Icons";
-import RelockLiquidity from "./modals/RelockLiquidity";
+import IncreaseLock from "./modals/IncreaseLock";
+import WalletConnectDialog from "../WalletConnectDialog";
+import LiquidityLock from "./LiquidityLock";
 
-function NewLockContents() {
+function NewLockContents({ temp }) {
   const {
     font,
     fontHolder,
@@ -15,17 +17,25 @@ function NewLockContents() {
     wallet_address,
     mainBg,
   } = useSelector((state) => state);
+  const [wallet_status, setWalletStatus] = useState(false);
 
   const [tempModalStat, setTempModalStat] = useState(false);
 
   return wallet_address === "" ? (
-    <div className="flex justify-center">
-      <button
-        type="button"
-        className={`inline-block  py-2.5 px-5 mt-10 font-medium text-[${font}] bg-[${background} hover:bg-[${hover}] hover:text-[${fontHolder}]] rounded-lg border border-[${border}]-200 hover:bg-{${backgroundHolder}} hover:text-[${fontHolder}]`}
-      >
-        Connect Wallet
-      </button>
+    <div>
+      <WalletConnectDialog
+        modalState={wallet_status}
+        closeModal={() => setWalletStatus(false)}
+      />
+      <div className="flex justify-center">
+        <button
+          type="button"
+          className={`inline-block  py-2.5 px-5 mt-10 font-medium text-[${font}] bg-[${background} hover:bg-[${hover}] hover:text-[${fontHolder}]] rounded-lg border border-[${border}]-200 hover:bg-{${backgroundHolder}} hover:text-[${fontHolder}]`}
+          onClick={() => setWalletStatus(true)}
+        >
+          Connect Wallet
+        </button>
+      </div>
     </div>
   ) : (
     <div>
@@ -49,6 +59,7 @@ function NewLockContents() {
         className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
         type="button"
         onClick={() => {
+          // temp();
           setTempModalStat(true);
         }}
       >
@@ -58,7 +69,15 @@ function NewLockContents() {
         </div>
         <p>0x563865....2356</p>
       </button>
-      {tempModalStat && <RelockLiquidity />}
+      {tempModalStat ? (
+        <IncreaseLock
+          close={() => {
+            setTempModalStat(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

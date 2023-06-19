@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
 
-const LiquidityLock = () => {
+const LiquidityLock = ({ temp }) => {
   const { font, fontHolder, border, background, backgroundHolder, button } =
     useSelector((state) => state);
 
@@ -23,7 +23,7 @@ const LiquidityLock = () => {
 
   return (
     <div className={`text-[${font}]`}>
-      <button>Back</button>
+      <button onClick={temp}>Back</button>
       <h2 className="text-center text-3xl my-2">Lock Liquidity</h2>
       <h3 className={`text-center text-2xl text-[${fontHolder}] mb-5`}>
         🤔WETH / USDT🤔

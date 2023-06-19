@@ -26,9 +26,7 @@ function Connect() {
   let provider;
 
   try {
-    let temp_provider = new ethers.providers.Web3Provider(
-      window.ethereum
-    ).catch((err) => console.log(err));
+    let temp_provider = new ethers.providers.Web3Provider(window.ethereum);
     provider = temp_provider;
   } catch (error) {
     console.log(error);

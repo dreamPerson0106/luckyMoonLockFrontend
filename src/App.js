@@ -9,7 +9,7 @@ import LiquidityLocker from "./Components/LiquidityLocker";
 import TokenLocker from "./Components/TokenLocker";
 import Layout from "./Components/Layout";
 import Services from "./Components/Services";
-import LiquidityLocker from "./Components/LiquidityLocker";
+// import LiquidityLocker from "./Components/LiquidityLocker";
 
 function App() {
   const router = createBrowserRouter([

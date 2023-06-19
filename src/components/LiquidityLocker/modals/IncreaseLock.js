@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-function IncreaseLock() {
+function IncreaseLock({ close }) {
   const {
     font,
     fontHolder,
@@ -48,6 +48,7 @@ function IncreaseLock() {
             type="button"
             className={`absolute top-3 right-2.5 text-[${font}] bg-transparent hover:bg-[${backgroundHolder}] hover:text-[${fontHolder}] rounded-lg text-sm p-1.5 ml-auto inline-flex items-center`}
             data-modal-hide="increaselock-modal"
+            onClick={close}
           >
             <svg
               aria-hidden="true"

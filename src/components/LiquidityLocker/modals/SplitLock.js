@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-function SplitLock() {
+function SplitLock({ close }) {
   const {
     font,
     fontHolder,
