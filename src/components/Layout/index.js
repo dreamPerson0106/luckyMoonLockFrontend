@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   const { background, mainBg } = useSelector((state) => state);
@@ -27,6 +28,7 @@ const Layout = () => {
         <Outlet />
       </div>
       <Footer />
+      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 };

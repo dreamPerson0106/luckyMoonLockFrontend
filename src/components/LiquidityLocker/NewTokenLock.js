@@ -65,7 +65,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
             role="tabpanel"
             aria-labelledby="edit_withdraw-tab"
           >
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <p className={`text-sm font-medium text-[${font}]`}>
               Edit / Withdraw
             </p>
             <div className="flex justify-center">
