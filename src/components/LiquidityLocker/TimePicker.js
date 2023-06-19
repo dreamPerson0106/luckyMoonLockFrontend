@@ -1,5 +1,5 @@
 import React from "react";
-import Datetime from "react-datetime";
+import Datetime, { Calendar } from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { useSelector } from "react-redux";
 import { CalandarIcon } from "../../assets/Icons";
@@ -125,14 +125,25 @@ const TimePicker = () => {
   };
 
   return (
-    <Datetime
-      renderInput={renderInput}
-      renderView={renderView}
-      inputProps={inputProps}
-      renderDay={renderDay}
-      renderYear={renderYear}
-      renderMonth={renderMonth}
-    />
+    <>
+      <Datetime
+        renderInput={renderInput}
+        renderView={renderView}
+        inputProps={inputProps}
+        renderDay={renderDay}
+        renderYear={renderYear}
+        renderMonth={renderMonth}
+      />
+      <Calendar
+        components={{
+          Calendar: {
+            style: {
+              backgroundColor: "red",
+            },
+          },
+        }}
+      />
+    </>
   );
 };
 
