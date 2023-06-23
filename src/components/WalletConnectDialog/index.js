@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Dialog from "../Dialog";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
 import DialogFooter from "../Dialog/DialogFooter";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-hot-toast";
@@ -14,16 +13,16 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
   const { font, fontHolder, background, backgroundHolder, button, hover } =
     useSelector((state) => state);
   const { ethereum } = window;
-  const [walletAddress, setWalletAddress] = useState("CONNECT");
-  const [currentWalletAddress, setCurrentWalletAddress] = useState("");
+  // const [walletAddress, setWalletAddress] = useState("CONNECT");
+  // const [currentWalletAddress, setCurrentWalletAddress] = useState("");
 
   const dispatch = useDispatch();
 
-  const convStr = (str) => {
-    const temp =
-      str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
-    return temp;
-  };
+  // const convStr = (str) => {
+  //   const temp =
+  //     str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
+  //   return temp;
+  // };
 
   const connectMetaMask = async () => {
     if (typeof ethereum !== "undefined") {
@@ -34,8 +33,8 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
           console.log(res);
           const address = res[0].toString();
           dispatch(addAddress(address));
-          setWalletAddress(convStr(address));
-          setCurrentWalletAddress(address);
+          // setWalletAddress(convStr(address));
+          // setCurrentWalletAddress(address);
         })
         .catch((err) => toast.error(err.message));
     } else {

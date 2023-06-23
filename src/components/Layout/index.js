@@ -22,7 +22,9 @@ const Layout = () => {
       <div
         style={{
           backgroundImage: mainBg,
-          minHeight: "calc(50rem - 80px)",
+          minHeight: "85vh",
+          paddingLeft: 10,
+          paddingRight: 10,
           paddingTop: 80,
         }}
       >
