@@ -7,7 +7,23 @@ module.exports = {
     "./node_modules/react-datetime/**/*.{js,jsx,ts,tsx,css}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        slideUpEnter: {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(20px)",
+          },
+          "100%": {
+            opacity: 100,
+            transform: "translateY(0px)",
+          },
+        },
+      },
+      animation: {
+        slideUpEnter: "slideUpEnter .3s ease-in-out",
+      },
+    },
   },
   plugins: [],
   safelist: [

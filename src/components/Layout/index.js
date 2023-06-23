@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
+import PagewithTransition from "./PagewithTransition";
 
 const Layout = () => {
   const { background, mainBg } = useSelector((state) => state);
@@ -25,7 +26,9 @@ const Layout = () => {
           paddingTop: 80,
         }}
       >
-        <Outlet />
+        <PagewithTransition>
+          <Outlet />
+        </PagewithTransition>
       </div>
       <Footer />
       <Toaster position="bottom-right" reverseOrder={false} />
