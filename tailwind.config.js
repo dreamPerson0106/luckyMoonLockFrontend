@@ -12,7 +12,7 @@ module.exports = {
         slideUpEnter: {
           "0%": {
             opacity: 0,
-            transform: "translateY(20px)",
+            transform: "translateY(-20px)",
           },
           "100%": {
             opacity: 100,
