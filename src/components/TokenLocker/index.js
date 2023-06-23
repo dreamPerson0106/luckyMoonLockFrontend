@@ -67,14 +67,15 @@ const TokenLocker = () => {
             />
           </div>
           {search_token && (
-            <div className={`border-[${border}] w-full p-5 text-center`}>
-              <div className="flex justify-between ">
-                <p>🤔USDC / USD Coin</p> <p>6 decimals</p>
+            <Link to="lock">
+              <div className={`border-[${border}] w-full p-5 text-center`}>
+                <div className="flex justify-between ">
+                  <p>🤔USDC / USD Coin</p> <p>6 decimals</p>
+                </div>
+                <p className={`text-[${fontHolder}]`}>Your balance</p>
+                <h3 className="text-2xl">0.001 USDC</h3>
               </div>
-              <p className={`text-[${fontHolder}]`}>Your balance</p>
-              <h3 className="text-2xl">0.001 USDC</h3>
-              <Link to="lock">{"->"}</Link>
-            </div>
+            </Link>
           )}
         </>
       )}

@@ -2586,7 +2586,11 @@ export const SuccesCheckLogo = ({ className }) => {
       <path
         d="M34.2419 45.3594L29.8818 49.7197L48.2138 68.0518L52.5622 63.1801V53.9197L47.9593 59.0765L34.2419 45.3594Z"
         fill="#FFFBF5"
-export const SettingsIcon = ({}) => {
+      />
+    </svg>
+  );
+};
+export const SettingsIcon = ({ className }) => {
   return (
     <svg
       width="32"

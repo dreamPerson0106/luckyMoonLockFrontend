@@ -11,8 +11,11 @@ import {
 import NewToken from "./NewToken";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
+import { Link, useParams } from "react-router-dom";
 
 const NewTokenLocker = () => {
+  const { lock } = useParams();
+
   const {
     font,
     fontHolder,
@@ -25,7 +28,10 @@ const NewTokenLocker = () => {
 
   const [state, setState] = useState({
     unlock_address: false,
+    condition: false,
     approve: false,
+    lptoken: 25,
+    unlockovertime: false,
     dialogStatus: false,
   });
 
@@ -36,21 +42,40 @@ const NewTokenLocker = () => {
     });
   };
 
+  const handleLpToken = (num) => () => {
+    setState({
+      ...state,
+      lptoken: num,
+    });
+  };
+
   return (
-    <div className={`w-full mx-auto max-w-xl text-[${font}]  my-20 `}>
-      <div className="flex gap-10 mb-3 ">
-        <p
-          className={`flex gap-2 hover:border-b-2 hover:border-[${border}] cursor-pointer`}
+    <div
+      className={`w-full mx-auto max-w-xl text-[${
+        lock === "lock" ? font : fontHolder
+      }]  my-20 `}
+    >
+      <div className="flex gap-10 mb-3">
+        <Link
+          to={`/tokenlocker/lock`}
+          className={`flex px-2 gap-2 ${
+            lock === "lock" ? `border-b-[1px]` : `hover:border-b-[1px]`
+          } hover:border-[${border}] cursor-pointer`}
         >
           <PadLockIcon color={font} />
           New Lock
-        </p>
-        <p
-          className={`text-[${fontHolder}] flex gap-2 hover:border-b-2 hover:border-[${border}] cursor-pointer hover:text-[${font}]`}
+        </Link>
+        <Link
+          to={`/tokenlocker/viewlock`}
+          className={`text-[${
+            lock !== "lock" ? font : fontHolder
+          }] flex px-2 gap-2 ${
+            lock !== "lock" ? `border-b-[1px]` : `hover:border-b-[1px]`
+          } cursor-pointer hover:text-[${font}]`}
         >
           <PadLockIcon color={fontHolder} />
           View Locks
-        </p>
+        </Link>
       </div>
       <div className={`box_1 p-0 bg-[${background}] border-[${border}]`}>
         <div className="p-5 gap-5 flex flex-col">
@@ -134,37 +159,79 @@ const NewTokenLocker = () => {
             </div>
             <div className="mt-2 gap-3 flex">
               <button
-                className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+                className={`border-[1px] border-[${border}] rounded-md ${
+                  state.lptoken === 25 ? `bg-[${background}]` : `bg-[${button}]`
+                }  text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
+                onClick={handleLpToken(25)}
               >
                 25%
               </button>
               <button
-                className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+                className={`border-[1px] border-[${border}] rounded-md ${
+                  state.lptoken === 50 ? `bg-[${background}]` : `bg-[${button}]`
+                } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
+                onClick={handleLpToken(50)}
               >
                 50%
               </button>
               <button
-                className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+                className={`border-[1px] border-[${border}] rounded-md ${
+                  state.lptoken === 75 ? `bg-[${background}]` : `bg-[${button}]`
+                } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
+                onClick={handleLpToken(75)}
               >
                 75%
               </button>
               <button
-                className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+                className={`border-[1px] border-[${border}] rounded-md ${
+                  state.lptoken === 100
+                    ? `bg-[${background}]`
+                    : `bg-[${button}]`
+                } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
+                onClick={handleLpToken(100)}
               >
                 100%
               </button>
             </div>
           </div>
           <div className="flex justify-around items-center mx-16">
-            <button className="text-[#1ECD84]">Unlock on date</button>
-            <button>Unlock over time</button>
+            <button
+              className={!state.unlockovertime ? "text-[#1ECD84]" : ""}
+              onClick={() =>
+                setState({ ...state, unlockovertime: !state.unlockovertime })
+              }
+            >
+              Unlock on date
+            </button>
+            <button
+              className={state.unlockovertime ? "text-[#1ECD84]" : ""}
+              onClick={() =>
+                setState({ ...state, unlockovertime: !state.unlockovertime })
+              }
+            >
+              Unlock over time
+            </button>
           </div>
 
           <TimePicker />
           <p className="text-center font-bold">Premature Unlock condition</p>
           <div className="flex justify-center items-center gap-10">
-            <button className="text-[#1ECD84]">No</button>
-            <button>Yes</button>
+            <button
+              className={!state.condition ? "text-[#1ECD84]" : ""}
+              onClick={() =>
+                setState({ ...state, condition: !state.condition })
+              }
+            >
+              No
+            </button>
+            <button
+              className={state.condition ? "text-[#1ECD84]" : ""}
+              onClick={() =>
+                setState({ ...state, condition: !state.condition })
+              }
+            >
+              Yes
+            </button>
           </div>
           <div
             className={`border-[${border}] rounded-md border-[1px] bg-[${backgroundHolder}] p-5 text-center`}
