@@ -18,8 +18,10 @@ function EditLock() {
   const [panelStatus, setPanelStatus] = useState(false);
 
   return !panelStatus ? (
-    <div>
-      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+    <div className="p-4">
+      <p
+        className={`text-sm font-medium text-[${font}] dark:text-[${fontHolder}]`}
+      >
         Edit / Withdraw
       </p>
       <p className={` mt-5 text-[${font}] text-medium`}>

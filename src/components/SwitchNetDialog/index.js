@@ -14,21 +14,24 @@ import {
   XDaiLogo,
 } from "../../assets/Icons";
 
-const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
-  const { fontHolder } = useSelector((state) => state);
+const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
+  const { fontHolder, background, backgroundHolder, button, hover, font } =
+    useSelector((state) => state);
 
   return (
-    <Dialog modalState={modalState} closeModal={closeModal} button={buttonRef}>
+    <Dialog modalState={modalState} closeModal={closeModal} button={btnref}>
       <DialogHeader>
         <h1 className={`text-xl`}>Switch Network</h1>
       </DialogHeader>
-      <DialogContent className={`rounded-b-lg scroll-pb-10`}>
+      <DialogContent
+        className={`rounded-b-lg scroll-pb-10 bg-[${background}] hover:bg-[${backgroundHolder}]`}
+      >
         <div className="p-6">
           <ul className="my-4 space-y-3">
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <EthLogo width={35} height={35}></EthLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">Ethereum</span>
@@ -37,7 +40,7 @@ const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <AvaLogo width={35} height={35}></AvaLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">Avalanche</span>
@@ -46,7 +49,7 @@ const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <BSCLogo width={35} height={35}></BSCLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">
@@ -57,7 +60,7 @@ const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <DogeLogo width={35} height={35}></DogeLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">DogeChain</span>
@@ -66,7 +69,7 @@ const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <OneLogo width={35} height={35}></OneLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">
@@ -77,7 +80,7 @@ const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <PolyLogo width={35} height={35}></PolyLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">Polygon</span>
@@ -86,7 +89,7 @@ const SwitchNetDialog = ({ modalState, closeModal, buttonRef }) => {
             <li>
               <Link
                 href="#"
-                className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+                className={`flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
               >
                 <XDaiLogo width={35} height={35}></XDaiLogo>
                 <span className="flex-1 ml-3 whitespace-nowrap">xDai</span>

@@ -59,8 +59,8 @@ function NewLockContents({ temp }) {
         className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
         type="button"
         onClick={() => {
-          // temp();
-          setTempModalStat(true);
+          temp();
+          // setTempModalStat(true);
         }}
       >
         <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
@@ -69,7 +69,7 @@ function NewLockContents({ temp }) {
         </div>
         <p>0x563865....2356</p>
       </button>
-      {tempModalStat ? (
+      {/* {tempModalStat ? (
         <IncreaseLock
           close={() => {
             setTempModalStat(false);
@@ -77,7 +77,7 @@ function NewLockContents({ temp }) {
         />
       ) : (
         ""
-      )}
+      )} */}
     </div>
   );
 }

@@ -48,6 +48,7 @@ function WithdrawLiquidity({ close }) {
             type="button"
             className={`absolute top-3 right-2.5 text-[${font}] bg-transparent hover:bg-[${backgroundHolder}] hover:text-[${fontHolder}] rounded-lg text-sm p-1.5 ml-auto inline-flex items-center`}
             data-modal-hide="withdrawliquidity-modal"
+            onClick={close}
           >
             <svg
               aria-hidden="true"

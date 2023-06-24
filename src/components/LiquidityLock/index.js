@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { LockedLiquidityTokenIcon, EthereumIcon } from "../../assets/Icons";
 import { Link } from "react-router-dom";
 import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
+import SwitchNetDialog from "../SwitchNetDialog";
 
 const LiqLock = () => {
   const { font, fontHolder, background, backgroundHolder, button, hover } =
@@ -81,78 +82,27 @@ const LiqLock = () => {
               <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
               Ethereum
             </div>
-            <svg
-              className="w-4 h-4 ml-2"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
           </button>
-          {selecterStatus ? (
-            <div
-              id="dropdownDivider"
-              ref={ref}
-              className={`z-10 w-full bg-[${background}] divide-y divide-gray-100 rounded-lg shadow max-w-xl absolute top-14 left-0`}
-            >
-              <ul
-                className={`py-2 text-[${font}] font-bold text-lg`}
-                aria-labelledby="dropdownDividerButton"
-              >
-                <li>
-                  <a
-                    href="#"
-                    className={` flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
-                  >
-                    <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
-                    Dashboard
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
-                  >
-                    <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
-                  >
-                    <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
-                    Earnings
-                  </a>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <></>
-          )}
+          <SwitchNetDialog
+            modalState={selecterStatus}
+            closeModal={() => setSeleterStatus(false)}
+            ref={ref}
+          />
         </div>
         <label className="block mt-10 mb-2 text-base font-medium text-[#8C8C8C]">
           Lock Liquidity on which exchange?
         </label>
         <Link
+          to="/sushi-v1/locker"
           href="#"
-          className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-gray-100 group hover:shadow`}
+          className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
           <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
           <span className="flex-1 ml-3 whitespace-nowrap">LuckyMoon</span>
         </Link>
         <Link
           to="/sushi-v1/locker"
-          className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-gray-100 group hover:shadow`}
+          className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
           <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
           <span className="flex-1 ml-3 whitespace-nowrap">Sushiswap V1</span>

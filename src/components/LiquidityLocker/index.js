@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { EthereumIcon } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 import NewTokenLock from "./NewTokenLock";
+import SwitchNetDialog from "../SwitchNetDialog";
 
 const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);
@@ -10,6 +11,7 @@ const LiquidityLocker = () => {
   const [launchpadTab, setLaunchPadTab] = useState(false);
   const [innerLockStatus, setInnerLockStatus] = useState(true);
   const [selecterStatus, setSeleterStatus] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
   const {
     font,
@@ -49,7 +51,7 @@ const LiquidityLocker = () => {
       <button
         id="dropdownDividerButton"
         data-dropdown-toggle="dropdownDivider"
-        className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${background}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5  inline-flex items-center `}
+        className={`bg-[${background}] w-full justify-between text-[${fontHolder}] text-lg hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
         type="button"
         ref={btnref}
         onClick={() => {
@@ -60,66 +62,12 @@ const LiquidityLocker = () => {
           <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
           Ethereum
         </div>
-        <svg
-          className="w-4 h-4 ml-2"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          ></path>
-        </svg>
       </button>
-      <div className="relative">
-        {selecterStatus ? (
-          <div
-            id="dropdownDivider"
-            ref={ref}
-            className={` w-full bg-[${background}] divide-y divide-gray-100 rounded-lg shadow max-w-xl z-10 absolute top-0 left-0`}
-          >
-            <ul
-              className={`py-2 text-[${font}] font-bold text-lg`}
-              aria-labelledby="dropdownDividerButton"
-            >
-              <li>
-                <a
-                  href="#"
-                  className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
-                >
-                  <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
-                >
-                  <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className={`flex gap-2 items-center block px-4 py-2 hover:bg-[${hover}]`}
-                >
-                  <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
-                  Earnings
-                </a>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
+      <SwitchNetDialog
+        modalState={selecterStatus}
+        closeModal={() => setSeleterStatus(false)}
+        // btnref={ref}
+      />
 
       <div className="mb-4 mt-10">
         <ul
@@ -209,28 +157,38 @@ const LiquidityLocker = () => {
                 >
                   <li className="mr-2" role="presentation">
                     <button
-                      className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-[${fontHolder}] hover:border-[${font}]`}
+                      className={`inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
+                        activeTab === 0 && "border-b-4 "
+                      }`}
                       id="newlock-tab"
                       data-tabs-target="#lock"
                       type="button"
                       role="tab"
                       aria-controls="newlock"
                       aria-selected="true"
-                      onClick={() => setInnerLockStatus(true)}
+                      onClick={() => {
+                        setInnerLockStatus(true);
+                        setActiveTab(0);
+                      }}
                     >
                       New Lock
                     </button>
                   </li>
                   <li className="mr-2" role="presentation">
                     <button
-                      className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-[${fontHolder}] hover:border-[${font}]`}
+                      className={`inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
+                        activeTab === 1 && "border-b-4 "
+                      }`}
                       id="edit_withdraw-tab"
                       data-tabs-target="#edit_withdraw"
                       type="button"
                       role="tab"
                       aria-controls="edit_withdraw"
                       aria-selected="false"
-                      onClick={() => setInnerLockStatus(false)}
+                      onClick={() => {
+                        setInnerLockStatus(false);
+                        setActiveTab(1);
+                      }}
                     >
                       Edit / Withdraw
                     </button>

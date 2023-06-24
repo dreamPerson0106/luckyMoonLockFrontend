@@ -11,8 +11,16 @@ import { addAddress } from "../../actions";
 import { MetaMask, Coinbase, WalletConnect } from "../../assets/Icons";
 
 const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
-  const { font, fontHolder, background, backgroundHolder, button, hover } =
-    useSelector((state) => state);
+  const {
+    font,
+    fontHolder,
+    background,
+    backgroundHolder,
+    button,
+    border,
+    hover,
+    wallet_address,
+  } = useSelector((state) => state);
   const { ethereum } = window;
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const [currentWalletAddress, setCurrentWalletAddress] = useState("");
@@ -52,51 +60,67 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
         className="z-10"
       >
         <DialogHeader>
-          <h1 className={`text-xl`}>Connect Your Wallet</h1>
+          <h1 className={`text-xl`}>
+            {walletAddress == ""
+              ? "Connect Your Wallet"
+              : "Your Wallet Address Is"}
+          </h1>
         </DialogHeader>
         <DialogContent>
-          <div className={`p-6 bg-[${background}]`}>
-            <p className={`text-sm font-normal text-[${fontHolder}]`}>
-              Suniswap works bests with MetaMask on all chains
-            </p>
-            <ul className="my-4 space-y-3">
-              <li>
-                <button
-                  href="#"
-                  onClick={connectMetaMask}
-                  className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
-                >
-                  <MetaMask></MetaMask>
-                  <span className="flex-1 ml-3 whitespace-nowrap text-start">
-                    MetaMask
-                  </span>
-                </button>
-              </li>
-              <li>
-                <button
-                  href="#"
-                  className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg  group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
-                >
-                  <Coinbase></Coinbase>
-                  <span className="flex-1 ml-3 whitespace-nowrap text-start">
-                    Coinbase Wallet
-                  </span>
-                </button>
-              </li>
-              <li>
-                <button
-                  href="#"
-                  className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
-                >
-                  <WalletConnect></WalletConnect>
-                  <span className="flex-1 ml-3 whitespace-nowrap text-start">
-                    WalletConnect
-                  </span>
-                </button>
-              </li>
-              <li></li>
-            </ul>
-          </div>
+          {wallet_address !== "" ? (
+            <div
+              className={`text-[${font}] bg-[${background}] px-6 py-20 text-center text-lg`}
+            >
+              {wallet_address}
+            </div>
+          ) : (
+            <div className={`p-6 bg-[${background}]`}>
+              <p className={`text-sm font-normal text-[${fontHolder}]`}>
+                Suniswap works bests with MetaMask on all chains
+              </p>
+              <ul className="my-4 space-y-3">
+                <li>
+                  <button
+                    onClick={() => {
+                      setTimeout(() => {
+                        closeModal();
+                      }, 300);
+                      connectMetaMask();
+                    }}
+                    className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                  >
+                    <MetaMask></MetaMask>
+                    <span className="flex-1 ml-3 whitespace-nowrap text-start">
+                      MetaMask
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    href="#"
+                    className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg  group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                  >
+                    <Coinbase></Coinbase>
+                    <span className="flex-1 ml-3 whitespace-nowrap text-start">
+                      Coinbase Wallet
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    href="#"
+                    className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                  >
+                    <WalletConnect></WalletConnect>
+                    <span className="flex-1 ml-3 whitespace-nowrap text-start">
+                      WalletConnect
+                    </span>
+                  </button>
+                </li>
+                <li></li>
+              </ul>
+            </div>
+          )}
         </DialogContent>
         <DialogFooter>
           <div
