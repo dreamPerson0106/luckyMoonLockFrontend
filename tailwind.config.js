@@ -7,7 +7,23 @@ module.exports = {
     "./node_modules/react-datetime/**/*.{js,jsx,ts,tsx,css}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        slideUpEnter: {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(-20px)",
+          },
+          "100%": {
+            opacity: 100,
+            transform: "translateY(0px)",
+          },
+        },
+      },
+      animation: {
+        slideUpEnter: "slideUpEnter .3s ease-in-out",
+      },
+    },
   },
   plugins: [],
   safelist: [
@@ -44,5 +60,6 @@ module.exports = {
     "hover:bg-[#e9ecef]",
     "hover:bg-[#3a4759]",
     "hover:bg-[#1b1b1b]",
+    "hover:bg-[#162138]",
   ],
 };

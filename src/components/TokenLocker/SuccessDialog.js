@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Dialog from "../Dialog";
-import DialogHeader from "../Dialog/DialogHeader.js";
 import DialogContent from "../Dialog/DialogContent.js";
 import { SuccesCheckLogo } from "../../assets/Icons";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const SuccessDialog = ({ dialogStatus, close }) => {
-  const { font, fontHolder, background, border } = useSelector(
-    (state) => state
-  );
-  const [success_status, setSuccessStatus] = useState(false);
+  const { fontHolder, background } = useSelector((state) => state);
   return (
     <Dialog modalState={dialogStatus} closeModal={close}>
       <DialogContent

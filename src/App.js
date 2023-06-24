@@ -10,6 +10,7 @@ import Layout from "./Components/Layout";
 import Services from "./Components/Services";
 import LiquidityLocker from "./Components/LiquidityLocker";
 import NewTokenLocker from "./Components/TokenLocker/NewTokenLocker";
+import CommintSoon from "./Components/Layout/CommingSoon";
 
 function App() {
   const router = createBrowserRouter([
@@ -38,8 +39,12 @@ function App() {
           element: <TokenLocker />,
         },
         {
-          path: "/tokenlocker/lock",
+          path: "/tokenlocker/:lock",
           element: <NewTokenLocker />,
+        },
+        {
+          path: "*",
+          element: <CommintSoon />,
         },
       ],
     },

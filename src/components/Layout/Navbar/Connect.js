@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Cryptologo } from "../../../assets/Icons";
 import "./navbar.css";
-import { toast } from "react-hot-toast";
-// import detectEthereumProvider from "@metamask/detect-provider";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, removeAddress } from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
-import SwitchNetDialog from "../../SwitchNetDialog";
-import { REMOVE_ADDRESS } from "../../../actions/types";
-// import Web3 from "web3";
+import { toast } from "react-toastify";
 
 function Connect() {
   const [walletDialogStatus, setWalletDialogStatus] = useState(false);
@@ -53,7 +49,6 @@ function Connect() {
             string.slice(string.length - 3, string.length)
         );
       } catch (error) {
-        // toast.error("Couldn't find your wallet address");
         console.log("Wallet address in not found.");
       }
     }
@@ -65,7 +60,7 @@ function Connect() {
           currentWalletAddress === window.ethereum.selectedAddress &&
           window.ethereum.selectedAddress
         ) {
-          console.log("Found the address");
+          toast.success("Found your wallet address!");
           setWalletAddress(convStr(window.ethereum.selectedAddress));
         } else if (
           (await provider.getSigner()) &&
@@ -74,7 +69,7 @@ function Connect() {
         ) {
           setWalletAddress(convStr(window.ethereum.selectedAddress));
         } else {
-          console.log("disconnected");
+          toast.warn("Wallet Disconnected!");
           setWalletAddress("CONNECT");
           dispatch(removeAddress());
         }
@@ -133,13 +128,6 @@ function Connect() {
         }}
         buttonRef={btnSelf}
       />
-      {/* <SwitchNetDialog
-        modalState={walletDialogStatus}
-        closeModal={() => {
-          setWalletDialogStatus(false);
-        }}
-        buttonRef={btnSelf}
-      /> */}
     </>
   );
 }

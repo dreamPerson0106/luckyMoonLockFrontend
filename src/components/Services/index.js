@@ -10,18 +10,37 @@ import "./service.css";
 import { Link } from "react-router-dom";
 
 const Services = () => {
-  const { font, fontHolder, background, backgroundHolder, border } =
+  const { font, fontHolder, background, backgroundHolder, border, hover } =
     useSelector((state) => state);
 
   return (
     <div className={`container max-w-2xl text-[${font}] py-12 mx-auto`}>
       <h1 className="text-center text-5xl mb-4">Our Services</h1>
       <div className="flex justify-between text-lg text-bold p-4">
-        <p>Liquidity Locker</p> <p>Token Locker</p> <p>Token minter</p>
+        <Link
+          to={`viewliquidity`}
+          className={`hover:border-[${border}] hover:border-b-[1px]`}
+        >
+          <p>Liquidity Locker</p>
+        </Link>{" "}
+        <Link
+          to={`viewliquidity`}
+          className={`hover:border-[${border}] hover:border-b-[1px]`}
+        >
+          <p>Token Locker</p>
+        </Link>{" "}
+        <Link
+          to={`viewliquidity`}
+          className={`hover:border-[${border}] hover:border-b-[1px]`}
+        >
+          <p>Token minter</p>
+        </Link>
       </div>
       <div className={`serviceBox border-[${border}] bg-[${background}]`}>
         <Link to="liqlock">
-          <div className="flex py-2 items-center gap-3">
+          <div
+            className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}
+          >
             <LockedLiquidityTokenIcon width={76} height={76} />
             <div>
               <h5 className={`text-base font-semibold text-[${font}]`}>
@@ -34,8 +53,10 @@ const Services = () => {
           </div>
         </Link>
         <hr className={`text-[${backgroundHolder}]`} />
-        <Link to="#">
-          <div className="flex py-2 items-center gap-3">
+        <Link to="tokenminter">
+          <div
+            className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}
+          >
             <TokenminterIcon width={76} height={76} />
             <div>
               <h5 className={`text-base font-semibold text-[${font}]`}>
@@ -52,8 +73,10 @@ const Services = () => {
           </div>
         </Link>
         <hr className={`text-[${backgroundHolder}]`} />
-        <Link to="#">
-          <div className="flex py-2 items-center gap-3">
+        <Link to="launchpad">
+          <div
+            className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}
+          >
             <LaunchPadIcon width={76} height={76} />
             <div>
               <h5 className={`text-base font-semibold text-[${font}]`}>
@@ -70,7 +93,9 @@ const Services = () => {
         </Link>
         <hr className={`text-[${backgroundHolder}]`} />
         <Link to="/tokenlocker">
-          <div className="flex py-2 items-center gap-3">
+          <div
+            className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}
+          >
             <Tokenlocker width={76} height={76} />
             <div>
               <h5 className={`text-base font-semibold text-[${font}]`}>

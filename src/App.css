@@ -51,3 +51,7 @@ button {
 .d-block {
   display: block !important;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}
