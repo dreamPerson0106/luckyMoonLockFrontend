@@ -3,11 +3,12 @@ import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
-import { Toaster } from "react-hot-toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PagewithTransition from "./PagewithTransition";
 
 const Layout = () => {
-  const { background, mainBg } = useSelector((state) => state);
+  const { background, mainBg, theme } = useSelector((state) => state);
   useEffect(() => {
     document.body.classList.add(`bg-[${background}]`);
 
@@ -33,7 +34,18 @@ const Layout = () => {
         </PagewithTransition>
       </div>
       <Footer />
-      <Toaster position="bottom-right" reverseOrder={false} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={theme === "light" ? "light" : "dark"}
+      />
     </>
   );
 };

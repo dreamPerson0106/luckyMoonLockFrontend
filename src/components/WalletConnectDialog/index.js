@@ -5,7 +5,7 @@ import DialogContent from "../Dialog/DialogContent";
 import DialogFooter from "../Dialog/DialogFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { addAddress } from "../../actions";
 import { MetaMask, Coinbase, WalletConnect } from "../../assets/Icons";
 
@@ -30,15 +30,30 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
       await provider
         .send("eth_requestAccounts", [])
         .then((res) => {
-          console.log(res);
           const address = res[0].toString();
           dispatch(addAddress(address));
-          // setWalletAddress(convStr(address));
-          // setCurrentWalletAddress(address);
         })
-        .catch((err) => toast.error(err.message));
+        .catch((err) =>
+          toast.error(err.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          })
+        );
     } else {
-      toast.error("Please install MetaMask");
+      toast.error("Please install MetaMask", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
