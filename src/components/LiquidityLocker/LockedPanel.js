@@ -144,32 +144,30 @@ function LockedPanel() {
             >
               <OptionsIcon width={30} height={30} />
             </button>
-            {OptionState1 ? (
-              <div
-                className={`absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
-                ref={option_menu1}
-              >
-                {buttonArray.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <button
-                        className={`menu_rows ${
-                          theme === item.text.toLowerCase()
-                            ? `text-[#0784c3]`
-                            : `text-[${font}] hover:bg-[${hover}] `
-                        }`}
-                        onClick={handleModal(item.text)}
-                      >
-                        {item.component}
-                        {item.text}
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
+            <div
+              className={`${
+                OptionState1 ? "animate-slideUpEnter" : "hidden"
+              } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
+              ref={option_menu1}
+            >
+              {buttonArray.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <button
+                      className={`menu_rows ${
+                        theme === item.text.toLowerCase()
+                          ? `text-[#0784c3]`
+                          : `text-[${font}] hover:bg-[${hover}] `
+                      }`}
+                      onClick={handleModal(item.text)}
+                    >
+                      {item.component}
+                      {item.text}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <button
@@ -203,32 +201,30 @@ function LockedPanel() {
             >
               <OptionsIcon width={30} height={30} />
             </button>
-            {OptionState2 ? (
-              <div
-                className={`absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
-                ref={option_menu2}
-              >
-                {buttonArray.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <button
-                        className={`menu_rows ${
-                          theme === item.text.toLowerCase()
-                            ? `text-[#0784c3]`
-                            : `text-[${font}] hover:bg-[${hover}] `
-                        }`}
-                        onClick={handleModal(item.text)}
-                      >
-                        {item.component}
-                        {item.text}
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
+            <div
+              className={`${
+                OptionState2 ? "animate-slideUpEnter" : "hidden"
+              } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
+              ref={option_menu2}
+            >
+              {buttonArray.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <button
+                      className={`menu_rows ${
+                        theme === item.text.toLowerCase()
+                          ? `text-[#0784c3]`
+                          : `text-[${font}] hover:bg-[${hover}] `
+                      }`}
+                      onClick={handleModal(item.text)}
+                    >
+                      {item.component}
+                      {item.text}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <button
