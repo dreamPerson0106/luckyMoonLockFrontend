@@ -94,7 +94,6 @@ const LiqLock = () => {
         </label>
         <Link
           to="/sushi-v1/locker"
-          href="#"
           className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
           <EthereumIcon width={"35"} height={"35"}></EthereumIcon>

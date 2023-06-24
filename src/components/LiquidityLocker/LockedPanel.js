@@ -13,7 +13,6 @@ import {
   WayIcon,
   Setting,
 } from "../../assets/Icons";
-import { Link } from "react-router-dom";
 
 function LockedPanel() {
   const {
@@ -22,11 +21,8 @@ function LockedPanel() {
     background,
     backgroundHolder,
     border,
-    button,
     hover,
     theme,
-    wallet_address,
-    mainBg,
   } = useSelector((state) => state);
 
   const [OptionState1, setOptionStatus1] = useState(false);
@@ -156,7 +152,7 @@ function LockedPanel() {
                 {buttonArray.map((item, index) => {
                   return (
                     <div key={index}>
-                      <Link
+                      <button
                         className={`menu_rows ${
                           theme === item.text.toLowerCase()
                             ? `text-[#0784c3]`
@@ -166,7 +162,7 @@ function LockedPanel() {
                       >
                         {item.component}
                         {item.text}
-                      </Link>
+                      </button>
                     </div>
                   );
                 })}
@@ -246,51 +242,36 @@ function LockedPanel() {
           Withdraw
         </button>
       </div>
-      {RelockModalState ? (
-        <RelockLiquidity
-          close={() => {
-            setRelockModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {OwnershipTransModalState ? (
-        <OwnershipTrans
-          close={() => {
-            setOwnershipTransModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {IncreaseLockModalState ? (
-        <IncreaseLock
-          close={() => {
-            setIncreaseLockModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {SplitModalState ? (
-        <SplitLock
-          close={() => {
-            setSplitModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {WithdrawModalState ? (
-        <WithdrawLiquidity
-          close={() => {
-            setWithdrawModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
+      <RelockLiquidity
+        states={RelockModalState}
+        close={() => {
+          setRelockModalState(false);
+        }}
+      />
+      <OwnershipTrans
+        states={OwnershipTransModalState}
+        close={() => {
+          setOwnershipTransModalState(false);
+        }}
+      />
+      <IncreaseLock
+        states={IncreaseLockModalState}
+        close={() => {
+          setIncreaseLockModalState(false);
+        }}
+      />
+      <SplitLock
+        states={SplitModalState}
+        close={() => {
+          setSplitModalState(false);
+        }}
+      />
+      <WithdrawLiquidity
+        states={WithdrawModalState}
+        close={() => {
+          setWithdrawModalState(false);
+        }}
+      />
     </div>
   );
 }
