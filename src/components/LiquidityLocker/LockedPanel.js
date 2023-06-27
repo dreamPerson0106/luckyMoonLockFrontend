@@ -156,7 +156,7 @@ function LockedPanel() {
                 {buttonArray.map((item, index) => {
                   return (
                     <div key={index}>
-                      <Link
+                      <button
                         className={`menu_rows ${
                           theme === item.text.toLowerCase()
                             ? `text-[#0784c3]`
@@ -166,7 +166,7 @@ function LockedPanel() {
                       >
                         {item.component}
                         {item.text}
-                      </Link>
+                      </button>
                     </div>
                   );
                 })}
