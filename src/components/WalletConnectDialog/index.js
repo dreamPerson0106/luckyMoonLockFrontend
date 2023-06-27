@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Dialog from "../Dialog";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
 import DialogFooter from "../Dialog/DialogFooter";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { addAddress } from "../../actions";
 import { MetaMask, Coinbase, WalletConnect } from "../../assets/Icons";
 
@@ -22,16 +21,16 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
     wallet_address,
   } = useSelector((state) => state);
   const { ethereum } = window;
-  const [walletAddress, setWalletAddress] = useState("CONNECT");
-  const [currentWalletAddress, setCurrentWalletAddress] = useState("");
+  // const [walletAddress, setWalletAddress] = useState("CONNECT");
+  // const [currentWalletAddress, setCurrentWalletAddress] = useState("");
 
   const dispatch = useDispatch();
 
-  const convStr = (str) => {
-    const temp =
-      str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
-    return temp;
-  };
+  // const convStr = (str) => {
+  //   const temp =
+  //     str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
+  //   return temp;
+  // };
 
   const connectMetaMask = async () => {
     if (typeof ethereum !== "undefined") {
@@ -39,15 +38,30 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
       await provider
         .send("eth_requestAccounts", [])
         .then((res) => {
-          console.log(res);
           const address = res[0].toString();
           dispatch(addAddress(address));
-          setWalletAddress(convStr(address));
-          setCurrentWalletAddress(address);
         })
-        .catch((err) => toast.error(err.message));
+        .catch((err) =>
+          toast.error(err.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          })
+        );
     } else {
-      toast.error("Please install MetaMask");
+      toast.error("Please install MetaMask", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

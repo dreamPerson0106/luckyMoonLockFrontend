@@ -34,13 +34,13 @@ const Dialog = ({ children, modalState, closeModal, button }) => {
       <div
         tabIndex="-1"
         aria-hidden="true"
-        className=" fixed mt-20 top-0 left-0 right-0 z-20 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(80%)] max-h-full"
+        className=" fixed top-0 left-0 right-0 z-20 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  max-h-full bg-gray-800/60 backdrop-blur-md"
       >
         <div className=" flex justify-center w-full h-full max-h-[96%]">
           <div className={`relative w-full max-w-2xl py-6`} ref={modal}>
             <button
               type="button"
-              className={`z-20 absolute top-8 right-2.5 text-gray-400 bg-transparent rounded-full hover:bg-[${background}] hover:text-[#FC5252] text-sm p-1.5 ml-auto inline-flex items-center`}
+              className={`z-50 absolute top-8 right-2.5 text-gray-400 bg-transparent rounded-full hover:bg-[${background}] hover:text-[#FC5252] text-sm p-1.5 ml-auto inline-flex items-center`}
               ref={closeBtn}
               onClick={closeModal}
             >

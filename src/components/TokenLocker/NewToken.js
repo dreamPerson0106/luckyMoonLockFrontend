@@ -3,15 +3,9 @@ import { CopyIcon, UploadArrowIcon, WarningIcon } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 
 const NewToken = () => {
-  const {
-    font,
-    fontHolder,
-    border,
-    background,
-    hover,
-    backgroundHolder,
-    button,
-  } = useSelector((state) => state);
+  const { font, fontHolder, backgroundHolder, button } = useSelector(
+    (state) => state
+  );
   return (
     <>
       <div className={`flex justify-between items-start font-[${font}]`}>

@@ -5,6 +5,7 @@ import { Cryptologo, SearchLogo } from "../../assets/Icons";
 import WalletConnectDialog from "../WalletConnectDialog";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Loading from "../Layout/Loading";
 
 const TokenLocker = () => {
   const {
@@ -17,7 +18,7 @@ const TokenLocker = () => {
     button,
   } = useSelector((state) => state);
   const [wallet_status, setWalletStatus] = useState(false);
-  const [search_token, setSearchToken] = useState(null);
+  const [search_token, setSearchToken] = useState("");
 
   return (
     <div
@@ -49,7 +50,7 @@ const TokenLocker = () => {
         <>
           <div className="w-full relative z-0">
             <input
-              type="search"
+              type="text"
               className={`border-[1px] border-[${border}] bg-[${backgroundHolder}] w-full px-10 py-2 rounded-lg`}
               placeholder="Token address"
               onChange={(e) => setSearchToken(e.target.value)}
@@ -65,16 +66,26 @@ const TokenLocker = () => {
               color={fontHolder}
               className={`absolute top-2 right-2`}
             />
+            <p className={`text-[${fontHolder}] text-center text-xs mt-2`}>
+              Input over 3 letters of the wallet address{" "}
+            </p>
           </div>
-          {search_token && (
-            <div className={`border-[${border}] w-full p-5 text-center`}>
-              <div className="flex justify-between ">
-                <p>🤔USDC / USD Coin</p> <p>6 decimals</p>
+          {search_token.length >= 3 ? (
+            <Link to="lock" className={`hover:bg-[${backgroundHolder}]`}>
+              <div
+                className={`border-[${border}] w-full p-5 text-center border-[1px] rounded-md hover:bg-[${backgroundHolder}]`}
+              >
+                <div className="flex justify-between ">
+                  <p>🤔 USDC / USD Coin</p> <p>6 decimals</p>
+                </div>
+                <p className={`text-[${fontHolder}]`}>Your balance</p>
+                <h3 className="text-2xl">0.001 USDC</h3>
               </div>
-              <p className={`text-[${fontHolder}]`}>Your balance</p>
-              <h3 className="text-2xl">0.001 USDC</h3>
-              <Link to="lock">{"->"}</Link>
-            </div>
+            </Link>
+          ) : search_token.length >= 1 ? (
+            <Loading />
+          ) : (
+            <></>
           )}
         </>
       )}

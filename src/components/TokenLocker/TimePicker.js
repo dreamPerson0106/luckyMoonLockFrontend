@@ -8,8 +8,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const TimePicker = () => {
-  const { font, fontHolder, background, backgroundHolder, border, hover } =
-    useSelector((state) => state);
+  const { font, background, border, hover } = useSelector((state) => state);
   const [calendar, setCalendar] = useState(null);
   const child = useRef();
 
