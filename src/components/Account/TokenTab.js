@@ -29,22 +29,44 @@ function TokenTab() {
           Goeli
         </button>
       </div>
-      <p className={`text-lg border-l-0 text-[${font}]`}>Your Token Locks</p>
-      <hr className={`bg-[${fontHolder}]`} />
-      <div className="flex justify-between">
+      <p className={`text-lg border-l-0 text-[${font}] `}>Your Token Locks</p>
+      <hr className={`bg-[${fontHolder}] mt-6`} />
+      <div className="flex justify-between mt-4 mb-2">
         <div className="flex justify-between items-center gap-2">
           <EthereumIcon width={35} height={35}></EthereumIcon>
           <div>
-            <p className="text-lg "> FLOKI/ETH</p>
+            <p className="text-lg "> FLOKI / ETH</p>
             <p className="text-sm "> Liquidity : $5.82 M</p>
           </div>
         </div>
         <div className="text-right">
-          <div className="items-center">
-            <p>$4.76M</p>
+          <div className="items-center flex text-right justify-end gap-4">
+            <p className="text-lg text-[#1ECD84]">$4.76M</p>
             <PadLockIcon
               color="#1ECD84"
-              className="  items-center float-right"
+              className=" w-7 h-7 items-center float-right"
+            />
+          </div>
+          <div>
+            <p className="text-sm ">81.8% - next in 263 years</p>
+          </div>
+        </div>
+      </div>
+      <hr className={`bg-[${fontHolder}] mt-6`} />
+      <div className="flex justify-between mt-4 mb-2">
+        <div className="flex justify-between items-center gap-2">
+          <EthereumIcon width={35} height={35}></EthereumIcon>
+          <div>
+            <p className="text-lg "> FLOKI / ETH</p>
+            <p className="text-sm "> Liquidity : $5.82 M</p>
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="items-center flex text-right justify-end gap-4">
+            <p className="text-lg text-[#1ECD84]">$4.76M</p>
+            <PadLockIcon
+              color="#1ECD84"
+              className=" w-7 h-7 items-center float-right"
             />
           </div>
           <div>
