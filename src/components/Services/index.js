@@ -73,25 +73,6 @@ const Services = () => {
           </div>
         </Link>
         <hr className={`text-[${backgroundHolder}]`} />
-        <Link to="launchpad">
-          <div
-            className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}
-          >
-            <LaunchPadIcon width={76} height={76} />
-            <div>
-              <h5 className={`text-base font-semibold text-[${font}]`}>
-                LaunchPad
-              </h5>
-              <p className={`text-[${fontHolder}]`}>
-                Raise capital to kick start your blockchain project
-              </p>
-              <p className={`text-[${fontHolder}]`}>
-                Decentralised presale service
-              </p>
-            </div>
-          </div>
-        </Link>
-        <hr className={`text-[${backgroundHolder}]`} />
         <Link to="/tokenlocker">
           <div
             className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}

@@ -21,6 +21,12 @@ function App() {
         {
           path: "",
           element: <Dashboard />,
+          loader: async () => {
+            const res = await fetch(
+              "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,binancecoin&vs_currencies=usd"
+            );
+            return res;
+          },
         },
         {
           path: "services/liqlock",

@@ -50,7 +50,7 @@ function EditLock() {
         }}
       >
         <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
+          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
           WETH / USDT
         </div>
         <p>0x563865....2356</p>
