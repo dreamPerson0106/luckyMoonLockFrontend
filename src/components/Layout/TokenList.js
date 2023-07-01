@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { EthereumIcon, BinanceIcon } from "../../assets/Icons";
+import { Link } from "react-router-dom";
 
 const TokenList = () => {
   const { border, font, background } = useSelector((state) => state);
@@ -70,33 +71,38 @@ const TokenList = () => {
     <div className="w-full overflow-x-scroll flex gap-5 pb-4">
       {token_list.map((item, index) => {
         return (
-          <div
-            className={`grid grid-cols-2 gap-7 border-[${border}] bg-[${background}] text-[${font}] px-4 py-2 rounded-lg border-2 items-center w-80`}
-            key={index}
-            style={{ gridTemplateColumns: "86px 150px" }}
-          >
+          <Link to={`/tokens`} key={index}>
             <div
-              className={`relative border-2 border-[${border}] w-[86px] h-[86px] rounded-full flex justify-center items-center col-span-1`}
+              className={`grid grid-cols-2 gap-7 border-[${border}] bg-[${background}] text-[${font}] px-4 py-2 rounded-lg border-2 items-center w-80`}
+              style={{ gridTemplateColumns: "86px 150px" }}
             >
-              <img
-                src={`/img/${item.title.toLowerCase()}.svg`}
-                className="w-[75px] h-w-[75px]"
-                alt={item.title}
-              />
-              {item.chain === "ETH" ? (
-                <EthereumIcon className={`w-6 h-6 bottom-0 right-0 absolute`} />
-              ) : (
-                <BinanceIcon className={`w-6 h-6 bottom-0 right-0 absolute`} />
-              )}
+              <div
+                className={`relative border-2 border-[${border}] w-[86px] h-[86px] rounded-full flex justify-center items-center col-span-1`}
+              >
+                <img
+                  src={`/img/${item.title.toLowerCase()}.svg`}
+                  className="w-[75px] h-w-[75px]"
+                  alt={item.title}
+                />
+                {item.chain === "ETH" ? (
+                  <EthereumIcon
+                    className={`w-6 h-6 bottom-0 right-0 absolute`}
+                  />
+                ) : (
+                  <BinanceIcon
+                    className={`w-6 h-6 bottom-0 right-0 absolute`}
+                  />
+                )}
+              </div>
+              <div className="w-50 col-span-1">
+                <h5>{item.title}</h5>
+                <p>
+                  {item.price} {item.chain}
+                </p>
+                <p>in {item.period} days</p>
+              </div>
             </div>
-            <div className="w-50 col-span-1">
-              <h5>{item.title}</h5>
-              <p>
-                {item.price} {item.chain}
-              </p>
-              <p>in {item.period} days</p>
-            </div>
-          </div>
+          </Link>
         );
       })}
     </div>

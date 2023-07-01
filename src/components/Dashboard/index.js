@@ -18,7 +18,6 @@ const Dashboard = () => {
     (state) => state
   );
   const data = useLoaderData();
-  console.log(data);
 
   return (
     <div className=" container sm:px-10 lg:p-0 lg:max-w-7xl py-16 lg:py-16 mx-auto ">
