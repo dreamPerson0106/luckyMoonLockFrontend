@@ -75,7 +75,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
       >
         <DialogHeader>
           <h1 className={`text-xl`}>
-            {walletAddress == ""
+            {wallet_address == ""
               ? "Connect Your Wallet"
               : "Your Wallet Address Is"}
           </h1>

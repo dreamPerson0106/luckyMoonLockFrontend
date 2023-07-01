@@ -5,6 +5,7 @@ import Mode from "./Mode.js";
 import "./navbar.css";
 import { useSelector } from "react-redux";
 import BrowserMenu from "./BrowserMenu.js";
+import Profile from "./Profile";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -21,6 +22,7 @@ function Navbar() {
       </div>
       <div style={{ display: "inline-flex", gap: 30, alignItems: "center" }}>
         <Connect />
+        <Profile />
         <Mode />
       </div>
     </nav>

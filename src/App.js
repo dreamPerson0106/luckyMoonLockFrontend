@@ -50,6 +50,10 @@ function App() {
           element: <NewTokenLocker />,
         },
         {
+          path: "/profile",
+          element: <Account />,
+        },
+        {
           path: "*",
           element: <CommintSoon />,
         },
