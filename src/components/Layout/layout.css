@@ -147,3 +147,13 @@
     transform: rotate(-360deg);
   }
 }
+
+#tokenlist::-webkit-scrollbar {
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 10px;
+  background-color: #00000015;
+  border-radius: 10px;
+}

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PagewithTransition from "./PagewithTransition";
+import TokenList from "./TokenList";
+import "./layout.css";
 
 const Layout = () => {
   const { background, mainBg, theme } = useSelector((state) => state);
@@ -29,6 +31,7 @@ const Layout = () => {
           paddingTop: 80,
         }}
       >
+        <TokenList />
         <PagewithTransition>
           <Outlet />
         </PagewithTransition>

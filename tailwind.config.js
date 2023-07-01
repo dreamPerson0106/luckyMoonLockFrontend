@@ -61,5 +61,11 @@ module.exports = {
     "hover:bg-[#3a4759]",
     "hover:bg-[#1b1b1b]",
     "hover:bg-[#162138]",
+    "fill-[#6c757d]",
+    "fill-[#93a3b8]",
+    "fill-[#bbbbbb]",
+    "fill-[#212529]",
+    "fill-[#e3e9f1]",
+    "fill-[#f5f5f5]",
   ],
 };

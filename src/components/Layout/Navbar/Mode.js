@@ -174,33 +174,31 @@ function Mode() {
       >
         {themeModeIcon()}
       </button>
-      {menu_status ? (
-        <div
-          className={`menu_box bg-[${background}] border-[${border}]`}
-          ref={menu_bar}
-        >
-          {buttonArray.map((item, index) => {
-            return (
-              <div key={index}>
-                <button
-                  className={`menu_rows ${
-                    theme === item.text.toLowerCase()
-                      ? `text-[#0784c3]`
-                      : `text-[${font}] hover:bg-[${hover}] `
-                  }`}
-                  onClick={clickChangeTheme(item.text.toLowerCase())}
-                >
-                  {item.component}
-                  {item.text}
-                </button>
-                {spliter_idex - 1 === index ? <hr /> : <></>}
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <></>
-      )}
+      <div
+        className={`${
+          menu_status ? "animate-slideUpEnter" : "hidden"
+        } menu_box bg-[${background}] border-[${border}]`}
+        ref={menu_bar}
+      >
+        {buttonArray.map((item, index) => {
+          return (
+            <div key={index}>
+              <button
+                className={`menu_rows ${
+                  theme === item.text.toLowerCase()
+                    ? `text-[#0784c3]`
+                    : `text-[${font}] hover:bg-[${hover}] `
+                }`}
+                onClick={clickChangeTheme(item.text.toLowerCase())}
+              >
+                {item.component}
+                {item.text}
+              </button>
+              {spliter_idex - 1 === index ? <hr /> : <></>}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
