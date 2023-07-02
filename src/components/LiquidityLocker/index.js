@@ -13,17 +13,7 @@ const LiquidityLocker = () => {
   const [selecterStatus, setSeleterStatus] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
-  const {
-    font,
-    fontHolder,
-    background,
-    backgroundHolder,
-    border,
-    button,
-    hover,
-    wallet_address,
-    mainBg,
-  } = useSelector((state) => state);
+  const { font, fontHolder, background, hover } = useSelector((state) => state);
 
   const ref = useRef();
   const btnref = useRef();
@@ -59,7 +49,7 @@ const LiquidityLocker = () => {
         }}
       >
         <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
+          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
           Ethereum
         </div>
       </button>

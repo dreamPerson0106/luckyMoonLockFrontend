@@ -67,28 +67,26 @@ const LiqLock = () => {
         <label className="block mb-2 text-base font-medium text-[#8C8C8C]">
           Selected Network
         </label>
-        <div className="relative">
-          <button
-            id="dropdownDividerButton"
-            data-dropdown-toggle="dropdownDivider"
-            className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
-            type="button"
-            ref={btnref}
-            onClick={() => {
-              setSeleterStatus(!selecterStatus);
-            }}
-          >
-            <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-              <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
-              Ethereum
-            </div>
-          </button>
-          <SwitchNetDialog
-            modalState={selecterStatus}
-            closeModal={() => setSeleterStatus(false)}
-            ref={ref}
-          />
-        </div>
+        <button
+          id="dropdownDividerButton"
+          data-dropdown-toggle="dropdownDivider"
+          className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+          type="button"
+          ref={btnref}
+          onClick={() => {
+            setSeleterStatus(!selecterStatus);
+          }}
+        >
+          <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
+            <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
+            Ethereum
+          </div>
+        </button>
+        <SwitchNetDialog
+          modalState={selecterStatus}
+          closeModal={() => setSeleterStatus(false)}
+          ref={ref}
+        />
         <label className="block mt-10 mb-2 text-base font-medium text-[#8C8C8C]">
           Lock Liquidity on which exchange?
         </label>
