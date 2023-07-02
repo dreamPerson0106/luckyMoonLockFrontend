@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { EthLogo, OptionsIcon, PadLockIcon } from "../../assets/Icons";
 import { useSelector } from "react-redux";
+import SwitchNetDialog from "../SwitchNetDialog";
 
 function ProfileTab() {
+  const [selecterStatus, setSeleterStatus] = useState(false);
+
+  const btnref = useRef(null);
   const {
     font,
     fontHolder,
@@ -14,6 +18,7 @@ function ProfileTab() {
     wallet_address,
     mainBg,
   } = useSelector((state) => state);
+
   return (
     <div>
       <div
@@ -24,10 +29,17 @@ function ProfileTab() {
       >
         <button
           className={`mx-auto w-4/12 my-3 py-3 bg-[${button}] border-[1px] border-[${border}] rounded-lg btn_shadow flex justify-center items-center gap-2`}
+          ref={btnref}
+          onClick={() => setSeleterStatus(true)}
         >
           <EthLogo width={35} height={35}></EthLogo>
           Goeli
         </button>
+        <SwitchNetDialog
+          modalState={selecterStatus}
+          closeModal={() => setSeleterStatus(false)}
+          btnref={btnref}
+        />
       </div>
       <p className={`text-lg border-l-0 text-[${font}]`}>Your Token Locks</p>
       <button

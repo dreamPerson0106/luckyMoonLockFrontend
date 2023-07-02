@@ -113,7 +113,7 @@ function Connect() {
   return (
     <>
       <button
-        className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}]`}
+        className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md gap-2`}
         onClick={connectWallet}
         ref={btnSelf}
       >

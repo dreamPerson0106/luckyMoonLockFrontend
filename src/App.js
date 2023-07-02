@@ -44,7 +44,7 @@ function App() {
           element: <NewTokenLocker />,
         },
         {
-          path: "/account",
+          path: "/profile",
           element: <Account />,
         },
         {

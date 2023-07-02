@@ -12,10 +12,8 @@
 
 .conbtn {
   align-items: center;
-  border-radius: 6px;
   display: flex;
   padding: 11px;
-  gap: 5px;
   border-width: 1px;
   border-style: solid;
 }

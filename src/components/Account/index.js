@@ -46,10 +46,22 @@ function Account() {
   return (
     <div className={`container mx-auto pt-10 pb-7 text-[${font}] max-w-xl`}>
       <div className="w-full items-center text-center">
-        <p className={` mx-auto text-[${fontHolder}]`}>Your Account</p>
+        <p className={` mx-auto text-[${fontHolder}] text-lg font-bold`}>
+          Your Account
+        </p>
         <div className={"flex justify-center"}>
-          <ProfileuserIcon width={22} height={22}></ProfileuserIcon>
-          {wallet_address}
+          {wallet_address ? (
+            <div>
+              <ProfileuserIcon
+                width={22}
+                height={22}
+                fill={"#393939"}
+              ></ProfileuserIcon>
+              {wallet_address}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 
