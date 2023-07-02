@@ -56,14 +56,11 @@ export const Logo = ({ width, height }) => {
   );
 };
 
-export const Cryptologo = ({ width, height, color, className }) => {
+export const Cryptologo = ({ className }) => {
   return (
     <svg
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
+      viewBox={`0 0 11 18`}
       xmlns="http://www.w3.org/2000/svg"
-      fill={color}
       className={className}
     >
       <path d="M0 8.75625L5.3775 17.5125L10.755 8.75625L5.3775 0L0 8.75625ZM8.26619 8.28656L5.3775 9.3995L2.48881 8.28662L5.3775 3.58287L8.26619 8.28656ZM3.34956 10.6275L5.3775 11.4088L7.40544 10.6275L5.3775 13.9296L3.34956 10.6275Z" />
@@ -364,40 +361,6 @@ export const BinanceIcon = ({ className }) => {
   );
 };
 
-export const EthereumIcon = ({ className }) => {
-  return (
-    <svg
-      viewBox={`0 0 35 35`}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-      <path
-        d="M17.4979 5.00002L17.334 5.55592V21.6856L17.4979 21.8488L24.9955 17.4232L17.4979 5.00002Z"
-        fill="#343434"
-      />
-      <path
-        d="M17.4978 5.00002L10 17.4232L17.4978 21.8488V14.02V5.00002Z"
-        fill="#8C8C8C"
-      />
-      <path
-        d="M17.4979 23.2664L17.4055 23.3789V29.1245L17.4979 29.3938L25.0001 18.843L17.4979 23.2664Z"
-        fill="#3C3C3B"
-      />
-      <path
-        d="M17.4978 29.3938V23.2664L10 18.843L17.4978 29.3938Z"
-        fill="#8C8C8C"
-      />
-      <path
-        d="M17.4978 21.8488L24.9954 17.4232L17.4978 14.02V21.8488Z"
-        fill="#141414"
-      />
-      <path d="M10 17.4232L17.4978 21.8488V14.02L10 17.4232Z" fill="#393939" />
-    </svg>
-  );
-};
-
 export const BitcoinIcon = ({ className }) => {
   return (
     <svg
@@ -587,14 +550,13 @@ export const LittleLockerIcon = ({ width, height }) => {
   );
 };
 
-export const EthLogo = ({ width, height }) => {
+export const EthLogo = ({ className }) => {
   return (
     <svg
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
+      viewBox={`0 0 35 35`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M17.5 35C27.165 35 35 27.165 35 17.5C35 7.83502 27.165 0 17.5 0C7.83502 0 0 7.83502 0 17.5C0 27.165 7.83502 35 17.5 35Z"

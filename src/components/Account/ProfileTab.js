@@ -32,7 +32,7 @@ function ProfileTab() {
           ref={btnref}
           onClick={() => setSeleterStatus(true)}
         >
-          <EthLogo width={35} height={35}></EthLogo>
+          <EthLogo className={`w-9 h-9`} />
           Goeli
         </button>
         <SwitchNetDialog

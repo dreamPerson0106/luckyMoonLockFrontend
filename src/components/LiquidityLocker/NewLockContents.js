@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { EthLogo, EthereumIcon } from "../../assets/Icons";
+import { EthLogo } from "../../assets/Icons";
 import IncreaseLock from "./modals/IncreaseLock";
 import WalletConnectDialog from "../WalletConnectDialog";
 import LiquidityLock from "./LiquidityLock";
@@ -64,7 +64,7 @@ function NewLockContents({ temp }) {
         }}
       >
         <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthLogo width={35} height={35} />
+          <EthLogo className={`w-9 h-9`} />
           WETH / USDT
         </div>
         <p>0x563865....2356</p>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { EthereumIcon, BinanceIcon } from "../../assets/Icons";
+import { BinanceIcon, EthLogo } from "../../assets/Icons";
 import { Link } from "react-router-dom";
 
 const TokenList = () => {
@@ -85,9 +85,7 @@ const TokenList = () => {
                   alt={item.title}
                 />
                 {item.chain === "ETH" ? (
-                  <EthereumIcon
-                    className={`w-6 h-6 bottom-0 right-0 absolute`}
-                  />
+                  <EthLogo className={`w-6 h-6 bottom-0 right-0 absolute`} />
                 ) : (
                   <BinanceIcon
                     className={`w-6 h-6 bottom-0 right-0 absolute`}

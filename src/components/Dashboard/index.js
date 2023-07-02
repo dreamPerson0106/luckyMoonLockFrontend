@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   BinanceIcon,
   BitcoinIcon,
-  EthereumIcon,
+  EthLogo,
   LittleLockerIcon,
   LockedLiquidityTokenIcon,
   LockerIcon,
@@ -40,7 +40,7 @@ const Dashboard = () => {
             </span>
           </div>
           <div className="inline-flex items-center gap-3">
-            <EthereumIcon className={`w-9 h-9`} />
+            <EthLogo className={`w-9 h-9`} />
             <span className={`text-[${fontHolder}]`}>
               ${data["ethereum"] ? data["ethereum"]["usd"] : 0}
             </span>

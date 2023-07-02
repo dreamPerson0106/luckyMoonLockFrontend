@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EthLogo, EthereumIcon } from "../../assets/Icons";
+import { EthLogo } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 import EditLock from "./EditLock";
 import NewLockContents from "./NewLockContents";
@@ -36,7 +36,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
             aria-labelledby="newlock-tab"
           >
             <div className="flex gap-5 items-center mb-6 max-w-full">
-              <EthLogo width={35} height={35} />
+              <EthLogo className={`w-9 h-9`} />
               <p className={`text-[${font}] font-bold text-lg`}>Sushiswap V1</p>
             </div>
             <p className="mb-6">

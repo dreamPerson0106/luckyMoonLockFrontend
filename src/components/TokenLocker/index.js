@@ -57,10 +57,7 @@ const TokenLocker = () => {
               value={search_token}
             />
             <Cryptologo
-              width={11}
-              height={18}
-              color={fontHolder}
-              className={`absolute top-[28%] left-4`}
+              className={`absolute top-[16%] left-4 fill-[${fontHolder}] w-3 h-5`}
             />
             <SearchLogo
               color={fontHolder}

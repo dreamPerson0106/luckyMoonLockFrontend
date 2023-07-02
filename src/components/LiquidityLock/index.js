@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { LockedLiquidityTokenIcon, EthereumIcon } from "../../assets/Icons";
+import { LockedLiquidityTokenIcon, EthLogo } from "../../assets/Icons";
 import { Link } from "react-router-dom";
 // import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
 import { SwitchNetDialog, SwitchNetButton } from "../SwitchNet";
@@ -93,14 +93,14 @@ const LiqLock = () => {
           to="/sushi-v1/locker"
           className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
-          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
+          <EthLogo className={`w-9 h-9`} />
           <span className="flex-1 ml-3 whitespace-nowrap">LuckyMoon</span>
         </Link>
         <Link
           to="/sushi-v1/locker"
           className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
-          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
+          <EthLogo className={`w-9 h-9`} />
           <span className="flex-1 ml-3 whitespace-nowrap">Sushiswap V1</span>
         </Link>
       </div>
