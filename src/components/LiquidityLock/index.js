@@ -3,12 +3,18 @@ import { useSelector } from "react-redux";
 import { LockedLiquidityTokenIcon, EthereumIcon } from "../../assets/Icons";
 import { Link } from "react-router-dom";
 // import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
-import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
-import SwitchNetButton from "../SwitchNet/SwitchNetButton";
+import { SwitchNetDialog, SwitchNetButton } from "../SwitchNet";
 
 const LiqLock = () => {
-  const { font, fontHolder, background, backgroundHolder, button, hover } =
-    useSelector((state) => state);
+  const {
+    font,
+    fontHolder,
+    background,
+    backgroundHolder,
+    button,
+    border,
+    hover,
+  } = useSelector((state) => state);
   const [selecterStatus, setSeleterStatus] = useState(false);
   const ref = useRef();
   const btnref = useRef();
@@ -38,7 +44,7 @@ const LiqLock = () => {
     >
       <div
         id="toast-default"
-        className={`grid grid-cols-6 gap-4  max-h-80 w-full max-w-xl p-4 text-gray-500 bg-[#FDF193] shadow`}
+        className={`grid grid-cols-6 gap-4  max-h-80 w-full max-w-xl p-4 text-gray-500 bg-[#FDF193] shadow rounded-2xl`}
         role="alert"
       >
         <div className=" justify-center flex-shrink-0 rounded-lg ">
@@ -62,13 +68,14 @@ const LiqLock = () => {
       </h1>
 
       <div
-        className={`max-w-xl p-3 mt-16 bg-[${background}] border-[${backgroundHolder}] border-[1px] rounded-lg`}
+        className={`max-w-xl p-3 mt-16 bg-[${background}] border-[${backgroundHolder}] border-[${border}] border-[1px] rounded-lg`}
         style={{ boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)" }}
       >
         <label className="block mb-2 text-base font-medium text-[#8C8C8C]">
           Selected Network
         </label>
         <SwitchNetButton
+          className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
           state={() => {
             setSeleterStatus(!selecterStatus);
           }}

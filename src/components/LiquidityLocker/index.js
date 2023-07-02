@@ -4,6 +4,7 @@ import { EthereumIcon } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 import NewTokenLock from "./NewTokenLock";
 import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
+import { SwitchNetButton } from "../SwitchNet";
 
 const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);
@@ -38,25 +39,17 @@ const LiquidityLocker = () => {
   }, [ref]);
   return (
     <div className={`container mx-auto pt-10 pb-7 text-[${font}] max-w-xl`}>
-      <button
-        id="dropdownDividerButton"
-        data-dropdown-toggle="dropdownDivider"
+      <SwitchNetButton
         className={`bg-[${background}] w-full justify-between text-[${fontHolder}] text-lg hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
-        type="button"
-        ref={btnref}
-        onClick={() => {
+        state={() => {
           setSeleterStatus(!selecterStatus);
         }}
-      >
-        <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
-          Ethereum
-        </div>
-      </button>
+        ref={btnref}
+      />
       <SwitchNetDialog
         modalState={selecterStatus}
         closeModal={() => setSeleterStatus(false)}
-        // btnref={ref}
+        btnref={btnref}
       />
 
       <div className="mb-4 mt-10">

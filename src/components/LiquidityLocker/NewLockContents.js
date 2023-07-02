@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { EthereumIcon } from "../../assets/Icons";
+import { EthLogo, EthereumIcon } from "../../assets/Icons";
 import IncreaseLock from "./modals/IncreaseLock";
 import WalletConnectDialog from "../WalletConnectDialog";
 import LiquidityLock from "./LiquidityLock";
@@ -51,12 +51,12 @@ function NewLockContents({ temp }) {
           type="text"
           id="default-input"
           placeholder="Lookymoon V2 – Goerli pair address…"
-          className={` my-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5`}
+          className={` my-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5 bg-[${backgroundHolder}]`}
         />
       </div>
       <button
         id=""
-        className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+        className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
         type="button"
         onClick={() => {
           temp();
@@ -64,7 +64,7 @@ function NewLockContents({ temp }) {
         }}
       >
         <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
+          <EthLogo width={35} height={35} />
           WETH / USDT
         </div>
         <p>0x563865....2356</p>

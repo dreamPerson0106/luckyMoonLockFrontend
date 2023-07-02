@@ -2,10 +2,8 @@ import React, { forwardRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BSCLogo, EthLogo, PolyLogo } from "../../assets/Icons";
 
-const SwitchNetButton = forwardRef((props, ref) => {
-  const { fontHolder, button, hover, font, chain } = useSelector(
-    (state) => state
-  );
+const SwitchNetButton = forwardRef(({ className, state }, ref) => {
+  const { font, chain } = useSelector((state) => state);
 
   const [network, setNetwork] = useState({
     title: "Ethereum",
@@ -46,14 +44,7 @@ const SwitchNetButton = forwardRef((props, ref) => {
     setNetwork(filter(chain_list, chain)[0]);
   }, [chain]);
   return (
-    <button
-      id="dropdownDividerButton"
-      data-dropdown-toggle="dropdownDivider"
-      className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
-      type="button"
-      ref={ref}
-      onClick={props.state}
-    >
+    <button className={className} type="button" ref={ref} onClick={state}>
       <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
         {}
         {network.icon}
