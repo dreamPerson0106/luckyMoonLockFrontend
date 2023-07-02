@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { EthereumIcon } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 import NewTokenLock from "./NewTokenLock";
-import SwitchNetDialog from "../SwitchNetDialog";
+import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
 
 const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);

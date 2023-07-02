@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { EthLogo, OptionsIcon, PadLockIcon } from "../../assets/Icons";
 import { useSelector } from "react-redux";
-import SwitchNetDialog from "../SwitchNetDialog";
+import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
 
 function ProfileTab() {
   const [selecterStatus, setSeleterStatus] = useState(false);

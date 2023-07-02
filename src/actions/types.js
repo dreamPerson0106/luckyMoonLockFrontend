@@ -1,3 +1,4 @@
 export const ADD_ADDRESS = "ADD_ADDRESS";
 export const REMOVE_ADDRESS = "REMOVE_ADDRESS";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const CHANGE_CHAIN = "CHANGE_CHAIN";

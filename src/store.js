@@ -8,6 +8,7 @@ import theme from "./assets/theme.json";
 const initialState = {
   wallet_address: "",
   ...theme.dim,
+  chain: "0x1",
 };
 
 const middleware = [thunk];

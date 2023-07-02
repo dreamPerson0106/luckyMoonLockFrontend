@@ -2,14 +2,16 @@ import React from "react";
 import Dialog from "../Dialog";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { EthLogo, BSCLogo, PolyLogo } from "../../assets/Icons";
 import { toast } from "react-toastify";
+import { changeChain } from "../../actions";
 
 const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
   const { fontHolder, background, button, hover, font } = useSelector(
     (state) => state
   );
+  const dispatch = useDispatch();
 
   const SwitchChainToPolygon = (chain) => () => {
     const { ethereum } = window;
@@ -22,6 +24,7 @@ const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
               method: "wallet_switchEthereumChain",
               params: [{ chainId: chain }],
             });
+            dispatch(changeChain(chain));
             toast.success("You have switched to the right network");
             if (ethereum.chainId !== chain) closeModal();
           } catch (switchError) {

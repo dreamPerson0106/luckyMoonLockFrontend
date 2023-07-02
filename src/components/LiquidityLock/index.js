@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { LockedLiquidityTokenIcon, EthereumIcon } from "../../assets/Icons";
 import { Link } from "react-router-dom";
-import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
-import SwitchNetDialog from "../SwitchNetDialog";
+// import { useSyncExternalStoreWithSelector } from "use-sync-external-store/with-selector";
+import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
+import SwitchNetButton from "../SwitchNet/SwitchNetButton";
 
 const LiqLock = () => {
   const { font, fontHolder, background, backgroundHolder, button, hover } =
@@ -67,25 +68,16 @@ const LiqLock = () => {
         <label className="block mb-2 text-base font-medium text-[#8C8C8C]">
           Selected Network
         </label>
-        <button
-          id="dropdownDividerButton"
-          data-dropdown-toggle="dropdownDivider"
-          className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
-          type="button"
-          ref={btnref}
-          onClick={() => {
+        <SwitchNetButton
+          state={() => {
             setSeleterStatus(!selecterStatus);
           }}
-        >
-          <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-            <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
-            Ethereum
-          </div>
-        </button>
+          ref={btnref}
+        />
         <SwitchNetDialog
           modalState={selecterStatus}
           closeModal={() => setSeleterStatus(false)}
-          ref={ref}
+          btnref={btnref}
         />
         <label className="block mt-10 mb-2 text-base font-medium text-[#8C8C8C]">
           Lock Liquidity on which exchange?

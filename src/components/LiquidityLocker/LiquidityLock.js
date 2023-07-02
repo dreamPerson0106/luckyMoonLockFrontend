@@ -25,7 +25,7 @@ const LiquidityLock = ({ temp }) => {
       <button onClick={temp}>Back</button>
       <h2 className="text-center text-3xl my-2">Lock Liquidity</h2>
       <h3 className={`text-center text-2xl text-[${fontHolder}] mb-5`}>
-        🤔WETH / USDT🤔
+        🤔 WETH / USDT🤔
       </h3>
       {/* Lock how many LP tokens? */}
       <p className="my-2 text-center">Lock how many LP tokens?</p>
