@@ -3,7 +3,7 @@ import { Cryptologo } from "../../../assets/Icons";
 import "./navbar.css";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, removeAddress } from "../../../actions";
+import { addAddress, convAddress, removeAddress } from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
 import { toast } from "react-toastify";
 
@@ -43,6 +43,7 @@ function Connect() {
         const signer = await provider.getSigner().getAddress();
         let string = signer.toString();
         dispatch(addAddress(string));
+        dispatch(convAddress(convStr(string)));
         setWalletAddress(
           string.slice(0, 4) +
             "..." +

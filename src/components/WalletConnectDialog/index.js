@@ -6,7 +6,7 @@ import DialogFooter from "../Dialog/DialogFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { addAddress } from "../../actions";
+import { addAddress, convAddress } from "../../actions";
 import { MetaMask, Coinbase, WalletConnect } from "../../assets/Icons";
 
 const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
@@ -26,11 +26,11 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
 
   const dispatch = useDispatch();
 
-  // const convStr = (str) => {
-  //   const temp =
-  //     str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
-  //   return temp;
-  // };
+  const convStr = (str) => {
+    const temp =
+      str.slice(0, 4) + "..." + str.slice(str.length - 3, str.length);
+    return temp;
+  };
 
   const connectMetaMask = async () => {
     if (typeof ethereum !== "undefined") {
@@ -40,6 +40,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
         .then((res) => {
           const address = res[0].toString();
           dispatch(addAddress(address));
+          dispatch(convAddress(convStr(address)));
         })
         .catch((err) =>
           toast.error(err.message, {

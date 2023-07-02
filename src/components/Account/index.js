@@ -19,6 +19,7 @@ function Account() {
     button,
     hover,
     wallet_address,
+    conv_address,
     mainBg,
   } = useSelector((state) => state);
 
@@ -51,13 +52,13 @@ function Account() {
         </p>
         <div className={"flex justify-center"}>
           {wallet_address ? (
-            <div>
+            <div className="flex gap-3 font-bold">
               <ProfileuserIcon
                 width={22}
                 height={22}
                 fill={"#393939"}
               ></ProfileuserIcon>
-              {wallet_address}
+              {conv_address}
             </div>
           ) : (
             <></>

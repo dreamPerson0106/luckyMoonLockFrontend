@@ -1,4 +1,9 @@
-import { ADD_ADDRESS, CHANGE_THEME, REMOVE_ADDRESS } from "./types.js";
+import {
+  ADD_ADDRESS,
+  CHANGE_THEME,
+  REMOVE_ADDRESS,
+  CONV_ADDRESS,
+} from "./types.js";
 
 export const addAddress = (address) => ({
   type: ADD_ADDRESS,
@@ -13,4 +18,9 @@ export const removeAddress = () => ({
 export const changeTheme = (theme) => ({
   type: CHANGE_THEME,
   payload: theme,
+});
+
+export const convAddress = (converted_address) => ({
+  type: CONV_ADDRESS,
+  payload: converted_address,
 });
