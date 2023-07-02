@@ -18,6 +18,7 @@ const Dashboard = () => {
     (state) => state
   );
   const data = useLoaderData();
+  console.log(data);
 
   return (
     <div className=" container sm:px-10 lg:p-0 lg:max-w-7xl py-16 lg:py-16 mx-auto ">
@@ -35,19 +36,19 @@ const Dashboard = () => {
           <div className="inline-flex items-center gap-3">
             <BitcoinIcon className={`w-9 h-9`} />
             <span className={`text-[${fontHolder}]`}>
-              ${data["bitcoin"]["usd"]}
+              ${data["bitcoin"] ? data["bitcoin"]["usd"] : 0}
             </span>
           </div>
           <div className="inline-flex items-center gap-3">
             <EthereumIcon className={`w-9 h-9`} />
             <span className={`text-[${fontHolder}]`}>
-              ${data["ethereum"]["usd"]}
+              ${data["ethereum"] ? data["ethereum"]["usd"] : 0}
             </span>
           </div>
           <div className="inline-flex items-center gap-3">
             <BinanceIcon className={`w-9 h-9`} />
             <span className={`text-[${fontHolder}]`}>
-              ${data["binancecoin"]["usd"]}
+              ${data["binancecoin"] ? data["binancecoin"]["usd"] : 0}
             </span>
           </div>
         </div>
