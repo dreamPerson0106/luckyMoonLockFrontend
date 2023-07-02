@@ -1,30 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import "./tokenlocker.css";
-import {
-  CheckIcon,
-  DownArrowIcon,
-  EyeIcon,
-  InfoIcon,
-  PadLockIcon,
-} from "../../assets/Icons";
-import NewToken from "./NewToken";
+import { CheckIcon, InfoIcon } from "../../assets/Icons";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
-import { Link, useParams } from "react-router-dom";
 
 const NewTokenLocker = () => {
-  const { lock } = useParams();
-
-  const {
-    font,
-    fontHolder,
-    border,
-    background,
-    hover,
-    backgroundHolder,
-    button,
-  } = useSelector((state) => state);
+  const { fontHolder, border, background, hover, backgroundHolder, button } =
+    useSelector((state) => state);
 
   const [state, setState] = useState({
     unlock_address: false,
@@ -50,100 +32,11 @@ const NewTokenLocker = () => {
   };
 
   return (
-    <div
-      className={`w-full mx-auto max-w-xl text-[${
-        lock === "lock" ? font : fontHolder
-      }]  my-20 `}
-    >
-      <div className="flex gap-10 mb-3">
-        <Link
-          to={`/tokenlocker/lock`}
-          className={`flex px-2 gap-2 ${
-            lock === "lock" ? `border-b-[1px]` : `hover:border-b-[1px]`
-          } hover:border-[${border}] cursor-pointer`}
-        >
-          <PadLockIcon color={font} />
-          New Lock
-        </Link>
-        <Link
-          to={`/tokenlocker/viewlock`}
-          className={`text-[${
-            lock !== "lock" ? font : fontHolder
-          }] flex px-2 gap-2 ${
-            lock !== "lock" ? `border-b-[1px]` : `hover:border-b-[1px]`
-          } cursor-pointer hover:text-[${font}]`}
-        >
-          <PadLockIcon color={fontHolder} />
-          View Locks
-        </Link>
-      </div>
+    <>
       <div className={`box_1 p-0 bg-[${background}] border-[${border}]`}>
         <div className="p-5 gap-5 flex flex-col">
-          <div
-            className={`flex justify-between items-center border-b-[1px] border-[${border}] pb-2`}
-          >
-            <p>Lock (1)</p>
-            <button
-              className={`px-4 py-2 rounded-md bg-[${button}] hover:bg-[${hover}] flex items-center gap-2`}
-            >
-              Token View <EyeIcon color={fontHolder} />
-            </button>
-          </div>
-          <div
-            className={`flex justify-between items-center border-b-[1px] border-[${border}] pb-2`}
-          >
-            <button className="text-slate-50 flex gap-2 items-center px-4 py-2 bg-[#1ECD84] rounded-md">
-              <DownArrowIcon color={"#fff"} /> Add a Lock
-            </button>
-            <div className="flex gap-3">
-              <button
-                className={`px-4 py-2 rounded-md bg-[${button}] hover:bg-[${hover}] flex items-center gap-2`}
-              >
-                Download CSV
-              </button>
-              <button
-                className={`px-4 py-2 rounded-md bg-[${button}] hover:bg-[${hover}] flex items-center gap-2`}
-              >
-                Import CSV
-              </button>
-            </div>
-          </div>
-          <NewToken />
-          {/* Who can withdraw the tokens */}
-          <p className="text-center font-bold">Who can withdraw the tokens?</p>
-          <div className={`flex justify-center`}>
-            <button
-              className={`px-4 py-2 rounded-md ${
-                !state.unlock_address ? "bg-[#1ECD84]" : ""
-              }`}
-              onClick={() => {
-                setState({ ...state, unlock_address: !state.unlock_address });
-              }}
-            >
-              Me
-            </button>
-            <button
-              className={`px-4 py-2 rounded-md ${
-                state.unlock_address ? "bg-[#1ECD84]" : ""
-              }`}
-              onClick={() => {
-                setState({ ...state, unlock_address: !state.unlock_address });
-              }}
-            >
-              Someone else
-            </button>
-          </div>
-          {state.unlock_address ? (
-            <input
-              type="text"
-              placeholder="Unlock address"
-              className={`bg-[${backgroundHolder}] py-3 px-4 border-[1px] rounded-md border-[${border}] w-full `}
-            />
-          ) : (
-            <></>
-          )}
           {/* Lock how many LP tokens? */}
-          <p className="text-center font-bold">Lock how many LP tokens?</p>
+          <p className="text-center font-bold pt-5">Lock how many LP tokens?</p>
           <div
             className={`border-[${border}] rounded-md border-[1px] bg-[${backgroundHolder}] p-5`}
           >
@@ -194,6 +87,39 @@ const NewTokenLocker = () => {
               </button>
             </div>
           </div>
+          {/* Who can withdraw the tokens */}
+          <p className="text-center font-bold">Who can withdraw the tokens?</p>
+          <div className={`flex justify-center`}>
+            <button
+              className={`px-4 py-2 rounded-md ${
+                !state.unlock_address ? "bg-[#1ECD84]" : ""
+              }`}
+              onClick={() => {
+                setState({ ...state, unlock_address: !state.unlock_address });
+              }}
+            >
+              Me
+            </button>
+            <button
+              className={`px-4 py-2 rounded-md ${
+                state.unlock_address ? "bg-[#1ECD84]" : ""
+              }`}
+              onClick={() => {
+                setState({ ...state, unlock_address: !state.unlock_address });
+              }}
+            >
+              Someone else
+            </button>
+          </div>
+          {state.unlock_address ? (
+            <input
+              type="text"
+              placeholder="Unlock address"
+              className={`bg-[${backgroundHolder}] py-3 px-4 border-[1px] rounded-md border-[${border}] w-full `}
+            />
+          ) : (
+            <></>
+          )}
           <div className="flex justify-around items-center mx-16">
             <button
               className={!state.unlockovertime ? "text-[#1ECD84]" : ""}
@@ -315,7 +241,7 @@ const NewTokenLocker = () => {
           setState({ ...state, dialogStatus: false });
         }}
       />
-    </div>
+    </>
   );
 };
 

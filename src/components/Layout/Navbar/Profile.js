@@ -8,7 +8,8 @@ function Profile() {
     useSelector((state) => state);
   return (
     <div>
-      <button
+      <Link
+        to={"profile"}
         className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-full mr-2`}
       >
         <ProfileuserIcon
@@ -16,8 +17,7 @@ function Profile() {
           height={22}
           fill={"#bbbbbb"}
         ></ProfileuserIcon>
-        <Link to={"profile"}></Link>
-      </button>
+      </Link>
     </div>
   );
 }
