@@ -3,6 +3,7 @@ import { PadLockIcon } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ViewLocked from "./ViewLocked";
+import ViewUnlocked from "./ViewUnlocked";
 
 function LockLiquidityTab() {
   const [tabStatus, setTabStatus] = useState("locked");
@@ -123,7 +124,7 @@ function LockLiquidityTab() {
           </ul>
         </div>
         <div id="myTabContent ">
-          {tabStatus === "locked" ? <ViewLocked /> : <></>}
+          {tabStatus === "locked" ? <ViewLocked /> : <ViewUnlocked />}
         </div>
       </div>
     </div>
