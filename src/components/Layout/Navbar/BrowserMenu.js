@@ -61,45 +61,43 @@ const BrowserMenu = ({ children }) => {
       >
         {children}
       </button>
-      {menu_status ? (
-        <div
-          className={`menu_box bg-[${background}] border-[${border}]`}
-          style={{ top: 30, right: -80, minWidth: 250 }}
-          ref={browser_menu}
-        >
-          <input
-            type="text"
-            placeholder="Select an exchange"
-            className={`px-4 text-xs text-[${font}] border-b-[1px] border-[${border}] bg-[${background}]`}
-          />
+      <div
+        className={`${
+          menu_status ? "animate-slideUpEnter" : "hidden"
+        } menu_box bg-[${background}] border-[${border}]`}
+        style={{ top: 30, right: -80, minWidth: 250 }}
+        ref={browser_menu}
+      >
+        <input
+          type="text"
+          placeholder="Select an exchange"
+          className={`px-4 text-xs text-[${font}] border-b-[1px] border-[${border}] bg-[${background}]`}
+        />
 
-          {buttonArray.map((item, index) => {
-            return (
-              <div key={index}>
-                <hr />
-                <Link
-                  to={item.text.replace(" ", "").toLowerCase()}
-                  className={`menu_rows ${
-                    theme === item.text.toLowerCase()
-                      ? `text-[#0784c3]`
-                      : `text-[${font}] hover:bg-[${hover}] `
-                  }`}
-                  // onClick={clickChangeTheme(item.text.toLowerCase())}
-                >
-                  {item.component}
-                  {item.text}
-                </Link>
-              </div>
-            );
-          })}
-          <hr />
-          <div className={`flex text-xs px-4 py-1 text-[${fontHolder}]`}>
-            other exchanges
-          </div>
+        {buttonArray.map((item, index) => {
+          return (
+            <div key={index}>
+              <hr />
+              <Link
+                to={item.text.replace(" ", "").toLowerCase()}
+                className={`menu_rows ${
+                  theme === item.text.toLowerCase()
+                    ? `text-[#0784c3]`
+                    : `text-[${font}] hover:bg-[${hover}] `
+                }`}
+                // onClick={clickChangeTheme(item.text.toLowerCase())}
+              >
+                {item.component}
+                {item.text}
+              </Link>
+            </div>
+          );
+        })}
+        <hr />
+        <div className={`flex text-xs px-4 py-1 text-[${fontHolder}]`}>
+          other exchanges
         </div>
-      ) : (
-        <></>
-      )}
+      </div>
     </div>
   );
 };

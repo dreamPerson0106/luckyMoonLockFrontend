@@ -13,7 +13,6 @@ import {
   WayIcon,
   Setting,
 } from "../../assets/Icons";
-import { Link } from "react-router-dom";
 
 function LockedPanel() {
   const {
@@ -22,11 +21,8 @@ function LockedPanel() {
     background,
     backgroundHolder,
     border,
-    button,
     hover,
     theme,
-    wallet_address,
-    mainBg,
   } = useSelector((state) => state);
 
   const [OptionState1, setOptionStatus1] = useState(false);
@@ -148,32 +144,30 @@ function LockedPanel() {
             >
               <OptionsIcon width={30} height={30} />
             </button>
-            {OptionState1 ? (
-              <div
-                className={`absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
-                ref={option_menu1}
-              >
-                {buttonArray.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <button
-                        className={`menu_rows ${
-                          theme === item.text.toLowerCase()
-                            ? `text-[#0784c3]`
-                            : `text-[${font}] hover:bg-[${hover}] `
-                        }`}
-                        onClick={handleModal(item.text)}
-                      >
-                        {item.component}
-                        {item.text}
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
+            <div
+              className={`${
+                OptionState1 ? "animate-slideUpEnter" : "hidden"
+              } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
+              ref={option_menu1}
+            >
+              {buttonArray.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <button
+                      className={`menu_rows ${
+                        theme === item.text.toLowerCase()
+                          ? `text-[#0784c3]`
+                          : `text-[${font}] hover:bg-[${hover}] `
+                      }`}
+                      onClick={handleModal(item.text)}
+                    >
+                      {item.component}
+                      {item.text}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <button
@@ -207,32 +201,30 @@ function LockedPanel() {
             >
               <OptionsIcon width={30} height={30} />
             </button>
-            {OptionState2 ? (
-              <div
-                className={`absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
-                ref={option_menu2}
-              >
-                {buttonArray.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <button
-                        className={`menu_rows ${
-                          theme === item.text.toLowerCase()
-                            ? `text-[#0784c3]`
-                            : `text-[${font}] hover:bg-[${hover}] `
-                        }`}
-                        onClick={handleModal(item.text)}
-                      >
-                        {item.component}
-                        {item.text}
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
+            <div
+              className={`${
+                OptionState2 ? "animate-slideUpEnter" : "hidden"
+              } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
+              ref={option_menu2}
+            >
+              {buttonArray.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <button
+                      className={`menu_rows ${
+                        theme === item.text.toLowerCase()
+                          ? `text-[#0784c3]`
+                          : `text-[${font}] hover:bg-[${hover}] `
+                      }`}
+                      onClick={handleModal(item.text)}
+                    >
+                      {item.component}
+                      {item.text}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <button
@@ -246,51 +238,36 @@ function LockedPanel() {
           Withdraw
         </button>
       </div>
-      {RelockModalState ? (
-        <RelockLiquidity
-          close={() => {
-            setRelockModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {OwnershipTransModalState ? (
-        <OwnershipTrans
-          close={() => {
-            setOwnershipTransModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {IncreaseLockModalState ? (
-        <IncreaseLock
-          close={() => {
-            setIncreaseLockModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {SplitModalState ? (
-        <SplitLock
-          close={() => {
-            setSplitModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
-      {WithdrawModalState ? (
-        <WithdrawLiquidity
-          close={() => {
-            setWithdrawModalState(false);
-          }}
-        />
-      ) : (
-        ""
-      )}
+      <RelockLiquidity
+        states={RelockModalState}
+        close={() => {
+          setRelockModalState(false);
+        }}
+      />
+      <OwnershipTrans
+        states={OwnershipTransModalState}
+        close={() => {
+          setOwnershipTransModalState(false);
+        }}
+      />
+      <IncreaseLock
+        states={IncreaseLockModalState}
+        close={() => {
+          setIncreaseLockModalState(false);
+        }}
+      />
+      <SplitLock
+        states={SplitModalState}
+        close={() => {
+          setSplitModalState(false);
+        }}
+      />
+      <WithdrawLiquidity
+        states={WithdrawModalState}
+        close={() => {
+          setWithdrawModalState(false);
+        }}
+      />
     </div>
   );
 }

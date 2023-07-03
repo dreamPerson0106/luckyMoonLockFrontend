@@ -11,12 +11,14 @@ import {
   RegularLockerIcon,
 } from "../../assets/Icons";
 import "./dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
   const { font, fontHolder, background, hover, border } = useSelector(
     (state) => state
   );
+  const data = useLoaderData();
+
   return (
     <div className=" container sm:px-10 lg:p-0 lg:max-w-7xl py-16 lg:py-16 mx-auto ">
       <div className="flex w-full flex-wrap	justify-betweens mb-16 gap-16 lg:gap-0">
@@ -31,16 +33,22 @@ const Dashboard = () => {
         </div>
         <div className={`flex items-center justify-between w-full lg:w-1/3`}>
           <div className="inline-flex items-center gap-3">
-            <BinanceIcon width={35} height={35} />
-            <span className={`text-[${fontHolder}]`}>$225.27</span>
+            <BitcoinIcon className={`w-9 h-9`} />
+            <span className={`text-[${fontHolder}]`}>
+              ${data["bitcoin"]["usd"]}
+            </span>
           </div>
           <div className="inline-flex items-center gap-3">
-            <EthereumIcon width={35} height={35} />
-            <span className={`text-[${fontHolder}]`}>$225.27</span>
+            <EthereumIcon className={`w-9 h-9`} />
+            <span className={`text-[${fontHolder}]`}>
+              ${data["ethereum"]["usd"]}
+            </span>
           </div>
           <div className="inline-flex items-center gap-3">
-            <BitcoinIcon width={40} height={35} />
-            <span className={`text-[${fontHolder}]`}>$225.27</span>
+            <BinanceIcon className={`w-9 h-9`} />
+            <span className={`text-[${fontHolder}]`}>
+              ${data["binancecoin"]["usd"]}
+            </span>
           </div>
         </div>
       </div>
@@ -111,7 +119,7 @@ const Dashboard = () => {
               <div
                 className={`flex gap-5 items-center text-xs w-full hover:bg-[${hover}] p-1 rounded-lg px-3`}
               >
-                <NewLockIcon width={45} height={45} />
+                <NewLockIcon />
                 <div className="flex justify-between w-full">
                   <div>
                     <h3 className={`text-[${font}]`}>USDC</h3>

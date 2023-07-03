@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "../Dialog";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
@@ -21,7 +21,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
     wallet_address,
   } = useSelector((state) => state);
   const { ethereum } = window;
-  // const [walletAddress, setWalletAddress] = useState("CONNECT");
+  const [walletAddress, setWalletAddress] = useState("CONNECT");
   // const [currentWalletAddress, setCurrentWalletAddress] = useState("");
 
   const dispatch = useDispatch();

@@ -79,7 +79,7 @@ const LiqLock = () => {
             }}
           >
             <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-              <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
+              <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
               Ethereum
             </div>
           </button>
@@ -94,17 +94,16 @@ const LiqLock = () => {
         </label>
         <Link
           to="/sushi-v1/locker"
-          href="#"
           className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
-          <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
+          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
           <span className="flex-1 ml-3 whitespace-nowrap">LuckyMoon</span>
         </Link>
         <Link
           to="/sushi-v1/locker"
           className={`max-w-xl mb-5 flex items-center p-3 text-base font-bold text-[${fontHolder}] rounded-lg bg-[${backgroundHolder}] hover:bg-[${hover}] group hover:shadow`}
         >
-          <EthereumIcon width={"35"} height={"35"}></EthereumIcon>
+          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
           <span className="flex-1 ml-3 whitespace-nowrap">Sushiswap V1</span>
         </Link>
       </div>

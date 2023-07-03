@@ -11,7 +11,7 @@ import Services from "./Components/Services";
 import LiquidityLocker from "./Components/LiquidityLocker";
 import NewTokenLocker from "./Components/TokenLocker/NewTokenLocker";
 import CommintSoon from "./Components/Layout/CommingSoon";
-import Account from "./Components/Account";
+import "./font.css";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +22,12 @@ function App() {
         {
           path: "",
           element: <Dashboard />,
+          loader: async () => {
+            const res = await fetch(
+              "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,binancecoin&vs_currencies=usd"
+            );
+            return res;
+          },
         },
         {
           path: "services/liqlock",
