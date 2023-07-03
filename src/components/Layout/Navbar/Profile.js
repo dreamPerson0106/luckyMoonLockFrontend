@@ -12,11 +12,7 @@ function Profile() {
         to={"profile"}
         className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-full mr-2`}
       >
-        <ProfileuserIcon
-          width={22}
-          height={22}
-          fill={"#bbbbbb"}
-        ></ProfileuserIcon>
+        <ProfileuserIcon className={`w-6 h-6 fill-[#bbb]`} />
       </Link>
     </div>
   );

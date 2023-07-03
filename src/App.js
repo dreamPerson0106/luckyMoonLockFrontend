@@ -12,6 +12,7 @@ import LiquidityLocker from "./Components/LiquidityLocker";
 import NewTokenLocker from "./Components/TokenLocker/NewTokenLocker";
 import CommintSoon from "./Components/Layout/CommingSoon";
 import "./font.css";
+import Account from "./Components/Account";
 
 function App() {
   const router = createBrowserRouter([

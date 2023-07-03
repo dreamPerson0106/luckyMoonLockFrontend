@@ -53,11 +53,7 @@ function Account() {
         <div className={"flex justify-center"}>
           {wallet_address ? (
             <div className="flex gap-3 font-bold">
-              <ProfileuserIcon
-                width={22}
-                height={22}
-                fill={"#393939"}
-              ></ProfileuserIcon>
+              <ProfileuserIcon className={`w-6 h-6 fill-[#bbb]`} />
               {conv_address}
             </div>
           ) : (
