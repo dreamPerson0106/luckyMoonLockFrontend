@@ -1,16 +1,11 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { BinanceIcon, EthLogo } from "../../assets/Icons";
-import { useDraggable } from "react-use-draggable-scroll";
-
+import ScrollContainer from "react-indiana-drag-scroll";
 import { Link } from "react-router-dom";
 
 const TokenList = () => {
   const { border, font, background } = useSelector((state) => state);
-
-  const drag_token = useRef(null);
-  const { events } = useDraggable(drag_token); // Now we pass the reference to the useDraggable hook:
-
   const token_list = [
     {
       title: "NEOPUNK",
@@ -74,19 +69,20 @@ const TokenList = () => {
     },
   ];
 
+  const drag_token = useRef(null);
+
   return (
-    <div
-      className="flex max-w-full space-x-3 overflow-x-hidden scrollbar-hide"
-      {...events}
-      ref={drag_token} // add reference and events to the wrapping div
-    >
-      {token_list.map((item, index) => {
-        return (
-          <Link to={`/tokens`} key={index}>
+    <ScrollContainer horizontal={true} vertical={false} style={{ height: 200 }}>
+      <div
+        className="w-full overflow-x-scroll flex gap-5 pb-4"
+        ref={drag_token}
+      >
+        {token_list.map((item, index) => {
+          return (
+            // <Link to={`/tokens`} key={index}>
             <div
               className={`grid grid-cols-2 gap-7 border-[${border}] bg-[${background}] text-[${font}] px-4 py-2 rounded-lg border-2 items-center w-80`}
               style={{ gridTemplateColumns: "86px 150px" }}
-              key={index}
             >
               <div
                 className={`relative border-2 border-[${border}] w-[86px] h-[86px] rounded-full flex justify-center items-center col-span-1`}
@@ -112,10 +108,11 @@ const TokenList = () => {
                 <p>in {item.period} days</p>
               </div>
             </div>
-          </Link>
-        );
-      })}
-    </div>
+            // </Link>
+          );
+        })}
+      </div>
+    </ScrollContainer>
   );
 };
 
