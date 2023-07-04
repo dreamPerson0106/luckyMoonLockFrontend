@@ -11,7 +11,7 @@ function WithdrawSetting() {
     backgroundHolder,
     border,
     theme,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
 
   const optionsArray = [
     {

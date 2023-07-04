@@ -6,9 +6,9 @@ import theme from "./assets/theme.json";
 // import setAuthToken from './utils/setAuthToken';
 
 const initialState = {
-  wallet_address: "",
-  ...theme.dim,
-  chain: "0x1",
+  theme: {
+    ...theme.dim,
+  },
 };
 
 const middleware = [thunk];

@@ -8,7 +8,6 @@ import LiquidityLock from "./LiquidityLock";
 
 const NewTokenLock = ({ innerLockStatus }) => {
   const {
-    wallet_address,
     background,
     font,
     fontHolder,
@@ -16,7 +15,8 @@ const NewTokenLock = ({ innerLockStatus }) => {
     border,
     backgroundHolder,
     mainBg,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
+  const { wallet_address } = useSelector((state) => state.web3);
   const [wallet_status, setWalletStatus] = useState(false);
   const [temp, setTemp] = useState(false);
   return (

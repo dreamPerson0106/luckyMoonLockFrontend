@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import { BSCLogo, EthLogo, PolyLogo } from "../../assets/Icons";
 
 const SwitchNetButton = forwardRef(({ className, state }, ref) => {
-  const { font, chain } = useSelector((state) => state);
+  const { font } = useSelector((state) => state.theme);
+  const { chain } = useSelector((state) => state.web3);
 
   const chain_list = [
     {

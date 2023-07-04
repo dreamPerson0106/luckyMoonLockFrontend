@@ -9,7 +9,7 @@ import { changeChain } from "../../actions";
 
 const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
   const { fontHolder, background, button, hover, font } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   const dispatch = useDispatch();
 

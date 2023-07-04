@@ -9,7 +9,7 @@ import ViewTokenLocker from "./ViewTokenLocker";
 const TokenLocks = () => {
   const { lock } = useParams();
 
-  const { font, fontHolder, border } = useSelector((state) => state);
+  const { font, fontHolder, border } = useSelector((state) => state.theme);
 
   return (
     <div

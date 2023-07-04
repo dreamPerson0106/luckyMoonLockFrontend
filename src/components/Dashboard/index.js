@@ -15,7 +15,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
   const { font, fontHolder, background, hover, border } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   const data = useLoaderData();
   console.log(data);
@@ -57,7 +57,7 @@ const Dashboard = () => {
         <div className="w-full lg:w-5/12 mb-10">
           <h3 className={`text-[${font}] text-xl pb-3`}>LuckyMoon Services</h3>
           <div className={`box bg-[${background}] border-[${border}]`}>
-            <Link to="services">
+            <Link to="services/liqlock">
               <div
                 className={`flex gap-5 items-center hover:bg-[${hover}] px-2 py-1 rounded-md`}
               >

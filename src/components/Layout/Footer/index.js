@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const { font, background, border } = useSelector((state) => state);
+  const { font, background, border } = useSelector((state) => state.theme);
   return (
     <footer
       className={`footer mainfooter d-block bottom-0 w-full bg-[${background}] text-[${font}] border-[${border}]`}

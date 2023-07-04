@@ -6,7 +6,7 @@ import { useDraggable } from "react-use-draggable-scroll";
 import { Link } from "react-router-dom";
 
 const TokenList = () => {
-  const { border, font, background } = useSelector((state) => state);
+  const { border, font, background } = useSelector((state) => state.theme);
 
   const drag_token = useRef(null);
   const { events } = useDraggable(drag_token); // Now we pass the reference to the useDraggable hook:

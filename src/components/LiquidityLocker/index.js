@@ -4,6 +4,8 @@ import LockedPanel from "./LockedPanel";
 import NewTokenLock from "./NewTokenLock";
 import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
 import { SwitchNetButton } from "../SwitchNet";
+import { ethers } from "ethers";
+import { PairABI } from "../../assets/ABIs";
 
 const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);
@@ -13,7 +15,9 @@ const LiquidityLocker = () => {
   const [selecterStatus, setSeleterStatus] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
-  const { font, fontHolder, background, hover } = useSelector((state) => state);
+  const { font, fontHolder, background, hover } = useSelector(
+    (state) => state.theme
+  );
 
   const ref = useRef();
   const btnref = useRef();
@@ -36,6 +40,7 @@ const LiquidityLocker = () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [ref]);
+
   return (
     <div className={`container mx-auto pt-10 pb-7 text-[${font}] max-w-xl`}>
       <SwitchNetButton

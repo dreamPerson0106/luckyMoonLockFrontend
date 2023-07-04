@@ -12,7 +12,7 @@ const BrowserMenu = ({ children }) => {
     hover,
     border,
     theme,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
   const [menu_status, setMenuStatus] = useState(false);
   const btn_self = useRef(null);
   const browser_menu = useRef(null);

@@ -11,7 +11,7 @@ import { changeChain } from "../../../actions";
 import { ethers } from "ethers";
 
 function Navbar() {
-  const { font, background, border } = useSelector((state) => state);
+  const { font, background, border } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData() {

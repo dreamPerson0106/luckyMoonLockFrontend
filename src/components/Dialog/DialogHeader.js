@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function DialogHeader({ children, close }) {
   const { font, background, backgroundHolder, border } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
 
   return (

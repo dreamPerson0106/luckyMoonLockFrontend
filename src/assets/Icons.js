@@ -489,10 +489,10 @@ export const NewLockIcon = ({ className }) => {
       className={className}
     >
       <circle cx="22.5" cy="22.5" r="22.5" fill="#F1F9FB" />
-      <rect x="6" y="7" width="32" height="32" fill="url(#pattern0)" />
+      <rect x="6" y="7" width="32" height="32" fill="url(#pattern1)" />
       <defs>
         <pattern
-          id="pattern0"
+          id="pattern1"
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"

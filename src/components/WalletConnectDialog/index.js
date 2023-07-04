@@ -18,8 +18,8 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
     button,
     border,
     hover,
-    wallet_address,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
+  const { wallet_address } = useSelector((state) => state.web3);
   const { ethereum } = window;
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   // const [currentWalletAddress, setCurrentWalletAddress] = useState("");

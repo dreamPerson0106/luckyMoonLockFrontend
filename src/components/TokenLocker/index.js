@@ -8,17 +8,11 @@ import { Link } from "react-router-dom";
 import Loading from "../Layout/Loading";
 
 const TokenLocker = () => {
-  const {
-    wallet_address,
-    font,
-    fontHolder,
-    border,
-    background,
-    backgroundHolder,
-    button,
-  } = useSelector((state) => state);
+  const { font, fontHolder, border, background, backgroundHolder, button } =
+    useSelector((state) => state.theme);
   const [wallet_status, setWalletStatus] = useState(false);
   const [search_token, setSearchToken] = useState("");
+  const { wallet_address } = useSelector((state) => state.web3);
 
   return (
     <div

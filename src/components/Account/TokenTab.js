@@ -11,9 +11,10 @@ function TokenTab() {
     border,
     button,
     hover,
-    wallet_address,
     mainBg,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
+
+  const { wallet_address } = useSelector((state) => state.web3);
   return (
     <div>
       <div

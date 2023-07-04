@@ -15,7 +15,7 @@ function Mode() {
     backgroundHolder,
     border,
     theme,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
   const menu_bar = useRef(null);
   const mode_button = useRef(null);
   const [menu_status, setMenuStatus] = useState(false);

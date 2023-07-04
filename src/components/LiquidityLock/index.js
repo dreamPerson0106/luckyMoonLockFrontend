@@ -14,7 +14,7 @@ const LiqLock = () => {
     button,
     border,
     hover,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
   const [selecterStatus, setSeleterStatus] = useState(false);
   const ref = useRef();
   const btnref = useRef();

@@ -5,7 +5,6 @@ import LockedPanel from "./LockedPanel";
 
 function EditLock() {
   const {
-    wallet_address,
     background,
     font,
     fontHolder,
@@ -13,7 +12,8 @@ function EditLock() {
     mainBg,
     hover,
     border,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
+  const { wallet_address } = useSelector((state) => state.web3);
 
   const [panelStatus, setPanelStatus] = useState(false);
 

@@ -23,7 +23,7 @@ function LockedPanel() {
     border,
     hover,
     theme,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
 
   const [OptionState1, setOptionStatus1] = useState(false);
   const [OptionState2, setOptionStatus2] = useState(false);
