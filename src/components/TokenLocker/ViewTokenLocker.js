@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const ViewTokenLocker = () => {
-  const { border, background } = useSelector((state) => state);
+  const { border, background } = useSelector((state) => state.theme);
   return (
     <div className={`box_1 bg-[${background}] border-[${border}] p-5`}>
       ViewTokenLocker

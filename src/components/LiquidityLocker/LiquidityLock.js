@@ -5,7 +5,7 @@ import SuccessDialog from "./SuccessDialog";
 
 const LiquidityLock = ({ temp }) => {
   const { font, fontHolder, border, background, backgroundHolder, button } =
-    useSelector((state) => state);
+    useSelector((state) => state.theme);
 
   const [state, setState] = useState({
     unlock_address: false,

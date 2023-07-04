@@ -5,7 +5,7 @@ import DialogContent from "../../Dialog/DialogContent";
 
 function RelockLiquidity({ states, close }) {
   const { font, fontHolder, background, border, button, hover } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   return (
     <Dialog modalState={states} closeModal={close}>

@@ -1,36 +1,10 @@
-import {
-  ADD_ADDRESS,
-  REMOVE_ADDRESS,
-  CHANGE_THEME,
-  CHANGE_CHAIN,
-} from "../actions/types";
-import theme from "../assets/theme.json";
+import { combineReducers } from "redux";
+import theme from "./themeReducer";
+import web3 from "./web3Reducer";
 
-const initialState = {
-  wallet_address: "",
-  chain: "0x1",
-  ...theme,
-};
-
-function rootReducer(state = initialState, action) {
-  const { type, payload } = action;
-
-  switch (type) {
-    case ADD_ADDRESS:
-      return { ...state, wallet_address: payload };
-
-    case REMOVE_ADDRESS:
-      return { ...state, wallet_address: "" };
-
-    case CHANGE_THEME:
-      return { ...state, ...payload };
-
-    case CHANGE_CHAIN:
-      return { ...state, chain: payload };
-
-    default:
-      return state;
-  }
-}
+const rootReducer = combineReducers({
+  theme,
+  web3,
+});
 
 export default rootReducer;

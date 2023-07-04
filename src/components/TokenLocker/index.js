@@ -8,17 +8,11 @@ import { Link } from "react-router-dom";
 import Loading from "../Layout/Loading";
 
 const TokenLocker = () => {
-  const {
-    wallet_address,
-    font,
-    fontHolder,
-    border,
-    background,
-    backgroundHolder,
-    button,
-  } = useSelector((state) => state);
+  const { font, fontHolder, border, background, backgroundHolder, button } =
+    useSelector((state) => state.theme);
   const [wallet_status, setWalletStatus] = useState(false);
   const [search_token, setSearchToken] = useState("");
+  const { wallet_address } = useSelector((state) => state.web3);
 
   return (
     <div
@@ -57,10 +51,7 @@ const TokenLocker = () => {
               value={search_token}
             />
             <Cryptologo
-              width={11}
-              height={18}
-              color={fontHolder}
-              className={`absolute top-[28%] left-4`}
+              className={`absolute top-[16%] left-4 fill-[${fontHolder}] w-3 h-5`}
             />
             <SearchLogo
               color={fontHolder}

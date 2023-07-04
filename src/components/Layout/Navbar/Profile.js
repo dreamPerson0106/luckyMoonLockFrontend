@@ -5,7 +5,7 @@ import { ProfileuserIcon } from "../../../assets/Icons";
 
 function Profile() {
   const { button, hover, font, background, backgroundHolder, border } =
-    useSelector((state) => state);
+    useSelector((state) => state.theme);
   return (
     <div>
       <Link

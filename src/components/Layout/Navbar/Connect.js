@@ -16,7 +16,7 @@ function Connect() {
   const btnSelf = useRef(null);
   const { ethereum } = window;
   const { button, hover, font, background, backgroundHolder, border } =
-    useSelector((state) => state);
+    useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
   let provider;

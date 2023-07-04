@@ -5,7 +5,7 @@ import { SuccesCheckLogo } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 
 const SuccessDialog = ({ dialogStatus, close }) => {
-  const { fontHolder, background } = useSelector((state) => state);
+  const { fontHolder, background } = useSelector((state) => state.theme);
   return (
     <Dialog modalState={dialogStatus} closeModal={close}>
       <DialogContent

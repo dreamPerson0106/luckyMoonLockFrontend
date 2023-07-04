@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EthereumIcon } from "../../assets/Icons";
+import { EthLogo } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 import EditLock from "./EditLock";
 import NewLockContents from "./NewLockContents";
@@ -8,7 +8,6 @@ import LiquidityLock from "./LiquidityLock";
 
 const NewTokenLock = ({ innerLockStatus }) => {
   const {
-    wallet_address,
     background,
     font,
     fontHolder,
@@ -16,7 +15,8 @@ const NewTokenLock = ({ innerLockStatus }) => {
     border,
     backgroundHolder,
     mainBg,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
+  const { wallet_address } = useSelector((state) => state.web3);
   const [wallet_status, setWalletStatus] = useState(false);
   const [temp, setTemp] = useState(false);
   return (
@@ -36,7 +36,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
             aria-labelledby="newlock-tab"
           >
             <div className="flex gap-5 items-center mb-6 max-w-full">
-              <EthereumIcon className={`w-9 h-9`} />
+              <EthLogo className={`w-9 h-9`} />
               <p className={`text-[${font}] font-bold text-lg`}>Sushiswap V1</p>
             </div>
             <p className="mb-6">

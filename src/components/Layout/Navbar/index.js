@@ -8,14 +8,23 @@ import BrowserMenu from "./BrowserMenu.js";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";
 import { changeChain } from "../../../actions";
+import { ethers } from "ethers";
 
 function Navbar() {
-  const { font, background, border } = useSelector((state) => state);
+  const { font, background, border } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (window.ethereum) {
-      dispatch(changeChain(window.ethereum.chainId));
+    async function fetchData() {
+      if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const chainId = await provider
+          .getNetwork()
+          .then((network) => network.chainId);
+        console.log("chainID", "0x" + chainId.toString(16));
+        dispatch(changeChain("0x" + chainId.toString(16)));
+      }
     }
+    fetchData();
   }, []);
 
   return (

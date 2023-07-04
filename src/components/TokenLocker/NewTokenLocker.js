@@ -6,7 +6,7 @@ import SuccessDialog from "./SuccessDialog";
 
 const NewTokenLocker = () => {
   const { fontHolder, border, background, hover, backgroundHolder, button } =
-    useSelector((state) => state);
+    useSelector((state) => state.theme);
 
   const [state, setState] = useState({
     unlock_address: false,

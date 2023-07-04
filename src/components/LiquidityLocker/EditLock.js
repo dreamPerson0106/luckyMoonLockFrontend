@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { EthereumIcon } from "../../assets/Icons";
+import { EthLogo } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 
 function EditLock() {
   const {
-    wallet_address,
     background,
     font,
     fontHolder,
@@ -13,7 +12,8 @@ function EditLock() {
     mainBg,
     hover,
     border,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
+  const { wallet_address } = useSelector((state) => state.web3);
 
   const [panelStatus, setPanelStatus] = useState(false);
 
@@ -32,7 +32,7 @@ function EditLock() {
           type="text"
           id="default-input"
           placeholder="Lookymoon V2 – Goerli pair address…"
-          className={` my-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5`}
+          className={` my-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5 bg-[${backgroundHolder}]`}
         />
         <label
           htmlFor="default-input"
@@ -50,7 +50,7 @@ function EditLock() {
         }}
       >
         <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthereumIcon className={`w-9 h-9`}></EthereumIcon>
+          <EthLogo className={`w-9 h-9`} />
           WETH / USDT
         </div>
         <p>0x563865....2356</p>

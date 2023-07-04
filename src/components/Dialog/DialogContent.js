@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const DialogContent = ({ children, className }) => {
-  const { border } = useSelector((state) => state);
+  const { border } = useSelector((state) => state.theme);
   return (
     <div
       className={`border-x-[1px] border-[${border}] ${className}`}

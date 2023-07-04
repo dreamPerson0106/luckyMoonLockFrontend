@@ -2,7 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Dialog = ({ children, modalState, closeModal, button }) => {
-  const { background, fontHolder, border } = useSelector((state) => state);
+  const { background, fontHolder, border } = useSelector(
+    (state) => state.theme
+  );
 
   const modal = React.useRef(null);
   const closeBtn = React.useRef(null);

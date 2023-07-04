@@ -5,7 +5,7 @@ import DialogContent from "../../Dialog/DialogContent";
 
 function IncreaseLock({ states, close }) {
   const { font, fontHolder, background, border, button, hover, mainBg } =
-    useSelector((state) => state);
+    useSelector((state) => state.theme);
 
   return (
     <Dialog modalState={states} closeModal={close}>

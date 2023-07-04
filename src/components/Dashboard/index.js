@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   BinanceIcon,
   BitcoinIcon,
-  EthereumIcon,
+  EthLogo,
   LittleLockerIcon,
   LockedLiquidityTokenIcon,
   LockerIcon,
@@ -15,7 +15,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
   const { font, fontHolder, background, hover, border } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   const data = useLoaderData();
   console.log(data);
@@ -40,7 +40,7 @@ const Dashboard = () => {
             </span>
           </div>
           <div className="inline-flex items-center gap-3">
-            <EthereumIcon className={`w-9 h-9`} />
+            <EthLogo className={`w-9 h-9`} />
             <span className={`text-[${fontHolder}]`}>
               ${data["ethereum"] ? data["ethereum"]["usd"] : 0}
             </span>
@@ -57,7 +57,7 @@ const Dashboard = () => {
         <div className="w-full lg:w-5/12 mb-10">
           <h3 className={`text-[${font}] text-xl pb-3`}>LuckyMoon Services</h3>
           <div className={`box bg-[${background}] border-[${border}]`}>
-            <Link to="services">
+            <Link to="services/liqlock">
               <div
                 className={`flex gap-5 items-center hover:bg-[${hover}] px-2 py-1 rounded-md`}
               >

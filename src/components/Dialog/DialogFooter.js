@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const DialogFooter = ({ children }) => {
   const { font, background, backgroundHolder, border } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   return (
     <div

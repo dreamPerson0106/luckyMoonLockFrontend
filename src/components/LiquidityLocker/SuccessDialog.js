@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const SuccessDialog = ({ dialogStatus, close }) => {
   const { font, fontHolder, background, border } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   const [success_status, setSuccessStatus] = useState(false);
   return (

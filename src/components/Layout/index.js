@@ -10,7 +10,7 @@ import TokenList from "./TokenList";
 import "./layout.css";
 
 const Layout = () => {
-  const { background, mainBg, theme } = useSelector((state) => state);
+  const { background, mainBg, theme } = useSelector((state) => state.theme);
   useEffect(() => {
     document.body.classList.add(`bg-[${background}]`);
 

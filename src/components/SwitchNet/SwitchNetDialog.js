@@ -9,7 +9,7 @@ import { changeChain } from "../../actions";
 
 const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
   const { fontHolder, background, button, hover, font } = useSelector(
-    (state) => state
+    (state) => state.theme
   );
   const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
   const chain = [
     {
       title: "Ethereum",
-      icon: <EthLogo width={35} height={35} />,
+      icon: <EthLogo className={`w-9 h-9`} />,
       chain: "0x1",
     },
     {
@@ -59,7 +59,7 @@ const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
     },
     {
       title: "Goerli Test Chain",
-      icon: <EthLogo width={35} height={35} />,
+      icon: <EthLogo className={`w-9 h-9`} />,
       chain: "0x5",
     },
   ];

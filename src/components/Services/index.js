@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Services = () => {
   const { font, fontHolder, background, backgroundHolder, border, hover } =
-    useSelector((state) => state);
+    useSelector((state) => state.theme);
 
   return (
     <div className={`container max-w-2xl text-[${font}] py-12 mx-auto`}>
