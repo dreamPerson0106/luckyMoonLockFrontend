@@ -46,7 +46,6 @@ function NewLockContents({ temp }) {
         </label>
         <input
           type="text"
-          id="default-input"
           placeholder="Lookymoon V2 – Goerli pair address…"
           className={` mt-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5 bg-[${backgroundHolder}]`}
           value={searchQuery}

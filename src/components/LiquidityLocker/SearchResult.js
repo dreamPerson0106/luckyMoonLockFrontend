@@ -57,6 +57,7 @@ const SearchResult = ({ pairAddress, temp }) => {
       }
     }
   };
+
   useEffect(() => {
     //NOTE - USDC/WETH pool 0x647595535c370F6092C6daE9D05a7Ce9A8819F37
     //NOTE - WETH/USDC pool 0x513Dc22a3d82e6f15F86e8DbD7B8581c64D02f97
@@ -64,6 +65,7 @@ const SearchResult = ({ pairAddress, temp }) => {
     web3Instance(pairAddress);
     return () => {};
   }, [pairAddress]);
+
   return !loading ? (
     <Loading className="slideUpEnter" style={{ minHeight: "100px" }} />
   ) : pairInfo.error ? (
