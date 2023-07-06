@@ -136,7 +136,7 @@ const LiquidityLocker = () => {
       </div>
       <div
         id="myTabContent "
-        className={`bg-[${background}] rounded-lg`}
+        className={`bg-[${background}] rounded-lg border-[1px] border-[${border}]`}
         style={{
           boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)",
         }}

@@ -24,10 +24,10 @@ function LockLiquidityTab() {
       <div className="flex justify-end">
         <button
           id=""
-          className={` flex px-3 py-2 gap-2 bg-green-600 text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg items-center `}
+          className={` flex px-3 py-2 gap-2 bg-green-600 text-[white] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg items-center `}
           type="button"
         >
-          <PadLockIcon color={font} />
+          <PadLockIcon color={"white"} />
           <p>Lock Liquidity</p>
         </button>
       </div>
