@@ -3,6 +3,7 @@ import {
   REMOVE_ADDRESS,
   CHANGE_CHAIN,
   CHANGE_PAIRINFO,
+  CONV_ADDRESS,
 } from "../actions/types";
 
 const initialState = {
@@ -31,6 +32,9 @@ const web3Reducer = (state = initialState, action) => {
 
     case CHANGE_PAIRINFO:
       return { ...state, pairInfo: payload };
+
+    case CONV_ADDRESS:
+      return { ...state, conv_address: payload };
 
     default:
       return state;
