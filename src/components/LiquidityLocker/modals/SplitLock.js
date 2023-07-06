@@ -20,7 +20,6 @@ function SplitLock({ states, close }) {
           <form className="space-y-6" action="#">
             <div>
               <label
-                htmlFor="newOwner"
                 className={`block mb-4 text-sm font-medium text-[${font}]`}
               >
                 Split this lock into another lock with speclifed amount. Usefull

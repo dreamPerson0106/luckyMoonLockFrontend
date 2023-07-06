@@ -2,14 +2,16 @@ import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { PairABI, TokenABI } from "../../assets/ABIs";
 import Loading from "../Layout/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { EthLogo } from "../../assets/Icons";
+import { changePairInfo } from "../../actions";
 
 const SearchResult = ({ pairAddress, temp }) => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [pairInfo, setPairInfo] = useState({
-    balanceOf: "",
+    balanceOf: "0",
     token0: "",
     token1: "",
     error: false,
@@ -19,7 +21,7 @@ const SearchResult = ({ pairAddress, temp }) => {
   );
   const { wallet_address } = useSelector((state) => state.web3);
 
-  //SECTION - create web3 instance
+  //SECTION - create web3 instance and save pair info
   const web3Instance = async (pair_address) => {
     const { ethereum } = window;
     if (ethereum) {
@@ -46,6 +48,14 @@ const SearchResult = ({ pairAddress, temp }) => {
           token1: token1Symbol,
           error: false,
         });
+        dispatch(
+          changePairInfo({
+            balanceOf,
+            token0: token0Symbol,
+            token1: token1Symbol,
+            pairAddress,
+          })
+        );
         setLoading(true);
       } catch (err) {
         setPairInfo({
@@ -62,9 +72,12 @@ const SearchResult = ({ pairAddress, temp }) => {
     //NOTE - USDC/WETH pool 0x647595535c370F6092C6daE9D05a7Ce9A8819F37
     //NOTE - WETH/USDC pool 0x513Dc22a3d82e6f15F86e8DbD7B8581c64D02f97
     setLoading(false);
-    web3Instance(pairAddress);
+    // web3Instance(pairAddress);
+    //FIXME - change lptoken contract address
+    web3Instance("0x513Dc22a3d82e6f15F86e8DbD7B8581c64D02f97");
     return () => {};
   }, [pairAddress]);
+  //!SECTION
 
   return !loading ? (
     <Loading className="slideUpEnter" style={{ minHeight: "100px" }} />
@@ -74,7 +87,13 @@ const SearchResult = ({ pairAddress, temp }) => {
     <button
       className={`slideUpEnter my-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
       type="button"
-      onClick={temp}
+      onClick={
+        Number(pairInfo.balanceOf) === 0
+          ? () => {
+              toast.warn("Charge LP token!");
+            }
+          : temp
+      }
     >
       <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
         <EthLogo className={`w-9 h-9`} />

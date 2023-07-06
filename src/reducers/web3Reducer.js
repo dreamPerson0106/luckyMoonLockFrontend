@@ -1,13 +1,18 @@
-import { ADD_ADDRESS, REMOVE_ADDRESS, CHANGE_CHAIN } from "../actions/types";
+import {
+  ADD_ADDRESS,
+  REMOVE_ADDRESS,
+  CHANGE_CHAIN,
+  CHANGE_PAIRINFO,
+} from "../actions/types";
 
 const initialState = {
   wallet_address: "",
   chain: "0x1",
-  pairinfo: {
-    balanceOf: "",
+  pairInfo: {
+    balanceOf: "0",
     token0: "",
     token1: "",
-    error: false,
+    pairAddress: "",
   },
 };
 
@@ -23,6 +28,9 @@ const web3Reducer = (state = initialState, action) => {
 
     case CHANGE_CHAIN:
       return { ...state, chain: payload };
+
+    case CHANGE_PAIRINFO:
+      return { ...state, pairInfo: payload };
 
     default:
       return state;

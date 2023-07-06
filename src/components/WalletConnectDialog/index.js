@@ -66,7 +66,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
   };
 
   return (
-    <div className="z-10">
+    <div>
       <Dialog
         modalState={modalState}
         closeModal={closeModal}
@@ -75,7 +75,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
       >
         <DialogHeader>
           <h1 className={`text-xl`}>
-            {wallet_address == ""
+            {wallet_address === ""
               ? "Connect Your Wallet"
               : "Your Wallet Address Is"}
           </h1>

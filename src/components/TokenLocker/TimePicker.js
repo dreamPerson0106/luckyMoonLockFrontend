@@ -16,7 +16,6 @@ const TimePicker = () => {
 
   const changeHoverBackground = (className) => {
     try {
-      console.log(className);
       const changeClassName = child.current.querySelector("." + className);
       changeClassName.style.borderRadius = "10px";
       changeClassName.addEventListener("mouseover", () => {
@@ -30,8 +29,6 @@ const TimePicker = () => {
       console.log(err);
     }
   };
-
-  console.log(child);
 
   useEffect(() => {
     if (calendar) {
