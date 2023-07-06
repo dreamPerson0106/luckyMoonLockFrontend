@@ -18,6 +18,7 @@ function Account() {
     border,
     button,
     hover,
+    conv_address,
     mainBg,
   } = useSelector((state) => state.theme);
   const { wallet_address } = useSelector((state) => state.web3);
@@ -51,9 +52,9 @@ function Account() {
         </p>
         <div className={"flex justify-center"}>
           {wallet_address ? (
-            <div>
-              <ProfileuserIcon className={`w-6 h-6 fill-[#393939]`} />
-              {wallet_address}
+            <div className="flex gap-3 font-bold">
+              <ProfileuserIcon className={`w-6 h-6 fill-[#bbb]`} />
+              {conv_address}
             </div>
           ) : (
             <></>

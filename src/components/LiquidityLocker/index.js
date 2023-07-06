@@ -6,6 +6,7 @@ import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
 import { SwitchNetButton } from "../SwitchNet";
 import { ethers } from "ethers";
 import { PairABI } from "../../assets/ABIs";
+import LockLiquidityTab from "./LockLiquidityTab";
 
 const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);
@@ -188,26 +189,7 @@ const LiquidityLocker = () => {
         ) : (
           <></>
         )}
-        {liquidityTab ? (
-          <div
-            className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-            id="lock_liquidity"
-            role="tabpanel"
-            aria-labelledby="lock_liquidity-tab"
-          >
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              This is some placeholder content the{" "}
-              <strong className="font-medium text-gray-800 dark:text-white">
-                Lock Liquidity tab's associated content
-              </strong>
-              . Clicking another tab will toggle the visibility of this one for
-              the next. The tab JavaScript swaps classes to control the content
-              visibility and styling.
-            </p>
-          </div>
-        ) : (
-          <></>
-        )}
+        {liquidityTab ? <LockLiquidityTab /> : <></>}
         {launchpadTab ? (
           <div
             className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800"

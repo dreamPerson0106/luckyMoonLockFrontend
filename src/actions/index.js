@@ -1,9 +1,8 @@
 import {
   ADD_ADDRESS,
-  CHANGE_CHAIN,
   CHANGE_THEME,
   REMOVE_ADDRESS,
-  CHANGE_PAIRINFO,
+  CONV_ADDRESS,
 } from "./types.js";
 
 export const addAddress = (address) => ({
@@ -21,12 +20,7 @@ export const changeTheme = (theme) => ({
   payload: theme,
 });
 
-export const changeChain = (chain) => ({
-  type: CHANGE_CHAIN,
-  payload: chain,
-});
-
-export const changePairInfo = (pairInfo) => ({
-  type: CHANGE_PAIRINFO,
-  payload: pairInfo,
+export const convAddress = (converted_address) => ({
+  type: CONV_ADDRESS,
+  payload: converted_address,
 });

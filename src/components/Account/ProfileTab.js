@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { EthLogo, OptionsIcon, PadLockIcon } from "../../assets/Icons";
+import {
+  DownarrowheadIcon,
+  EthLogo,
+  OptionsIcon,
+  PadLockIcon,
+} from "../../assets/Icons";
 import { useSelector } from "react-redux";
 import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
 
@@ -28,12 +33,15 @@ function ProfileTab() {
         aria-labelledby="lock_liquidity-tab"
       >
         <button
-          className={`mx-auto w-4/12 my-3 py-3 bg-[${button}] border-[1px] border-[${border}] rounded-lg btn_shadow flex justify-center items-center gap-2`}
+          className={`mx-auto w-4/12 my-3 py-2 px-3 bg-[${button}] border-[1px] border-[${border}] hover:bg-[${hover}] text-lg rounded-lg btn_shadow flex justify-between items-center gap-2`}
           ref={btnref}
           onClick={() => setSeleterStatus(true)}
         >
-          <EthLogo className={`w-9 h-9`} />
-          Goeli
+          <div className="flex items-center gap-4">
+            <EthLogo width={35} height={35}></EthLogo>
+            <p>Goeli</p>
+          </div>
+          <DownarrowheadIcon fill={font} />
         </button>
         <SwitchNetDialog
           modalState={selecterStatus}
@@ -76,7 +84,10 @@ function ProfileTab() {
           <PadLockIcon color="#7C86AF" /> 0.0001 USDC
         </p>
         <p className={`flex gap-2 items-center text-md text-[${font}]`}>
-          10 minutes ago <OptionsIcon color="#1ECD84" width={25} height={25} />
+          10 minutes ago
+          <button>
+            <OptionsIcon color="#1ECD84" width={25} height={25} />
+          </button>
         </p>
       </div>
       <hr className={`bg-[${fontHolder}]`} />
