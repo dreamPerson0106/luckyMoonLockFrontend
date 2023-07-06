@@ -20,7 +20,6 @@ function Navbar() {
         const chainId = await provider
           .getNetwork()
           .then((network) => network.chainId);
-        console.log("chainID", "0x" + chainId.toString(16));
         dispatch(changeChain("0x" + chainId.toString(16)));
       }
     }
