@@ -56,7 +56,12 @@ const LiquidityLock = ({ temp }) => {
   //!SECTION - isValid
   return (
     <div className={`text-[${font}]`}>
-      <button onClick={temp}>Back</button>
+      <button
+        onClick={temp}
+        className={`border-[1px] border-[${border}] px-3 py-2 mx-2 rounded-lg text-[${fontHolder}] hover:bg-[${backgroundHolder}]`}
+      >
+        Back
+      </button>
       <h2 className="text-center text-3xl my-2">Lock Liquidity</h2>
       <h3 className={`text-center text-2xl text-[${fontHolder}] mb-5`}>
         🤔 WETH / USDT🤔
