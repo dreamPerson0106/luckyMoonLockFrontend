@@ -34,10 +34,7 @@ function EditLock() {
           placeholder="Lookymoon V2 – Goerli pair address…"
           className={` my-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5 bg-[${backgroundHolder}]`}
         />
-        <label
-          htmlFor="default-input"
-          className="block mb-2 text-sm text-gray-900 dark:text-white"
-        >
+        <label className="block mb-2 text-sm text-gray-900 dark:text-white">
           e.g. 0xc70556952asdfasd2sfsdf5sdf5sdfsdfsd4fsd6fsdfsd
         </label>
       </div>

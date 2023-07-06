@@ -20,7 +20,6 @@ function OwnershipTrans({ states, close }) {
           <form className="space-y-6" action="#">
             <div>
               <label
-                htmlFor="newOwner"
                 className={`block mb-2 text-sm font-medium text-[${font}]`}
               >
                 Transfer this lock to a new owner. The specified address will be

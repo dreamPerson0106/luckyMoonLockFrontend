@@ -7,18 +7,12 @@ import WalletConnectDialog from "../WalletConnectDialog";
 import LiquidityLock from "./LiquidityLock";
 
 const NewTokenLock = ({ innerLockStatus }) => {
-  const {
-    background,
-    font,
-    fontHolder,
-    hover,
-    border,
-    backgroundHolder,
-    mainBg,
-  } = useSelector((state) => state.theme);
+  const { background, font, fontHolder, hover, border, backgroundHolder } =
+    useSelector((state) => state.theme);
   const { wallet_address } = useSelector((state) => state.web3);
   const [wallet_status, setWalletStatus] = useState(false);
-  const [temp, setTemp] = useState(false);
+  const [temp, setTemp] = useState(true);
+
   return (
     <div id="innerTabContent" className="p-3">
       <WalletConnectDialog

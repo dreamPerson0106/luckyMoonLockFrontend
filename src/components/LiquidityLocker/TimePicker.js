@@ -7,15 +7,15 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const TimePicker = () => {
-  const { font, fontHolder, background, backgroundHolder, border, hover } =
-    useSelector((state) => state.theme);
+const TimePicker = ({ dateMoment, setDateMoment }) => {
+  const { font, background, border, hover } = useSelector(
+    (state) => state.theme
+  );
   const [calendar, setCalendar] = useState(null);
   const child = useRef();
 
   const changeHoverBackground = (className) => {
     try {
-      console.log(className);
       const changeClassName = child.current.querySelector("." + className);
       changeClassName.style.borderRadius = "10px";
       changeClassName.addEventListener("mouseover", () => {
@@ -29,8 +29,6 @@ const TimePicker = () => {
       console.log(err);
     }
   };
-
-  console.log(child);
 
   useEffect(() => {
     if (calendar) {
@@ -133,6 +131,8 @@ const TimePicker = () => {
         renderDay={renderDay}
         renderYear={renderYear}
         renderMonth={renderMonth}
+        value={dateMoment}
+        onChange={setDateMoment}
       />
     </>
   );

@@ -68,7 +68,7 @@ const LiqLock = () => {
       </h1>
 
       <div
-        className={`max-w-xl p-3 mt-16 bg-[${background}] border-[${backgroundHolder}] border-[${border}] border-[1px] rounded-lg`}
+        className={`max-w-xl p-3 mt-16 bg-[${background}]  border-[${border}] border-[1px] rounded-lg`}
         style={{ boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)" }}
       >
         <label className="block mb-2 text-base font-medium text-[#8C8C8C]">

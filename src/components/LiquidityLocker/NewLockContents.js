@@ -37,10 +37,7 @@ function NewLockContents({ temp }) {
   ) : (
     <div>
       <div className="my-6">
-        <label
-          htmlFor="default-input"
-          className={`block mb-2 text-sm text-[${font}]`}
-        >
+        <label className={`block mb-2 text-sm text-[${font}]`}>
           Enter the sushiswap V1 - Goerli pair adderss youd like to lock
           liquidity for
         </label>

@@ -15,7 +15,7 @@ const LiquidityLocker = () => {
   const [selecterStatus, setSeleterStatus] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
-  const { font, fontHolder, background, hover } = useSelector(
+  const { font, fontHolder, border, background, hover } = useSelector(
     (state) => state.theme
   );
 
@@ -122,7 +122,7 @@ const LiquidityLocker = () => {
       </div>
       <div
         id="myTabContent "
-        className={`bg-[${background}] rounded-lg`}
+        className={`bg-[${background}] border-[${border}] border-[1px] rounded-xl`}
         style={{
           boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)",
         }}

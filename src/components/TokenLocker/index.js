@@ -38,7 +38,8 @@ const TokenLocker = () => {
           className={`w-full my-3 py-4 bg-[${button}] border-[1px] border-[${border}] rounded-lg btn_shadow flex justify-center items-center gap-2`}
           onClick={() => setWalletStatus(true)}
         >
-          <Cryptologo width={11} height={18} color={font} /> Connect your wallet
+          <Cryptologo className={`w-3 h-5 fill-[${font}]`} /> Connect your
+          wallet
         </button>
       ) : (
         <>
