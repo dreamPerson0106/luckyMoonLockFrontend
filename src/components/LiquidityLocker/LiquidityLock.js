@@ -3,12 +3,17 @@ import { useSelector } from "react-redux";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
 import Input from "../Layout/Input";
+import { ethers, BigNumber } from "ethers";
+import { toast } from "react-toastify";
+
+const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
 
 const LiquidityLock = ({ temp }) => {
   const { font, fontHolder, border, background, backgroundHolder } =
     useSelector((state) => state.theme);
+  const { pairContract, wallet_address } = useSelector((state) => state.web3);
+  const [pairBalanceOf, setPairBalanceOf] = useState("0");
 
-  const { pairInfo } = useSelector((state) => state.web3);
   const [isValid, setIsValid] = useState(false);
   const [state, setState] = useState({
     lptoken: "",
@@ -18,9 +23,16 @@ const LiquidityLock = ({ temp }) => {
     approve: false,
     dialogStatus: false,
   });
+
   // SECTION - handle lock with web3 intergration
 
-  const handleLock = () => {
+  const handleLock = async () => {
+    console.log("lock");
+    const transfer = await pairContract.transfer(
+      LOCKER_ADDRESS,
+      state.lptoken * 10 ** 18
+    );
+    console.log(transfer);
     setState({
       ...state,
       dialogStatus: true,
@@ -32,19 +44,56 @@ const LiquidityLock = ({ temp }) => {
   const handleLptokenAmount = (rate) => () => {
     setState({
       ...state,
-      lptoken: ((pairInfo.balanceOf * rate) / 100).toFixed(20),
+      lptoken: (pairBalanceOf * (rate / 100)).toFixed(18),
     });
   };
+
+  //SECTION - handle approve
+
+  const handleApprove = async () => {
+    const { ethereum } = window;
+    const { lptoken } = state;
+    // return console.log(lptoken * 10 ** 18);
+    if (ethereum) {
+      try {
+        console.log("approve");
+        const approve = await pairContract.approve(
+          LOCKER_ADDRESS,
+          lptoken * 10 ** 18
+        );
+        if (approve) {
+          setState({ ...state, approve: true });
+        }
+      } catch (err) {
+        toast.error(err.message);
+      }
+    }
+  };
+  //!SECTION
+
+  useEffect(() => {
+    async function getPairContractInfo() {
+      let balanceOf = await pairContract.balanceOf(wallet_address);
+      balanceOf = ethers.utils.formatEther(balanceOf);
+      setPairBalanceOf(balanceOf);
+    }
+    try {
+      getPairContractInfo();
+    } catch (err) {
+      console.log(err);
+    }
+    return () => {};
+  }, []);
 
   //SECTION - isValid
 
   useEffect(() => {
     setIsValid(
-      (Number(state.lptoken) <= Number(pairInfo.balanceOf) &&
+      (Number(state.lptoken) <= Number(pairBalanceOf) &&
         state.lptoken.length !== 0 &&
         state.date.length !== 0 &&
         !state.unlock_address_state) ||
-        (Number(state.lptoken) <= Number(pairInfo.balanceOf) &&
+        (Number(state.lptoken) <= Number(pairBalanceOf) &&
           state.lptoken.length !== 0 &&
           state.date.length !== 0 &&
           state.unlock_address_state &&
@@ -54,6 +103,7 @@ const LiquidityLock = ({ temp }) => {
   }, [state]);
 
   //!SECTION - isValid
+
   return (
     <div className={`text-[${font}]`}>
       <button
@@ -73,9 +123,7 @@ const LiquidityLock = ({ temp }) => {
       <div
         className={`border-[${border}] rounded-md border-[1px] bg-[${backgroundHolder}] p-5`}
       >
-        <p className={`text-right text-[${font}]`}>
-          Balance : {pairInfo.balanceOf}
-        </p>
+        <p className={`text-right text-[${font}]`}>Balance : {pairBalanceOf}</p>
         <div className="flex w-full items-center gap-3">
           <Input
             type="decimal"
@@ -89,15 +137,14 @@ const LiquidityLock = ({ temp }) => {
             }}
             value={state.lptoken}
             invalid={
-              Number(state.lptoken) > Number(pairInfo.balanceOf) ||
+              Number(state.lptoken) > Number(pairBalanceOf) ||
               state.lptoken.length === 0
             }
             invalidText={
-              Number(state.lptoken) > Number(pairInfo.balanceOf)
+              Number(state.lptoken) > Number(pairBalanceOf)
                 ? `The amount must be smaller than LP token's balance.`
                 : "Invalid LP token amount"
             }
-            // step={"any"}
           />
           <span>USDT</span>
           {/* NOTE - Max button */}
@@ -231,8 +278,8 @@ const LiquidityLock = ({ temp }) => {
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
-          disabled={state.approve}
-          onClick={() => setState({ ...state, approve: true })}
+          disabled={state.approve && isValid}
+          onClick={handleApprove}
         >
           Approve
         </button>
@@ -242,7 +289,7 @@ const LiquidityLock = ({ temp }) => {
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
-          disabled={!state.approve}
+          // disabled={!state.approve && isValid}
           onClick={handleLock}
         >
           Lock

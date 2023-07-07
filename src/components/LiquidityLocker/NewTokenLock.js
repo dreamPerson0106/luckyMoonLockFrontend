@@ -11,7 +11,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
     useSelector((state) => state.theme);
   const { wallet_address } = useSelector((state) => state.web3);
   const [wallet_status, setWalletStatus] = useState(false);
-  const [temp, setTemp] = useState(true);
+  const [temp, setTemp] = useState(false);
 
   return (
     <div id="innerTabContent" className="p-3">

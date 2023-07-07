@@ -3,7 +3,7 @@ import {
   CHANGE_THEME,
   REMOVE_ADDRESS,
   CONV_ADDRESS,
-  CHANGE_PAIRINFO,
+  CHANGE_PAIRCONTRACT,
   CHANGE_CHAIN,
 } from "./types.js";
 
@@ -27,9 +27,9 @@ export const convAddress = (converted_address) => ({
   payload: converted_address,
 });
 
-export const changePairInfo = (pairInfo) => ({
-  type: CHANGE_PAIRINFO,
-  payload: pairInfo,
+export const changePairContract = (pairContract) => ({
+  type: CHANGE_PAIRCONTRACT,
+  payload: pairContract,
 });
 
 export const changeChain = (chain) => ({

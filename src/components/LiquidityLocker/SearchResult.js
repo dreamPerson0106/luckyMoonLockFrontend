@@ -5,7 +5,7 @@ import Loading from "../Layout/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { EthLogo } from "../../assets/Icons";
-import { changePairInfo } from "../../actions";
+import { changePairContract } from "../../actions";
 
 const SearchResult = ({ pairAddress, temp }) => {
   const dispatch = useDispatch();
@@ -27,13 +27,9 @@ const SearchResult = ({ pairAddress, temp }) => {
     if (ethereum) {
       try {
         const provider = new ethers.providers.Web3Provider(ethereum);
-
+        const signer = provider.getSigner();
         // Load the contract
-        const pairContract = new ethers.Contract(
-          pair_address,
-          PairABI,
-          provider
-        );
+        const pairContract = new ethers.Contract(pair_address, PairABI, signer);
         let balanceOf = await pairContract.balanceOf(wallet_address);
         balanceOf = ethers.utils.formatEther(balanceOf);
         let token0 = await pairContract.token0();
@@ -48,14 +44,7 @@ const SearchResult = ({ pairAddress, temp }) => {
           token1: token1Symbol,
           error: false,
         });
-        dispatch(
-          changePairInfo({
-            balanceOf,
-            token0: token0Symbol,
-            token1: token1Symbol,
-            pairAddress,
-          })
-        );
+        dispatch(changePairContract(pairContract));
         setLoading(true);
       } catch (err) {
         setPairInfo({
@@ -74,7 +63,7 @@ const SearchResult = ({ pairAddress, temp }) => {
     setLoading(false);
     // web3Instance(pairAddress);
     //FIXME - change lptoken contract address
-    web3Instance("0x513Dc22a3d82e6f15F86e8DbD7B8581c64D02f97");
+    web3Instance(pairAddress);
     return () => {};
   }, [pairAddress]);
   //!SECTION

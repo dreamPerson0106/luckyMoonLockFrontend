@@ -3,7 +3,12 @@ import { Cryptologo } from "../../../assets/Icons";
 import "./navbar.css";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, convAddress, removeAddress } from "../../../actions";
+import {
+  addAddress,
+  changeChain,
+  convAddress,
+  removeAddress,
+} from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
 import { toast } from "react-toastify";
 
@@ -75,6 +80,9 @@ function Connect() {
           dispatch(removeAddress());
         }
         setCurrentWalletAddress(window.ethereum.selectedAddress);
+      });
+      window.ethereum.on("chainChanged", (chainId) => {
+        dispatch(changeChain(chainId));
       });
     }
 
