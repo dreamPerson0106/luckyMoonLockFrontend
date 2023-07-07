@@ -12,6 +12,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
   const { wallet_address } = useSelector((state) => state.web3);
   const [wallet_status, setWalletStatus] = useState(false);
   const [temp, setTemp] = useState(false);
+  const [pairAddress, setPairAddress] = useState("");
 
   return (
     <div id="innerTabContent" className="p-3">
@@ -21,7 +22,10 @@ const NewTokenLock = ({ innerLockStatus }) => {
       />
       {innerLockStatus ? (
         temp ? (
-          <LiquidityLock temp={() => setTemp(false)} />
+          <LiquidityLock
+            temp={() => setTemp(false)}
+            pairAddress={pairAddress}
+          />
         ) : (
           <div
             className={`p-4 rounded-lg bg-[${background}]`}
@@ -47,7 +51,10 @@ const NewTokenLock = ({ innerLockStatus }) => {
               <li>Relocking</li>
               <li>Lock ownership transfer</li>
             </ul>
-            <NewLockContents temp={() => setTemp(true)} />
+            <NewLockContents
+              temp={() => setTemp(true)}
+              pairAddress={(address) => setPairAddress(address)}
+            />
           </div>
         )
       ) : (
