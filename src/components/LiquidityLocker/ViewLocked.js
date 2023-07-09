@@ -12,7 +12,7 @@ function ViewLocked() {
     hover,
     wallet_address,
     mainBg,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
   return (
     <>
       <p className={`mb-8`}>

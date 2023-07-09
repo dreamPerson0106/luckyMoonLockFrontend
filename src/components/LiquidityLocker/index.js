@@ -7,6 +7,7 @@ import { SwitchNetButton } from "../SwitchNet";
 import { ethers } from "ethers";
 import { PairABI } from "../../assets/ABIs";
 import LockLiquidityTab from "./LockLiquidityTab";
+import { Link } from "react-router-dom";
 
 const LiquidityLocker = () => {
   const [tokenTab, setTokenTab] = useState(true);
@@ -65,14 +66,9 @@ const LiquidityLocker = () => {
           role="tablist"
         >
           <li className="mr-2" role="presentation">
-            <button
+            <Link
               className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
-              id="tokens-tab"
-              data-tabs-target="#tokens"
-              type="button"
-              role="tab"
-              aria-controls="tokens"
-              aria-selected="false"
+              to="sushi-v1/ex-token"
               onClick={() => {
                 setTokenTab(true);
                 setLaunchPadTab(false);
@@ -80,17 +76,12 @@ const LiquidityLocker = () => {
               }}
             >
               Tokens
-            </button>
+            </Link>
           </li>
           <li className="mr-2" role="presentation">
-            <button
+            <Link
               className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
-              id="lock_liquidity-tab"
-              data-tabs-target="#lock_liquidity"
-              type="button"
-              role="tab"
-              aria-controls="lock_liquidity"
-              aria-selected="false"
+              to="sushi-v1/ex-lockliquidity"
               onClick={() => {
                 setTokenTab(false);
                 setLaunchPadTab(false);
@@ -98,7 +89,7 @@ const LiquidityLocker = () => {
               }}
             >
               Lock Liquidity
-            </button>
+            </Link>
           </li>
           <li role="presentation">
             <button

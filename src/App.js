@@ -13,6 +13,9 @@ import TokenLocks from "./Components/TokenLocker/TokenLocks";
 import CommintSoon from "./Components/Layout/CommingSoon";
 import "./font.css";
 import Account from "./Components/Account";
+import Extop from "./Components/LiquidityLocker/Extop";
+import Extoken from "./Components/LiquidityLocker/Extoken";
+import Exlockliquidity from "./Components/LiquidityLocker/Exlockliquidity";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +42,24 @@ function App() {
           element: <LiqLock />,
         },
         {
+          path: "sushi-v1/ex-token",
+          element: (
+            <>
+              <Extop />
+              <Extoken />
+            </>
+          ),
+        },
+        {
+          path: "sushi-v1/ex-lockliquidity",
+          element: (
+            <>
+              <Extop />
+              <Exlockliquidity />
+            </>
+          ),
+        },
+        {
           path: "sushi-v1/locker",
           element: <LiquidityLocker />,
         },
@@ -48,6 +69,10 @@ function App() {
         },
         {
           path: "/tokenlocker",
+          element: <TokenLocker />,
+        },
+        {
+          path: "/ex-token",
           element: <TokenLocker />,
         },
         {

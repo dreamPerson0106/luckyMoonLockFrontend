@@ -12,7 +12,7 @@ function ViewUnlocked() {
     hover,
     wallet_address,
     mainBg,
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.theme);
   return (
     <>
       <div className="flex justify-between gap-36 px-2">
