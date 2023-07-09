@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { SwitchNetButton, SwitchNetDialog } from "../SwitchNet";
 import { useSelector } from "react-redux";
+import PagewithTransition from "../Layout/PagewithTransition";
 
 function Extop() {
   const [selecterStatus, setSeleterStatus] = useState(false);
@@ -99,6 +100,8 @@ function Extop() {
           </ul>
         </div>
       </div>
+      <PagewithTransition />
+      <Outlet />
     </div>
   );
 }

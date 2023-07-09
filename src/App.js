@@ -42,23 +42,37 @@ function App() {
           element: <LiqLock />,
         },
         {
-          path: "sushi-v1/ex-token",
-          element: (
-            <>
-              <Extop />
-              <Extoken />
-            </>
-          ),
+          path: "sushi-v1",
+          element: <Extop />,
+          children: [
+            {
+              path: "ex-token",
+              element: <Extoken />,
+            },
+            {
+              path: "ex-lockliquidity",
+              element: <Exlockliquidity />,
+            },
+          ],
         },
-        {
-          path: "sushi-v1/ex-lockliquidity",
-          element: (
-            <>
-              <Extop />
-              <Exlockliquidity />
-            </>
-          ),
-        },
+        // {
+        //   path: "sushi-v1/ex-token",
+        //   element: (
+        //     <>
+        //       <Extop />
+        //       <Extoken />
+        //     </>
+        //   ),
+        // },
+        // {
+        //   path: "sushi-v1/ex-lockliquidity",
+        //   element: (
+        //     <>
+        //       <Extop />
+        //       <Exlockliquidity />
+        //     </>
+        //   ),
+        // },
         {
           path: "sushi-v1/locker",
           element: <LiquidityLocker />,

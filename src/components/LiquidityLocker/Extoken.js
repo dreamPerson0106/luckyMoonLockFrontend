@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import NewTokenLock from "./NewTokenLock";
+import { Outlet } from "react-router-dom";
 
 function Extoken() {
   const [activeTab, setActiveTab] = useState(0);
