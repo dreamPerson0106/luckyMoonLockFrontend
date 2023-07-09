@@ -18,43 +18,57 @@ const LiquidityLock = ({ temp, pairAddress }) => {
   const [approveState, setApproveState] = useState(false);
 
   const [isValid, setIsValid] = useState(false);
+  const [allowance, setAllowance] = useState(null);
+
   const [state, setState] = useState({
     lptoken: "",
     date: "",
     unlock_address: "",
+    fee: false,
     unlock_address_state: false,
     approve: false,
     dialogStatus: false,
   });
 
-  // SECTION - handle lock with web3 intergration
+  // SECTION - handle lock with web3 integration
 
   const handleLock = async () => {
     const { ethereum } = window;
     if (ethereum) {
       try {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const lockerContract = ethers.Contract(
-          LOCKER_ADDRESS,
-          LockerABI,
-          signer
-        );
-
-        const transfer = await lockerContract.transfer(
-          LOCKER_ADDRESS,
-          state.lptoken * 10 ** 18
-        );
         setState({
           ...state,
           dialogStatus: true,
         });
-        if (transfer) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const lockerContract = new ethers.Contract(
+          LOCKER_ADDRESS,
+          LockerABI,
+          signer
+        );
+        const unlock_date = new Date(state.date);
+        const now = new Date();
+        const unlocks_time = unlock_date - now;
+
+        const lockLPToken = await lockerContract.lockLPToken(
+          pairAddress,
+          state.lptoken * 10 ** 18,
+          unlocks_time,
+          "0x0000000000000000000000000000000000000000",
+          state.fee,
+          state.unlock_address.length !== 0
+            ? state.unlock_address
+            : wallet_address,
+          { value: ethers.utils.parseEther("0.001") }
+        );
+        const receipt = await lockLPToken.wait(3);
+        if (lockLPToken) {
           setTransferState(true);
         }
       } catch (err) {
         setState({ ...state, dialogStatus: false });
-        toast.error(err.message.split("(")[0]);
+        toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
       toast.error("Metamask is not detected");
@@ -83,6 +97,8 @@ const LiquidityLock = ({ temp, pairAddress }) => {
           LOCKER_ADDRESS,
           lptoken * 10 ** 18
         );
+        const receipt = await approve.wait(3);
+        console.log(receipt);
         setApproveState(false);
         if (approve) {
           setState({ ...state, approve: true });
@@ -96,15 +112,19 @@ const LiquidityLock = ({ temp, pairAddress }) => {
   //!SECTION
 
   useEffect(() => {
-    async function getPairContractInfo() {
-      let balanceOf = await pairContract.balanceOf(wallet_address);
-      balanceOf = ethers.utils.formatEther(balanceOf);
-      setPairBalanceOf(balanceOf);
-    }
-    try {
-      getPairContractInfo();
-    } catch (err) {
-      console.log(err);
+    const { ethereum } = window;
+    if (ethereum) {
+      async function getPairContractInfo() {
+        let balanceOf = await pairContract.balanceOf(wallet_address);
+
+        balanceOf = ethers.utils.formatEther(balanceOf);
+        setPairBalanceOf(balanceOf);
+      }
+      try {
+        getPairContractInfo();
+      } catch (err) {
+        console.log(err);
+      }
     }
     return () => {};
   }, []);
@@ -116,6 +136,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
       (Number(state.lptoken) <= Number(pairBalanceOf) &&
         state.lptoken.length !== 0 &&
         state.date.length !== 0 &&
+        new Date(state.date) > new Date() &&
         !state.unlock_address_state) ||
         (Number(state.lptoken) <= Number(pairBalanceOf) &&
           state.lptoken.length !== 0 &&
@@ -127,6 +148,25 @@ const LiquidityLock = ({ temp, pairAddress }) => {
   }, [state]);
 
   //!SECTION - isValid
+
+  //SECTION - approve state from allowance
+
+  useEffect(() => {
+    const { ethereum } = window;
+    if (ethereum) {
+      async function getPairAllowance() {
+        const allowance = await pairContract.allowance(
+          wallet_address,
+          LOCKER_ADDRESS
+        );
+        setAllowance(ethers.utils.formatEther(allowance));
+      }
+      getPairAllowance();
+    }
+    return () => {};
+  }, []);
+
+  //!SECTION
 
   return (
     <div className={`text-[${font}]`}>
@@ -316,11 +356,16 @@ const LiquidityLock = ({ temp, pairAddress }) => {
         </button>
         <button
           className={` w-1/3 py-3 rounded-lg ${
-            state.approve && isValid
-              ? "bg-[#1ECD84] text-[#e3e9f1]"
+            (state.approve && isValid) ||
+            (Number(state.lptoken) <= Number(allowance) && isValid)
+              ? "bg-[#1ECD84] text-[#e3e9f1] hover:bg-emerald-500 active:bg-emerald-700 cursor-pointer"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
-          disabled={!state.approve && isValid}
+          disabled={
+            !state.approve &&
+            isValid &&
+            Number(state.lptoken) > Number(allowance)
+          }
           onClick={handleLock}
         >
           Lock

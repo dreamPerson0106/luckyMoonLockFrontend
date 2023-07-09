@@ -48,7 +48,7 @@ function NewLockContents({ temp, pairAddress }) {
           value={searchQuery}
           onChange={(e) => {
             setsearchQuery(e.target.value);
-            pairAddress(searchQuery);
+            pairAddress(e.target.value);
           }}
         />
         {searchQuery.length === 42 ? (
