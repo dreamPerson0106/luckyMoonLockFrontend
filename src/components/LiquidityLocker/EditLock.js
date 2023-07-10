@@ -35,7 +35,7 @@ function EditLock() {
         );
 
         const indexes = BigNumber.from(lockedLPTokenNumber).toNumber();
-        const lockedLPTokens = new Array();
+        const lockedLPTokens = [];
         for (let i = 0; i < indexes; i++) {
           const address = await LockInstance.getUserLockedTokenAtIndex(
             wallet_address,
@@ -57,7 +57,7 @@ function EditLock() {
           const token0 = await token0Instance.symbol();
 
           const token1Instance = new ethers.Contract(
-            token0Address,
+            token1Address,
             TokenABI,
             provider
           );
@@ -71,7 +71,7 @@ function EditLock() {
     }
     getLockedLPTokenList();
     return () => {};
-  }, []);
+  }, [wallet_address]);
 
   //!SECTION
 

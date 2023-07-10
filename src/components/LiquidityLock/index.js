@@ -75,7 +75,7 @@ const LiqLock = () => {
           Selected Network
         </label>
         <SwitchNetButton
-          className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+          className={`w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border-[${border}] border-[1px]`}
           state={() => {
             setSeleterStatus(!selecterStatus);
           }}
