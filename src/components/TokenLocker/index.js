@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./tokenlocker.css";
 import { Cryptologo, SearchLogo } from "../../assets/Icons";
 import WalletConnectDialog from "../WalletConnectDialog";
@@ -8,10 +8,11 @@ import Loading from "../Layout/Loading";
 import { BigNumber, ethers } from "ethers";
 import { TokenABI } from "../../assets/ABIs";
 import { toast } from "react-toastify";
-import NewTokenLocker from "./NewTokenLocker";
 import TokenLocks from "./TokenLocks";
+import { changeContract } from "../../actions";
 
 const TokenLocker = () => {
+  const dispatch = useDispatch();
   const { font, fontHolder, border, background, backgroundHolder, button } =
     useSelector((state) => state.theme);
   const [wallet_status, setWalletStatus] = useState(false);
@@ -26,22 +27,30 @@ const TokenLocker = () => {
       const { ethereum } = window;
       if (ethereum) {
         if (search_token.length === 42) {
-          const provider = new ethers.providers.Web3Provider(ethereum);
-          const tokenInstance = new ethers.Contract(
-            search_token,
-            TokenABI,
-            provider
-          );
-          const balanceOf = await tokenInstance.balanceOf(wallet_address);
-          const symbol = await tokenInstance.symbol();
-          const name = await tokenInstance.name();
-          const decimals = await tokenInstance.decimals();
-          setToken({
-            symbol,
-            name,
-            balanceOf: ethers.utils.formatUnits(balanceOf, decimals).toString(),
-            decimals: BigNumber.from(decimals).toNumber(),
-          });
+          try {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            const tokenInstance = new ethers.Contract(
+              search_token,
+              TokenABI,
+              signer
+            );
+            dispatch(changeContract(tokenInstance));
+            const balanceOf = await tokenInstance.balanceOf(wallet_address);
+            const symbol = await tokenInstance.symbol();
+            const name = await tokenInstance.name();
+            const decimals = await tokenInstance.decimals();
+            setToken({
+              symbol,
+              name,
+              balanceOf: ethers.utils
+                .formatUnits(balanceOf, decimals)
+                .toString(),
+              decimals: BigNumber.from(decimals).toNumber(),
+            });
+          } catch (err) {
+            toast.error(err.message.split("(")[0].split("[")[0]);
+          }
         }
       } else {
         toast.error("Metamask is not detected!");
@@ -50,8 +59,6 @@ const TokenLocker = () => {
     getTokenInfo();
     return () => {};
   }, [search_token, wallet_address]);
-
-  console.log(tokenState);
 
   return (
     <>
@@ -104,7 +111,7 @@ const TokenLocker = () => {
                 Input over 3 letters of the wallet address{" "}
               </p>
             </div>
-            {search_token.length === 42 && token ? (
+            {token && search_token.length === 42 ? (
               <button
                 className={`hover:bg-[${backgroundHolder}]`}
                 onClick={() => {
@@ -142,7 +149,14 @@ const TokenLocker = () => {
           closeModal={() => setWalletStatus(false)}
         />
       </div>
-      <TokenLocks className={tokenState ? "animate-slideUpEnter" : "hidden"} />
+      {tokenState ? (
+        <TokenLocks
+          className={tokenState ? "animate-slideUpEnter" : "hidden"}
+          token_Address={search_token}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

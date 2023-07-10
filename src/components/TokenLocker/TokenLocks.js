@@ -6,7 +6,7 @@ import { PadLockIcon } from "../../assets/Icons";
 import NewTokenLocker from "./NewTokenLocker";
 import ViewTokenLocker from "./ViewTokenLocker";
 
-const TokenLocks = ({ className }, prop) => {
+const TokenLocks = ({ className, token_Address }) => {
   const { font, fontHolder, border } = useSelector((state) => state.theme);
   const [lock, setLock] = useState(true);
 
@@ -40,7 +40,11 @@ const TokenLocks = ({ className }, prop) => {
           View Locks
         </button>
       </div>
-      {lock ? <NewTokenLocker {...prop} /> : <ViewTokenLocker />}
+      {lock ? (
+        <NewTokenLocker token_Address={token_Address} />
+      ) : (
+        <ViewTokenLocker />
+      )}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Loading from "../Layout/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { EthLogo } from "../../assets/Icons";
-import { changePairContract } from "../../actions";
+import { changeContract } from "../../actions";
 
 const SearchResult = ({ pairAddress, temp }) => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const SearchResult = ({ pairAddress, temp }) => {
           token1: token1Symbol,
           error: false,
         });
-        dispatch(changePairContract(pairContract));
+        dispatch(changeContract(pairContract));
         setLoading(true);
       } catch (err) {
         setPairInfo({

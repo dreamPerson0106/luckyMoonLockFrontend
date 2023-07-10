@@ -5,14 +5,14 @@ import SuccessDialog from "./SuccessDialog";
 import Input from "../Layout/Input";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { LockerABI } from "../../assets/ABIs";
+import { LPTokenLockerABI } from "../../assets/ABIs";
 
 const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
 
 const LiquidityLock = ({ temp, pairAddress }) => {
   const { font, fontHolder, border, background, backgroundHolder } =
     useSelector((state) => state.theme);
-  const { pairContract, wallet_address } = useSelector((state) => state.web3);
+  const { contract, wallet_address } = useSelector((state) => state.web3);
   const [pairBalanceOf, setPairBalanceOf] = useState("0");
   const [transferState, setTransferState] = useState(false);
   const [approveState, setApproveState] = useState(false);
@@ -44,10 +44,10 @@ const LiquidityLock = ({ temp, pairAddress }) => {
         const signer = provider.getSigner();
         const lockerContract = new ethers.Contract(
           LOCKER_ADDRESS,
-          LockerABI,
+          LPTokenLockerABI,
           signer
         );
-        const unlock_date = new Date(state.date);
+        const unlock_date = state.date;
         const now = new Date();
         const unlocks_time = unlock_date - now;
 
@@ -93,7 +93,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
     if (ethereum) {
       try {
         setApproveState(true);
-        const approve = await pairContract.approve(
+        const approve = await contract.approve(
           LOCKER_ADDRESS,
           lptoken * 10 ** 18
         );
@@ -115,7 +115,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
     const { ethereum } = window;
     if (ethereum) {
       async function getPairContractInfo() {
-        let balanceOf = await pairContract.balanceOf(wallet_address);
+        let balanceOf = await contract.balanceOf(wallet_address);
 
         balanceOf = ethers.utils.formatEther(balanceOf);
         setPairBalanceOf(balanceOf);
@@ -155,7 +155,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
     const { ethereum } = window;
     if (ethereum) {
       async function getPairAllowance() {
-        const allowance = await pairContract.allowance(
+        const allowance = await contract.allowance(
           wallet_address,
           LOCKER_ADDRESS
         );

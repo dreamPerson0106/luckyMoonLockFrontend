@@ -6,7 +6,6 @@ const PagewithTransition = ({ children }) => {
   // const router = useRoutes();
   const location = useLocation();
   const [transitioning, setTransitioning] = useState(false);
-  console.log(transitioning);
 
   useEffect(() => {
     // 👇 this handler will create a transition effect between route changes,

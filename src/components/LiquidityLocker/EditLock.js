@@ -4,7 +4,7 @@ import { EthLogo } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 import { ethers, BigNumber } from "ethers";
 import { toast } from "react-toastify";
-import { LockerABI, PairABI, TokenABI } from "../../assets/ABIs";
+import { LPTokenLockerABI, PairABI, TokenABI } from "../../assets/ABIs";
 import Loading from "../Layout/Loading";
 
 const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
@@ -27,7 +27,7 @@ function EditLock() {
 
         const LockInstance = new ethers.Contract(
           LOCKER_ADDRESS,
-          LockerABI,
+          LPTokenLockerABI,
           provider
         );
         const lockedLPTokenNumber = await LockInstance.getUserNumLockedTokens(
