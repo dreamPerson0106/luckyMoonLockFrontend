@@ -43,7 +43,7 @@ const TokenLocks = ({ className, token_Address }) => {
       {lock ? (
         <NewTokenLocker token_Address={token_Address} />
       ) : (
-        <ViewTokenLocker />
+        <ViewTokenLocker token_address={token_Address} />
       )}
     </div>
   );
