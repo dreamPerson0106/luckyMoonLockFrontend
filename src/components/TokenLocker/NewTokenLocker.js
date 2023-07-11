@@ -139,6 +139,9 @@ const NewTokenLocker = ({ token_Address }) => {
   };
   //!SECTION
 
+  console.log("toknumber:", state.token);
+  console.log("allowance:", state.allowance);
+
   return (
     <>
       <div className={`box_1 p-0 bg-[${background}] border-[${border}]`}>
@@ -358,14 +361,13 @@ const NewTokenLocker = ({ token_Address }) => {
         </button>
         <button
           className={` w-1/2 py-3 rounded-lg ${
-            Number(state.allowance.toString().slice(5)) >=
-            Number(state.token.toString().slice(7))
+            Number(state.allowance).toFixed(4) >= Number(state.token).toFixed(4)
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
           disabled={
-            !Number(state.allowance.toString().slice(5)) >=
-            Number(state.token.toString().slice(7))
+            !Number(state.allowance).toFixed(4) >=
+            Number(state.token).toFixed(4)
           }
           onClick={handleLock}
         >
