@@ -7,6 +7,7 @@ import { addAddress, convAddress, removeAddress } from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
 import { toast } from "react-toastify";
 import { TERipple } from "tw-elements-react";
+import RippleButton from "../../Elements/RippleButton";
 
 function Connect() {
   const [walletDialogStatus, setWalletDialogStatus] = useState(false);
@@ -113,14 +114,15 @@ function Connect() {
   };
   return (
     <>
-      <button
-        className={`transition duration-500 ease-in-out conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md`}
+      <RippleButton
+        ButtonTitle={walletAddress}
+        className={`ripple focus:ring-0 transition duration-500 ease-in-out conbtn bg-[${button} text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md`}
         onClick={connectWallet}
         ref={btnSelf}
       >
         <Cryptologo width={11} height={18} color={font} />
         {walletAddress}
-      </button>
+      </RippleButton>
 
       <WalletConnectDialog
         className="z-20"

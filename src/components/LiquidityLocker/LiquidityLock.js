@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
-import Input from "../Layout/Input";
+import Input from "../Elements/Input";
 
 const LiquidityLock = ({ temp }) => {
   const { font, fontHolder, border, background, backgroundHolder } =
