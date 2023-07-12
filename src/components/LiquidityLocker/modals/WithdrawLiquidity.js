@@ -1,12 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Dialog from "../../Dialog";
 import DialogContent from "../../Dialog/DialogContent";
+import { ethers } from "ethers";
+import { LPTokenLockerABI } from "../../../assets/ABIs";
+import { toast } from "react-toastify";
 
-function WithdrawLiquidity({ states, close }) {
+const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
+
+function WithdrawLiquidity({
+  states,
+  index,
+  lockID,
+  lpTokenAddress,
+  decimals,
+  close,
+}) {
   const { font, fontHolder, background, border, button, hover } = useSelector(
     (state) => state.theme
   );
+
+  const [withdrawValue, setWithdrawValue] = useState(0);
+
+  const handleWithdraw = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const lockerInstance = new ethers.Contract(
+          LOCKER_ADDRESS,
+          LPTokenLockerABI,
+          signer
+        );
+        console.log(withdrawValue * 10 ** decimals);
+        let withdraw = await lockerInstance.withdraw(
+          lpTokenAddress,
+          index,
+          lockID,
+          parseInt(withdrawValue * 10 ** decimals)
+        );
+        withdraw = await withdraw.wait(1);
+        console.log(withdraw.status);
+        if (withdraw.status === 1) {
+          close();
+          toast.success("Withdraw success!");
+        } else {
+          toast.success("Withdraw Failed!");
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error(err.message.split("(")[0].split("[")[0]);
+      }
+    } else toast.warn("Metamask is not detected!");
+  };
   return (
     <Dialog modalState={states} closeModal={close}>
       <DialogContent
@@ -35,6 +82,8 @@ function WithdrawLiquidity({ states, close }) {
                     id="default-input"
                     placeholder="0"
                     className={` text-[${fontHolder}] text-sm rounded-lg  block w-[75%] p-2.5`}
+                    value={withdrawValue}
+                    onChange={(e) => setWithdrawValue(e.target.value)}
                   />
                   <button
                     id=""
@@ -54,6 +103,7 @@ function WithdrawLiquidity({ states, close }) {
             <button
               type="submit"
               className={`w-full text-[${font}] bg-[${button}] hover:bg-[${hover}] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center `}
+              onClick={handleWithdraw}
             >
               Withdraw
             </button>

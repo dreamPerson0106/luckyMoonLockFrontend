@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { EthLogo } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 import { ethers, BigNumber } from "ethers";
 import { toast } from "react-toastify";
 import { LPTokenLockerABI, PairABI, TokenABI } from "../../assets/ABIs";
 import Loading from "../Layout/Loading";
+import { changeContract } from "../../actions/index";
 
 const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
 
@@ -14,8 +15,9 @@ function EditLock() {
     (state) => state.theme
   );
   const { wallet_address } = useSelector((state) => state.web3);
+  const dispatch = useDispatch();
 
-  const [panelStatus, setPanelStatus] = useState(false);
+  const [panelStatus, setPanelStatus] = useState({ address: "", state: false });
   const [lpToken, setLPToken] = useState([]);
 
   //SECTION - get token address
@@ -71,11 +73,11 @@ function EditLock() {
     }
     getLockedLPTokenList();
     return () => {};
-  }, [wallet_address]);
+  }, [lpToken.length]);
 
   //!SECTION
 
-  return !panelStatus ? (
+  return !panelStatus.state ? (
     <div className="p-4">
       <p
         className={`text-sm font-medium text-[${font}] dark:text-[${fontHolder}]`}
@@ -96,7 +98,7 @@ function EditLock() {
           e.g. 0xc70556952asdfasd2sfsdf5sdf5sdfsdfsd4fsd6fsdfsd
         </label>
       </div>
-      {lpToken.length != 0 ? (
+      {lpToken.length !== 0 ? (
         lpToken.map((item, index) => {
           return (
             <button
@@ -104,7 +106,16 @@ function EditLock() {
               type="button"
               key={index}
               onClick={() => {
-                setPanelStatus(true);
+                const { ethereum } = window;
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                const pairInstance = new ethers.Contract(
+                  item.address,
+                  PairABI,
+                  signer
+                );
+                dispatch(changeContract(pairInstance));
+                setPanelStatus({ address: item.address, state: true });
               }}
             >
               <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
@@ -131,7 +142,13 @@ function EditLock() {
       )}
     </div>
   ) : (
-    <LockedPanel />
+    <LockedPanel
+      lpTokenAddress={panelStatus.address}
+      back={() => {
+        setLPToken([]);
+        setPanelStatus({ address: "", state: false });
+      }}
+    />
   );
 }
 

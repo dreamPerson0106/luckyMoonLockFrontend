@@ -34,6 +34,7 @@ const ViewTokenLocker = ({ token_address }) => {
           allowance = ethers.utils.formatUnits(allowance, decimals);
 
           setTokenInfo({ balanceOf, allowance, decimals });
+
           const tokenLockerInstance = new ethers.Contract(
             TOKEN_ADDRESS,
             TokenLockerABI,
