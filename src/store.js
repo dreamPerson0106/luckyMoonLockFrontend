@@ -3,12 +3,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import theme from "./assets/theme.json";
-// import {useMediaQuery} from "react-responsive"
-// import setAuthToken from './utils/setAuthToken';
 
-// const isDarkMode = useMediaQuery({
-//   query: "(prefers-color-scheme: dark)"
-// })
+// import setAuthToken from './utils/setAuthToken';
 
 const initialState = {
   theme: {

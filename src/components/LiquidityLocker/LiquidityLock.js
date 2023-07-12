@@ -58,7 +58,7 @@ const LiquidityLock = ({ temp }) => {
     <div className={`text-[${font}]`}>
       <button
         onClick={temp}
-        className={`border-[1px] border-[${border}] px-3 py-2 mx-2 rounded-lg text-[${fontHolder}] hover:bg-[${backgroundHolder}]`}
+        className={`duration-500 ease-in-out border-[1px] border-[${border}] px-3 py-2 mx-2 rounded-lg text-[${fontHolder}] hover:bg-[${backgroundHolder}]`}
       >
         Back
       </button>
@@ -102,7 +102,7 @@ const LiquidityLock = ({ temp }) => {
           <span>USDT</span>
           {/* NOTE - Max button */}
           <button
-            className="bg-[#1ECD84] p-3 rounded-md"
+            className="duration-500 ease-in-out bg-[#1ECD84] p-3 rounded-md"
             onClick={handleLptokenAmount(100)}
           >
             Max
@@ -110,19 +110,19 @@ const LiquidityLock = ({ temp }) => {
         </div>
         <div className="mt-2 gap-3 flex">
           <button
-            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
             onClick={handleLptokenAmount(25)}
           >
             25%
           </button>
           <button
-            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
             onClick={handleLptokenAmount(50)}
           >
             50%
           </button>
           <button
-            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
             onClick={handleLptokenAmount(75)}
           >
             75%
@@ -160,7 +160,7 @@ const LiquidityLock = ({ temp }) => {
       <p className="text-center mt-7 mb-2">Who can withdraw the tokens?</p>
       <div className={`flex justify-center`}>
         <button
-          className={`px-4 py-2 rounded-md ${
+          className={`duration-500 ease-in-out px-4 py-2 rounded-md ${
             !state.unlock_address_state ? "bg-[#1ECD84]" : ""
           }`}
           onClick={() => {
@@ -173,7 +173,7 @@ const LiquidityLock = ({ temp }) => {
           Me
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${
+          className={`duration-500 ease-in-out px-4 py-2 rounded-md ${
             state.unlock_address_state ? "bg-[#1ECD84]" : ""
           }`}
           onClick={() => {
@@ -210,7 +210,7 @@ const LiquidityLock = ({ temp }) => {
 
       <p className="mt-7 mb-2 text-center">Free options</p>
       <div className="flex justify-center">
-        <button className="bg-[#1ECD84] px-4 py-2 rounded-md text-[#e3e9f1]">
+        <button className="duration-500 ease-in-out bg-[#1ECD84] px-4 py-2 rounded-md text-[#e3e9f1]">
           0.01 ETH
           <br />
           (+1% UNIV)
@@ -226,7 +226,7 @@ const LiquidityLock = ({ temp }) => {
       </p>
       <div className="flex justify-around text-center my-3">
         <button
-          className={` w-1/3 py-3 rounded-lg ${
+          className={`duration-500 ease-in-out w-1/3 py-3 rounded-lg ${
             !state.approve && isValid
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"
@@ -237,7 +237,7 @@ const LiquidityLock = ({ temp }) => {
           Approve
         </button>
         <button
-          className={` w-1/3 py-3 rounded-lg ${
+          className={`duration-500 ease-in-out w-1/3 py-3 rounded-lg ${
             state.approve && isValid
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"

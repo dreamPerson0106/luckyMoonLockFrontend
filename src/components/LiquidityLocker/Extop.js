@@ -6,7 +6,7 @@ import PagewithTransition from "../Layout/PagewithTransition";
 
 function Extop() {
   const [selecterStatus, setSeleterStatus] = useState(false);
-  const { font, fontHolder, border, background, hover } = useSelector(
+  const { font, fontHolder, background, hover } = useSelector(
     (state) => state.theme
   );
 
@@ -80,7 +80,7 @@ function Extop() {
             </li>
             <li role="presentation">
               <button
-                className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
+                className={`duration-500 ease-in-out inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
                 id="launchpad-tab"
                 data-tabs-target="#launchpad"
                 type="button"

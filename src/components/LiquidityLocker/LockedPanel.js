@@ -11,7 +11,6 @@ import {
   TimeleftIcon,
   UserIcon,
   WayIcon,
-  Setting,
 } from "../../assets/Icons";
 
 function LockedPanel() {
@@ -136,7 +135,7 @@ function LockedPanel() {
           </div>
           <div className="relative">
             <button
-              className="col-span-1 mt-7"
+              className="duration-500 ease-in-out col-span-1 mt-7"
               ref={btn_self1}
               onClick={() => {
                 setOptionStatus1(!OptionState1);
@@ -154,7 +153,7 @@ function LockedPanel() {
                 return (
                   <div key={index}>
                     <button
-                      className={`menu_rows ${
+                      className={`duration-500 ease-in-out menu_rows ${
                         theme === item.text.toLowerCase()
                           ? `text-[#0784c3]`
                           : `text-[${font}] hover:bg-[${hover}] `
@@ -172,7 +171,7 @@ function LockedPanel() {
         </div>
         <button
           id=""
-          className={` my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
+          className={`duration-500 ease-in-out my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
           type="button"
           onClick={() => {
             setWithdrawModalState(true);
@@ -193,7 +192,7 @@ function LockedPanel() {
           </div>
           <div className="relative">
             <button
-              className="col-span-1 mt-7"
+              className="duration-500 ease-in-out col-span-1 mt-7"
               ref={btn_self2}
               onClick={() => {
                 setOptionStatus2(!OptionState2);
@@ -211,7 +210,7 @@ function LockedPanel() {
                 return (
                   <div key={index}>
                     <button
-                      className={`menu_rows ${
+                      className={`duration-500 ease-in-out menu_rows ${
                         theme === item.text.toLowerCase()
                           ? `text-[#0784c3]`
                           : `text-[${font}] hover:bg-[${hover}] `
@@ -229,7 +228,7 @@ function LockedPanel() {
         </div>
         <button
           id=""
-          className={` my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
+          className={`duration-500 ease-in-out my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
           type="button"
           onClick={() => {
             setWithdrawModalState(true);

@@ -54,6 +54,7 @@ const BrowserMenu = ({ children }) => {
   return (
     <div className=" relative">
       <button
+        className="duration-500 ease-in-out"
         onClick={() => {
           setMenuStatus(!menu_status);
         }}
@@ -71,13 +72,13 @@ const BrowserMenu = ({ children }) => {
         <input
           type="text"
           placeholder="Select an exchange"
-          className={`px-4 text-xs text-[${font}] border-b-[1px] border-[${border}] bg-[${background}]`}
+          className={` w-full px-4 text-xs text-[${font}] bg-[${background}] mb-2`}
         />
 
         {buttonArray.map((item, index) => {
           return (
             <div key={index}>
-              <hr />
+              <hr className={`border-[${border}]`} />
               <Link
                 to={item.text.replace(" ", "").toLowerCase()}
                 className={`menu_rows ${
@@ -93,7 +94,7 @@ const BrowserMenu = ({ children }) => {
             </div>
           );
         })}
-        <hr />
+        <hr className={`border-[${border}]`} />
         <div className={`flex text-xs px-4 py-1 text-[${fontHolder}]`}>
           other exchanges
         </div>

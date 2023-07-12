@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import NewTokenLock from "./NewTokenLock";
-import { Outlet } from "react-router-dom";
+import Profiletoken from "./Profiletoken";
 
 function Extoken() {
   const [activeTab, setActiveTab] = useState(0);
-  const [innerLockStatus, setInnerLockStatus] = useState(true);
-  const { font, fontHolder, border, background, hover } = useSelector(
+  const [tokenViewStatus, setTokenViewStatus] = useState(true);
+  const { font, fontHolder, border, background } = useSelector(
     (state) => state.theme
   );
 
@@ -33,7 +32,7 @@ function Extoken() {
           >
             <li className="mr-2" role="presentation">
               <button
-                className={`inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
+                className={`duration-500 ease-in-out inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
                   activeTab === 0 && "border-b-4 "
                 }`}
                 id="newlock-tab"
@@ -43,16 +42,16 @@ function Extoken() {
                 aria-controls="newlock"
                 aria-selected="true"
                 onClick={() => {
-                  setInnerLockStatus(true);
+                  setTokenViewStatus(true);
                   setActiveTab(0);
                 }}
               >
-                New Lock
+                All tokens
               </button>
             </li>
             <li className="mr-2" role="presentation">
               <button
-                className={`inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
+                className={`duration-500 ease-in-out inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
                   activeTab === 1 && "border-b-4 "
                 }`}
                 id="edit_withdraw-tab"
@@ -62,17 +61,17 @@ function Extoken() {
                 aria-controls="edit_withdraw"
                 aria-selected="false"
                 onClick={() => {
-                  setInnerLockStatus(false);
+                  setTokenViewStatus(false);
                   setActiveTab(1);
                 }}
               >
-                Edit / Withdraw
+                Watchlist
               </button>
             </li>
           </ul>
         </div>
       </div>
-      <NewTokenLock innerLockStatus={innerLockStatus}></NewTokenLock>
+      <Profiletoken tokenViewStatus={tokenViewStatus}></Profiletoken>
     </div>
   );
 }

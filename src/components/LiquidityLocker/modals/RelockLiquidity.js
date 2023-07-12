@@ -16,7 +16,7 @@ function RelockLiquidity({ states, close }) {
           <h3 className={`mb-4 text-xl font-medium text-[${font}]`}>
             Relock Liquidity
           </h3>
-          <hr className={`text-[${fontHolder}] mb-5`}></hr>
+          <hr className={`border-[${border}] mb-5`}></hr>
           <form className="space-y-6" action="#">
             <div>
               <label
@@ -46,7 +46,7 @@ function RelockLiquidity({ states, close }) {
 
             <button
               type="submit"
-              className={`w-full text-[${font}] bg-[${button}] hover:bg-[${hover}] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center `}
+              className={`duration-500 ease-in-out w-full text-[${font}] bg-[${button}] hover:bg-[${hover}] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center `}
             >
               Relock
             </button>

@@ -4,15 +4,9 @@ import { EthLogo } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
 
 function EditLock() {
-  const {
-    background,
-    font,
-    fontHolder,
-    backgroundHolder,
-    mainBg,
-    hover,
-    border,
-  } = useSelector((state) => state.theme);
+  const { font, fontHolder, backgroundHolder, mainBg, hover } = useSelector(
+    (state) => state.theme
+  );
   const { wallet_address } = useSelector((state) => state.web3);
 
   const [panelStatus, setPanelStatus] = useState(false);
@@ -40,7 +34,7 @@ function EditLock() {
       </div>
       <button
         id=""
-        className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+        className={`duration-500 ease-in-out mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
         type="button"
         onClick={() => {
           setPanelStatus(true);
@@ -50,7 +44,7 @@ function EditLock() {
           <EthLogo className={`w-9 h-9`} />
           WETH / USDT
         </div>
-        <p>0x563865....2356</p>
+        <p>{wallet_address}</p>
       </button>
     </div>
   ) : (

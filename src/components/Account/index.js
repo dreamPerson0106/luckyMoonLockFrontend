@@ -71,7 +71,7 @@ function Account() {
         >
           <li className="mr-2" role="presentation">
             <button
-              className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
+              className={`duration-500 ease-in-out inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
               id="tokens-tab"
               data-tabs-target="#tokens"
               type="button"
@@ -87,7 +87,7 @@ function Account() {
           </li>
           <li className="mr-2" role="presentation">
             <button
-              className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
+              className={`duration-500 ease-in-out inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
               id="lock_liquidity-tab"
               data-tabs-target="#lock_liquidity"
               type="button"
@@ -103,7 +103,7 @@ function Account() {
           </li>
           <li role="presentation">
             <button
-              className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
+              className={`duration-500 ease-in-out inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
               id="launchpad-tab"
               data-tabs-target="#launchpad"
               type="button"

@@ -24,14 +24,14 @@ function TokenTab() {
         aria-labelledby="lock_liquidity-tab"
       >
         <button
-          className={`mx-auto w-4/12 my-3 py-3 bg-[${button}] border-[1px] border-[${border}] rounded-lg btn_shadow flex justify-center items-center gap-2`}
+          className={`duration-500 ease-in-out mx-auto w-4/12 my-3 py-3 bg-[${button}] border-[1px] border-[${border}] rounded-lg btn_shadow flex justify-center items-center gap-2`}
         >
           <EthLogo className={`w-9 h-9`}></EthLogo>
           Goeli
         </button>
       </div>
       <p className={`text-lg border-l-0 text-[${font}] `}>Your Token Locks</p>
-      <hr className={`bg-[${fontHolder}] mt-6`} />
+      <hr className={`border-[${border}] mt-6`} />
       <div className="flex justify-between mt-4 mb-2">
         <div className="flex justify-between items-center gap-2">
           <EthLogo className={`w-9 h-9`} />
@@ -53,7 +53,7 @@ function TokenTab() {
           </div>
         </div>
       </div>
-      <hr className={`bg-[${fontHolder}] mt-6`} />
+      <hr className={`border-[${border}] mt-6`} />
       <div className="flex justify-between mt-4 mb-2">
         <div className="flex justify-between items-center gap-2">
           <EthLogo className={`w-9 h-9`} />

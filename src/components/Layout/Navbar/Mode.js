@@ -6,16 +6,8 @@ import { LightLogo, DarkLogo, DimLogo, Setting } from "../../../assets/Icons";
 
 function Mode() {
   const dispatch = useDispatch();
-  const {
-    font,
-    fontHolder,
-    button,
-    hover,
-    background,
-    backgroundHolder,
-    border,
-    theme,
-  } = useSelector((state) => state.theme);
+  const { font, fontHolder, button, hover, background, border, theme } =
+    useSelector((state) => state.theme);
   const menu_bar = useRef(null);
   const mode_button = useRef(null);
   const [menu_status, setMenuStatus] = useState(false);
@@ -73,10 +65,13 @@ function Mode() {
   const clickChangeTheme = (state) => () => {
     switch (state) {
       case "light":
+        localStorage.setItem("BRIGHT_MODE", "light");
         return dispatch(changeTheme(themes.light));
       case "dim":
+        localStorage.setItem("BRIGHT_MODE", "dim");
         return dispatch(changeTheme(themes.dim));
       case "dark":
+        localStorage.setItem("BRIGHT_MODE", "dark");
         return dispatch(changeTheme(themes.dark));
 
       default:
@@ -164,7 +159,7 @@ function Mode() {
   return (
     <div style={{ position: "relative" }}>
       <button
-        className={`mode bg-[${button}] border-[${border}] hover:bg-[${hover}] ${
+        className={`duration-500 ease-in-out mode bg-[${button}] border-[${border}] hover:bg-[${hover}] ${
           menu_status ? `bg-[${hover}]` : ""
         }`}
         onClick={() => {
@@ -184,7 +179,7 @@ function Mode() {
           return (
             <div key={index}>
               <button
-                className={`menu_rows ${
+                className={`duration-500 ease-in-out items-center menu_rows ${
                   theme === item.text.toLowerCase()
                     ? `text-[#0784c3]`
                     : `text-[${font}] hover:bg-[${hover}] `
@@ -194,7 +189,11 @@ function Mode() {
                 {item.component}
                 {item.text}
               </button>
-              {spliter_idex - 1 === index ? <hr /> : <></>}
+              {spliter_idex - 1 === index ? (
+                <hr className={`border-[${border}]`} />
+              ) : (
+                <></>
+              )}
             </div>
           );
         })}

@@ -10,7 +10,7 @@ function Profile() {
     <div>
       <Link
         to={"profile"}
-        className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-full mr-2`}
+        className={`duration-500 ease-in-out conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-full mr-2`}
       >
         <ProfileuserIcon className={`w-6 h-6 fill-[#bbbbbb]`} />
       </Link>

@@ -93,7 +93,7 @@ const LiquidityLocker = () => {
           </li>
           <li role="presentation">
             <button
-              className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
+              className={`duration-500 ease-in-out inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
               id="launchpad-tab"
               data-tabs-target="#launchpad"
               type="button"
@@ -136,7 +136,7 @@ const LiquidityLocker = () => {
                 >
                   <li className="mr-2" role="presentation">
                     <button
-                      className={`inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
+                      className={`duration-500 ease-in-out inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
                         activeTab === 0 && "border-b-4 "
                       }`}
                       id="newlock-tab"
@@ -155,7 +155,7 @@ const LiquidityLocker = () => {
                   </li>
                   <li className="mr-2" role="presentation">
                     <button
-                      className={`inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
+                      className={`duration-500 ease-in-out inline-block p-4  border-[${font}]-700 rounded-t-lg hover:text-[${fontHolder}]  ${
                         activeTab === 1 && "border-b-4 "
                       }`}
                       id="edit_withdraw-tab"

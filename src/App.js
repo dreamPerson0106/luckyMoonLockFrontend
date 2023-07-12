@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";

@@ -2,17 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function ViewLocked() {
-  const {
-    font,
-    fontHolder,
-    background,
-    backgroundHolder,
-    border,
-    button,
-    hover,
-    wallet_address,
-    mainBg,
-  } = useSelector((state) => state.theme);
+  const { font, fontHolder } = useSelector((state) => state.theme);
   return (
     <>
       <p className={`mb-8`}>

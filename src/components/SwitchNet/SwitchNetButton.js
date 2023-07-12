@@ -32,7 +32,12 @@ const SwitchNetButton = forwardRef(({ className, state }, ref) => {
   const network = chain_list.find((chains) => chains.chain === chain);
 
   return (
-    <button className={className} type="button" ref={ref} onClick={state}>
+    <button
+      className={className + " duration-500 ease-in-out"}
+      type="button"
+      ref={ref}
+      onClick={state}
+    >
       <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
         {network && network.icon}
         {network && network.title}

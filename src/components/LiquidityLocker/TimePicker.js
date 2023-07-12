@@ -71,7 +71,10 @@ const TimePicker = ({ dateMoment, setDateMoment }) => {
           placeholder="Select Date and times"
           className={`text-[${font}] bg-[${background}] !important w-full p-3`}
         />
-        <button onClick={openCalendar} className="absolute top-3 right-1 ">
+        <button
+          onClick={openCalendar}
+          className=" duration-500 ease-in-out absolute top-3 right-1 "
+        >
           <CalandarIcon />
         </button>
         <div className="bg-black">

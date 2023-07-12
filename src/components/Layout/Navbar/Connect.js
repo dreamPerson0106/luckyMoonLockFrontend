@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAddress, convAddress, removeAddress } from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
 import { toast } from "react-toastify";
+import { TERipple } from "tw-elements-react";
 
 function Connect() {
   const [walletDialogStatus, setWalletDialogStatus] = useState(false);
@@ -15,8 +16,7 @@ function Connect() {
   const [firstLoginTime, setFirstLoginTime] = useState();
   const btnSelf = useRef(null);
   const { ethereum } = window;
-  const { button, hover, font, background, backgroundHolder, border } =
-    useSelector((state) => state.theme);
+  const { button, hover, font, border } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
   let provider;
@@ -114,13 +114,14 @@ function Connect() {
   return (
     <>
       <button
-        className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md gap-2`}
+        className={`transition duration-500 ease-in-out conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md`}
         onClick={connectWallet}
         ref={btnSelf}
       >
         <Cryptologo width={11} height={18} color={font} />
         {walletAddress}
       </button>
+
       <WalletConnectDialog
         className="z-20"
         modalState={walletDialogStatus}
