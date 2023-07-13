@@ -2,7 +2,7 @@ import { useRef } from "react";
 import "./Button/style.css";
 import { useClickAnimation } from "./Button/useClickAnimation";
 
-export default function RippleButton({ ButtonTitle, className }) {
+export default function RippleButton(props) {
   const buttonRef2 = useRef();
 
   useClickAnimation(buttonRef2, {
@@ -15,8 +15,13 @@ export default function RippleButton({ ButtonTitle, className }) {
   return (
     <div className="App">
       <div className={"button-container"}>
-        <button className={className} ref={buttonRef2} type="button">
-          <span>{ButtonTitle}</span>
+        <button
+          {...props}
+          className={props.className}
+          ref={buttonRef2}
+          type="button"
+        >
+          <span>{props.ButtonTitle}</span>
         </button>
       </div>
     </div>
