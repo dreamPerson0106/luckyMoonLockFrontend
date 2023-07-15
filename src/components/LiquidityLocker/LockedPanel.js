@@ -75,7 +75,6 @@ function LockedPanel({ lpTokenAddress, back }) {
             LPTokenLockerABI,
             provider
           );
-          console.log(wallet_address, lpTokenAddress);
           const lpTokenNumber = await LockerInstance.getUserNumLocksForToken(
             wallet_address,
             lpTokenAddress

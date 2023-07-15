@@ -30,7 +30,6 @@ function Connect() {
     let temp_provider = new ethers.providers.Web3Provider(window.ethereum);
     provider = temp_provider;
   } catch (error) {
-    console.log(error);
     let temp_provider = null;
     provider = temp_provider;
   }
@@ -55,7 +54,7 @@ function Connect() {
             string.slice(string.length - 3, string.length)
         );
       } catch (error) {
-        console.log("Wallet address in not found.");
+        toast.warn("Metamask is not detected.");
       }
     }
 
@@ -95,7 +94,6 @@ function Connect() {
     if (storedFirstLoginTime) {
       if (currentTime - storedFirstLoginTime > 0.1 * 60 * 1000) {
         //disconnect wallet
-        console.log(currentTime - storedFirstLoginTime);
         localStorage.setItem("firstLoginTime", currentTime);
         provider = new ethers.providers.Web3Provider(window.ethereum);
         setWalletAddress("CONNECT");
@@ -110,7 +108,6 @@ function Connect() {
 
     // Check if connection is still valid
     if (!connection) {
-      console.log("checking connection");
       setConnection(provider);
       getSignerAddress();
     }

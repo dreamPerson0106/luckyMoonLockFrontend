@@ -35,7 +35,6 @@ function RelockLiquidity({ states, index, lockID, lpTokenAddress, close }) {
           parseInt(relockDate.getTime() / 1000)
         );
         relock = await relock.wait(1);
-        console.log(relock.status);
         if (relock.status === 1) {
           close();
           toast.success("Relock success!");

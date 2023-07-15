@@ -16,6 +16,8 @@ const ViewTokenLocker = ({ token_address }) => {
   const [splitValue, setSplitValue] = useState("");
   const [incrementValue, setIncrementValue] = useState("");
   const [tokenInfo, setTokenInfo] = useState(null);
+  const [withdrawValue, setWithdrawValue] = useState(0);
+  const [ownership, setOwnership] = useState("");
 
   useEffect(() => {
     async function getLockedToken() {
@@ -48,10 +50,12 @@ const ViewTokenLocker = ({ token_address }) => {
           userLockTokenLength = BigNumber.from(userLockTokenLength).toNumber();
           let array = [];
           for (let i = 0; i < userLockTokenLength; i++) {
-            let tokenLockID = await tokenLockerInstance.getTokenLockIDAtIndex(
-              token_address,
-              i
-            );
+            let tokenLockID =
+              await tokenLockerInstance.getUserLockIDForTokenAtIndex(
+                wallet_address,
+                token_address,
+                i
+              );
             const lock = await tokenLockerInstance.getLock(
               BigNumber.from(tokenLockID).toNumber()
             );
@@ -64,18 +68,20 @@ const ViewTokenLocker = ({ token_address }) => {
             const decimals = await tokenInstance.decimals();
             array.push({
               lockID: BigNumber.from(lock[0]).toNumber(),
+              tokenAddress: lock[1],
               locked: ethers.utils.formatUnits(lock[2], decimals),
               shareDeposited: ethers.utils.formatUnits(lock[4], decimals),
               withdrawn: ethers.utils.formatUnits(lock[3], decimals),
               sharewithdrawn: ethers.utils.formatUnits(lock[5], decimals),
               startDate: new Date(BigNumber.from(lock[6]).toNumber() * 1000),
               endDate: new Date(BigNumber.from(lock[7]).toNumber() * 1000),
+              owner: lock[8],
+              condition: lock[9],
               decimals: decimals,
             });
           }
           setLockedToken(array);
         } catch (err) {
-          console.log(err);
           toast.error(err.message.split("(")[0].split("[")[0]);
         }
       } else {
@@ -86,23 +92,28 @@ const ViewTokenLocker = ({ token_address }) => {
     return () => {};
   }, []);
 
-  const handleWithdraw = async () => {
+  const handleWithdraw = (lockID, decimals) => async () => {
     const { ethereum } = window;
     if (ethereum) {
       try {
         const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
         const tokenLockerInstance = new ethers.Contract(
           TOKEN_ADDRESS,
           TokenLockerABI,
-          provider
+          signer
         );
-        let userLockTokenLength =
-          await tokenLockerInstance.getUserLocksForTokenLength(
-            wallet_address,
-            token_address
-          );
+        let withdraw = await tokenLockerInstance.withdraw(
+          lockID,
+          parseInt(withdrawValue * 10 ** decimals)
+        );
+        withdraw = await withdraw.wait(1);
+        if (withdraw.status === 1) {
+          toast.success("Withdraw Success!");
+        } else {
+          toast.error("Withdraw Failed!");
+        }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -129,15 +140,12 @@ const ViewTokenLocker = ({ token_address }) => {
           parseInt(splitValue * 10 ** decimals)
         );
         splitToken = await splitToken.wait(1);
-
-        console.log(splitToken.status);
         if (splitToken.status === 1) {
           toast.success("Split Token Success!");
         } else {
           toast.error("Split Token Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -161,14 +169,14 @@ const ViewTokenLocker = ({ token_address }) => {
           signer
         );
         const relock_date = parseInt(relockDate.getTime() / 1000);
-        console.log(lockID, relock_date);
         let relock = await tokenLockerInstance.relock(lockID, relock_date);
         const txStatus = await relock.wait(1);
-        if (txStatus.status) {
+        if (txStatus.status === 1) {
           toast.success("Relock is successed!");
+        } else {
+          toast.error("Relock is faield!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -180,24 +188,27 @@ const ViewTokenLocker = ({ token_address }) => {
 
   //SECTION -- HANDLE TRANSFER OWNERSHIP
 
-  const handleTransferOnwership = async () => {
+  const handleTransferOnwership = (lockID) => async () => {
     const { ethereum } = window;
     if (ethereum) {
       try {
         const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
         const tokenLockerInstance = new ethers.Contract(
           TOKEN_ADDRESS,
           TokenLockerABI,
-          provider
+          signer
         );
 
-        let userLockTokenLength =
-          await tokenLockerInstance.getUserLocksForTokenLength(
-            wallet_address,
-            token_address
-          );
+        let transferLockOwnership =
+          await tokenLockerInstance.transferLockOwnership(lockID, ownership);
+        transferLockOwnership = await transferLockOwnership.wait(1);
+        if (transferLockOwnership.status === 1) {
+          toast.success("Transfer Onwership Success!");
+        } else {
+          toast.error("Transfer Ownership Failed!");
+        }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -218,14 +229,12 @@ const ViewTokenLocker = ({ token_address }) => {
           parseInt(incrementValue * 10 ** decimals)
         );
         approve = await approve.wait(1);
-        console.log(approve);
         if (approve.status === 1) {
           toast.success("Token Approve Success!");
         } else {
           toast.error("Token Approve Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -247,20 +256,17 @@ const ViewTokenLocker = ({ token_address }) => {
           TokenLockerABI,
           signer
         );
-        console.log(lockID, parseInt(incrementValue * 10 ** decimals));
         let incrementLock = await tokenLockerInstance.incrementLock(
           lockID,
           parseInt(incrementValue * 10 ** decimals)
         );
         incrementLock = await incrementLock.wait(1);
-        console.log(incrementLock.status);
         if (incrementLock.status === 1) {
           toast.success("Increment Lock Success!");
         } else {
           toast.error("Increment Lock Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -281,9 +287,15 @@ const ViewTokenLocker = ({ token_address }) => {
                 .map((text, index) => {
                   return <p key={index}>{text}</p>;
                 })}
+              <input
+                type="text"
+                placeholder="withdraw"
+                value={withdrawValue}
+                onChange={(e) => setWithdrawValue(e.target.value)}
+              ></input>
               <button
                 className={`border-[1px] border-[${border}] px-3 py-1 rounded-lg`}
-                onClick={handleWithdraw}
+                onClick={handleWithdraw(item.lockID, item.decimals)}
               >
                 withdraw
               </button>
@@ -321,9 +333,15 @@ const ViewTokenLocker = ({ token_address }) => {
               >
                 relock
               </button>
+              <input
+                type="text"
+                placeholder="Transfer Ownership"
+                value={ownership}
+                onChange={(e) => setOwnership(e.target.value)}
+              />
               <button
                 className={`border-[1px] border-[${border}] px-3 py-1 rounded-lg`}
-                onClick={handleTransferOnwership}
+                onClick={handleTransferOnwership(item.lockID)}
               >
                 Transfer Ownership
               </button>

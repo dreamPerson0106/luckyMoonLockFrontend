@@ -25,21 +25,18 @@ function IncreaseLock({
     const { ethereum } = window;
     if (ethereum) {
       try {
-        console.log(decimals);
-        console.log(parseInt(incrementLockValue * 10 ** decimals));
         let approve = await contract.approve(
           LOCKER_ADDRESS,
           parseInt(incrementLockValue * 10 ** decimals)
         );
         approve = await approve.wait(1);
-        console.log(approve.status);
+
         if (approve.status === 1) {
           toast.success("Approve Success!");
         } else {
           toast.error("Approve Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else {
@@ -65,7 +62,7 @@ function IncreaseLock({
           parseInt(incrementLockValue * 10 ** decimals)
         );
         incrementLock = await incrementLock.wait(1);
-        console.log(incrementLock.status);
+
         if (incrementLock.status === 1) {
           close();
           toast.success("Increment Lock Success!");
@@ -73,7 +70,6 @@ function IncreaseLock({
           toast.success("Increment Lock Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else toast.warn("Metamask is not detected!");

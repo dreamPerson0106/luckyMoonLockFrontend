@@ -97,9 +97,10 @@ const NewTokenLocker = ({ token_Address }) => {
           },
         ]);
         await lockToken.wait(1);
-        if (lockToken) {
+        if (lockToken.status === 1) {
           toast.success("Lock Success!");
-          console.log(true);
+        } else {
+          toast.error("Lock Failed!");
         }
       } catch (err) {
         setState({ ...state, dialogStatus: false });
@@ -138,9 +139,6 @@ const NewTokenLocker = ({ token_Address }) => {
     }
   };
   //!SECTION
-
-  console.log("toknumber:", state.token);
-  console.log("allowance:", state.allowance);
 
   return (
     <>

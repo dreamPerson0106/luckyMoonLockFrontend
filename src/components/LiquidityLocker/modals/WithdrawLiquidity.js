@@ -33,7 +33,6 @@ function WithdrawLiquidity({
           LPTokenLockerABI,
           signer
         );
-        console.log(withdrawValue * 10 ** decimals);
         let withdraw = await lockerInstance.withdraw(
           lpTokenAddress,
           index,
@@ -41,7 +40,6 @@ function WithdrawLiquidity({
           parseInt(withdrawValue * 10 ** decimals)
         );
         withdraw = await withdraw.wait(1);
-        console.log(withdraw.status);
         if (withdraw.status === 1) {
           close();
           toast.success("Withdraw success!");
@@ -49,7 +47,6 @@ function WithdrawLiquidity({
           toast.success("Withdraw Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else toast.warn("Metamask is not detected!");

@@ -40,7 +40,6 @@ function OwnershipTrans({
           newOwner
         );
         transferLockOwnership = await transferLockOwnership.wait(1);
-        console.log(transferLockOwnership.status);
         if (transferLockOwnership.status === 1) {
           close();
           toast.success("Split Success!");
@@ -48,7 +47,6 @@ function OwnershipTrans({
           toast.success("Split Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else toast.warn("Metamask is not detected!");

@@ -33,7 +33,7 @@ function SplitLock({ states, index, lockID, lpTokenAddress, decimals, close }) {
           { value: ethers.utils.parseEther("0.001") }
         );
         splitLock = await splitLock.wait(1);
-        console.log(splitLock.status);
+
         if (splitLock.status === 1) {
           close();
           toast.success("Split Success!");
@@ -41,7 +41,6 @@ function SplitLock({ states, index, lockID, lpTokenAddress, decimals, close }) {
           toast.success("Split Failed!");
         }
       } catch (err) {
-        console.log(err);
         toast.error(err.message.split("(")[0].split("[")[0]);
       }
     } else toast.warn("Metamask is not detected!");

@@ -89,7 +89,6 @@ const LiquidityLock = ({ temp, pairAddress }) => {
   const handleApprove = async () => {
     const { ethereum } = window;
     const { lptoken } = state;
-    // return console.log(lptoken * 10 ** 18);
     if (ethereum) {
       try {
         setApproveState(true);
@@ -98,7 +97,6 @@ const LiquidityLock = ({ temp, pairAddress }) => {
           lptoken * 10 ** 18
         );
         const receipt = await approve.wait(3);
-        console.log(receipt);
         setApproveState(false);
         if (approve) {
           setState({ ...state, approve: true });
@@ -123,7 +121,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
       try {
         getPairContractInfo();
       } catch (err) {
-        console.log(err);
+        toast.error(err.split("[")[0]);
       }
     }
     return () => {};
