@@ -92,7 +92,7 @@ const TokenList = () => {
     >
       {token_list.map((item, index) => {
         return (
-          <Link to={`/locked_tokens/${item.link}`} key={index}>
+          <Link to={`/latest_locked_tokens/${item.link}`} key={index}>
             <div
               className={`grid grid-cols-2 gap-7 border-[${border}] bg-[${background}] text-[${font}] px-4 py-2 rounded-lg border-2 items-center w-80`}
               style={{ gridTemplateColumns: "86px 150px" }}

@@ -16,7 +16,7 @@ import Account from "./Components/Account";
 import Extop from "./Components/LiquidityLocker/Extop";
 import Extoken from "./Components/LiquidityLocker/Extoken";
 import Exlockliquidity from "./Components/LiquidityLocker/Exlockliquidity";
-import LockedTokens from "./Components/Account/LockedTokens";
+import LatestLockedTokens from "./Components/Account/LatestLockedTokens";
 
 function App() {
   const router = createBrowserRouter([
@@ -99,8 +99,8 @@ function App() {
           element: <Account />,
         },
         {
-          path: "/locked_tokens/:locked_token_address",
-          element: <LockedTokens />,
+          path: "/latest_locked_tokens/:locked_token_address",
+          element: <LatestLockedTokens />,
         },
         {
           path: "*",
