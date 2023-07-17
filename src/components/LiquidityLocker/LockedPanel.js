@@ -12,8 +12,13 @@ import {
   UserIcon,
   WayIcon,
 } from "../../assets/Icons";
+import { BigNumber, ethers } from "ethers";
+import { toast } from "react-toastify";
+import { LPTokenLockerABI, TokenABI } from "../../assets/ABIs";
 
-function LockedPanel() {
+const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
+
+function LockedPanel({ lpTokenAddress, back }) {
   const {
     font,
     fontHolder,
@@ -32,136 +37,171 @@ function LockedPanel() {
   const [IncreaseLockModalState, setIncreaseLockModalState] = useState(false);
   const [SplitModalState, setSplitModalState] = useState(false);
   const [WithdrawModalState, setWithdrawModalState] = useState(false);
-  const option_menu1 = useRef(null);
-  const option_menu2 = useRef(null);
-  const btn_self1 = useRef(null);
-  const btn_self2 = useRef(null);
-  const buttonArray = [
-    {
-      component: <TimeleftIcon width={16} height={16} />,
-      text: "Relock",
-    },
-    {
-      component: <UserIcon width={16} height={16} />,
-      text: "Transfer Ownership",
-    },
-    {
-      component: <PlusIcon width={16} height={16} />,
-      text: "Increment Lock",
-    },
-    {
-      component: <WayIcon width={16} height={16} />,
-      text: "Split Lock",
-    },
-  ];
-  const handleModal = (str) => () => {
-    setOptionStatus1(false);
-    setOptionStatus2(false);
-    switch (str) {
-      case "Relock":
-        setRelockModalState(true);
-        break;
-      case "Transfer Ownership":
-        setOwnershipTransModalState(true);
-        break;
-      case "Increment Lock":
-        setIncreaseLockModalState(true);
-        break;
-      case "Split Lock":
-        setSplitModalState(true);
-        break;
+  const [lpTokens, setLPTokens] = useState([]);
+  const [handleInfo, setHandleInfo] = useState({
+    index: null,
+    lockID: null,
+    decimals: null,
+  });
 
-      default:
-        break;
+  const { wallet_address, contract } = useSelector((state) => state.web3);
+
+  useEffect(() => {
+    async function getPairInfo() {
+      const { ethereum } = window;
+      if (ethereum) {
+        try {
+          let token0 = await contract.token0();
+          let token1 = await contract.token1();
+          const decimals = await contract.decimals();
+          setHandleInfo({ ...handleInfo, decimals });
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const token0Instance = new ethers.Contract(
+            token0,
+            TokenABI,
+            provider
+          );
+          token0 = token0Instance.symbol();
+          const token1Instance = new ethers.Contract(
+            token1,
+            TokenABI,
+            provider
+          );
+          token1 = token1Instance.symbol();
+
+          const LockerInstance = new ethers.Contract(
+            LOCKER_ADDRESS,
+            LPTokenLockerABI,
+            provider
+          );
+          const lpTokenNumber = await LockerInstance.getUserNumLocksForToken(
+            wallet_address,
+            lpTokenAddress
+          );
+          let lockedLPTokens = [];
+          for (let i = 0; i < BigNumber.from(lpTokenNumber).toNumber(); i++) {
+            const lockedLPToken =
+              await LockerInstance.getUserLockForTokenAtIndex(
+                wallet_address,
+                lpTokenAddress,
+                i
+              );
+
+            const lockDate = BigNumber.from(lockedLPToken[0]).toNumber() * 1000;
+            const amount = ethers.utils.formatUnits(lockedLPToken[1], decimals);
+            const initialAmount = ethers.utils.formatUnits(
+              lockedLPToken[2],
+              decimals
+            );
+            const unlockDate =
+              BigNumber.from(lockedLPToken[3]).toNumber() * 1000;
+            const lockID = BigNumber.from(lockedLPToken[4]).toNumber();
+            lockedLPTokens.push({
+              lockDate,
+              amount,
+              initialAmount,
+              unlockDate,
+              lockID,
+            });
+          }
+          setLPTokens(lockedLPTokens);
+        } catch (err) {
+          toast.error(err.message.split("(")[0].split("[")[0]);
+        }
+      } else {
+        toast.warn("Metamask is not detect!");
+      }
     }
+    getPairInfo();
+    return () => {};
+  }, []);
+
+  const handleRelock = (lockID, index) => () => {
+    setHandleInfo({ ...handleInfo, index, lockID });
+    setRelockModalState(true);
   };
-
-  useEffect(() => {
-    function handleOutsideClick(event) {
-      if (
-        option_menu1.current &&
-        !option_menu1.current.contains(event.target) &&
-        btn_self1.current &&
-        !btn_self1.current.contains(event.target)
-      ) {
-        // Clicked outside the div
-        setOptionStatus1(false);
-      }
-    }
-
-    document.addEventListener("click", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [option_menu1]);
-  useEffect(() => {
-    function handleOutsideClick(event) {
-      if (
-        option_menu2.current &&
-        !option_menu2.current.contains(event.target) &&
-        btn_self2.current &&
-        !btn_self2.current.contains(event.target)
-      ) {
-        // Clicked outside the div
-
-        setOptionStatus2(false);
-      }
-    }
-
-    document.addEventListener("click", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [option_menu2]);
-
+  const handleSplit = (lockID, index) => () => {
+    setHandleInfo({ ...handleInfo, index, lockID });
+    setSplitModalState(true);
+  };
+  const handleWithdraw = (lockID, index) => () => {
+    setHandleInfo({ ...handleInfo, index, lockID });
+    setWithdrawModalState(true);
+  };
+  const handleTransferOwnerShip = (lockID, index) => () => {
+    setHandleInfo({ ...handleInfo, index, lockID });
+    setOwnershipTransModalState(true);
+  };
+  const handleIncrementLock = (lockID, index) => () => {
+    setHandleInfo({ ...handleInfo, index, lockID });
+    setIncreaseLockModalState(true);
+  };
   return (
     <div>
+      <button
+        onClick={back}
+        className={`px-3 py-1 border-[1px] border-[${border}] rounded-md`}
+      >
+        Back
+      </button>
       <p className={`text-[${font}]`}>Withdraw Liquidity</p>
       <p className={`text-[${fontHolder}] text-center`}>WETH / USDT</p>
       <p className={`text-[${fontHolder}] text-center`}>
         <span>0.536..97</span> - <span>Look page</span>
       </p>
-      <div
-        className={`my-6 bg-[${backgroundHolder}] border-[${border}] border-[1px] rounded-md`}
-      >
-        <div className="grid grid-cols-12 h-20">
-          <div className="col-span-11">
-            <p className={`mt-5 ml-5 text-[${font}]`}>0.03% UNLOCKED</p>
-            <p className={`my-1 ml-5 text-[${fontHolder}]`}>
-              0.000000000004568962
-            </p>
-          </div>
-          <div className="relative">
-            <button
-              className="duration-500 ease-in-out col-span-1 mt-7"
-              ref={btn_self1}
-              onClick={() => {
-                setOptionStatus1(!OptionState1);
-              }}
-            >
-              <OptionsIcon width={30} height={30} />
-            </button>
+      {lpTokens.length !== 0 &&
+        lpTokens.map((lpToken, index) => {
+          return (
             <div
-              className={`${
-                OptionState1 ? "animate-slideUpEnter" : "hidden"
-              } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
-              ref={option_menu1}
+              className={`my-6 bg-[${backgroundHolder}] border-[${border}] border-[1px] rounded-md`}
+              key={index}
             >
-              {buttonArray.map((item, index) => {
-                return (
-                  <div key={index}>
+              <div className="grid grid-cols-12 h-20">
+                <div className="col-span-11">
+                  <p className={`mt-5 ml-5 text-[${font}]`}>
+                    0.03%{" "}
+                    {lpToken.unlockDate > new Date().getTime()
+                      ? "LOCKED"
+                      : "UNLOCKED"}
+                  </p>
+                  <p className={`my-1 ml-5 text-[${fontHolder}]`}>
+                    {lpToken.amount}
+                  </p>
+                </div>
+                <div className="relative">
+                  <button
+                    className="col-span-1 mt-7"
+                    onClick={() => {
+                      setOptionStatus1(!OptionState1);
+                    }}
+                  >
+                    <OptionsIcon width={30} height={30} />
+                  </button>
+                  <div
+                    className={`${
+                      OptionState1 ? "animate-slideUpEnter" : "hidden"
+                    } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
+                  >
                     <button
-                      className={`duration-500 ease-in-out menu_rows ${
-                        theme === item.text.toLowerCase()
-                          ? `text-[#0784c3]`
-                          : `text-[${font}] hover:bg-[${hover}] `
-                      }`}
-                      onClick={handleModal(item.text)}
+                      className={`menu_rows text-[${font}] hover:bg-[${hover}] `}
+                      onClick={handleRelock(lpToken.lockID, index)}
                     >
-                      {item.component}
-                      {item.text}
+                      <TimeleftIcon width={16} height={16} />
+                      Relock
+                    </button>
+                    <button
+                      className={`menu_rows text-[${font}] hover:bg-[${hover}] `}
+                      onClick={handleTransferOwnerShip(lpToken.lockID, index)}
+                    >
+                      <UserIcon width={16} height={16} />
+                      Transfer Ownership
+                    </button>
+                    <button
+                      className={`menu_rows text-[${font}] hover:bg-[${hover}] `}
+                      onClick={handleIncrementLock(lpToken.lockID, index)}
+                    >
+                      <PlusIcon width={16} height={16} />
+                      Increment Lock
                     </button>
                   </div>
                 );
@@ -205,24 +245,25 @@ function LockedPanel() {
                 OptionState2 ? "animate-slideUpEnter" : "hidden"
               } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
               ref={option_menu2}
-            >
-              {buttonArray.map((item, index) => {
-                return (
-                  <div key={index}>
+            >     
                     <button
-                      className={`duration-500 ease-in-out menu_rows ${
-                        theme === item.text.toLowerCase()
-                          ? `text-[#0784c3]`
-                          : `text-[${font}] hover:bg-[${hover}] `
-                      }`}
-                      onClick={handleModal(item.text)}
+                      className={`menu_rows text-[${font}] hover:bg-[${hover}] `}
+                      onClick={handleSplit(lpToken.lockID, index)}
                     >
-                      {item.component}
-                      {item.text}
+                      <WayIcon width={16} height={16} />
+                      Split Lock
                     </button>
                   </div>
-                );
-              })}
+                </div>
+              </div>
+              <button
+                id=""
+                className={` my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
+                type="button"
+                onClick={handleWithdraw(lpToken.lockID, index)}
+              >
+                Withdraw
+              </button>
             </div>
           </div>
         </div>
@@ -237,32 +278,52 @@ function LockedPanel() {
           Withdraw
         </button>
       </div>
+          );
+        })}
       <RelockLiquidity
         states={RelockModalState}
+        index={handleInfo.index}
+        lockID={handleInfo.lockID}
+        lpTokenAddress={lpTokenAddress}
         close={() => {
           setRelockModalState(false);
         }}
       />
       <OwnershipTrans
         states={OwnershipTransModalState}
+        index={handleInfo.index}
+        lockID={handleInfo.lockID}
+        lpTokenAddress={lpTokenAddress}
         close={() => {
           setOwnershipTransModalState(false);
         }}
       />
       <IncreaseLock
         states={IncreaseLockModalState}
+        index={handleInfo.index}
+        lockID={handleInfo.lockID}
+        decimals={handleInfo.decimals}
+        lpTokenAddress={lpTokenAddress}
         close={() => {
           setIncreaseLockModalState(false);
         }}
       />
       <SplitLock
         states={SplitModalState}
+        index={handleInfo.index}
+        lockID={handleInfo.lockID}
+        lpTokenAddress={lpTokenAddress}
+        decimals={handleInfo.decimals}
         close={() => {
           setSplitModalState(false);
         }}
       />
       <WithdrawLiquidity
         states={WithdrawModalState}
+        index={handleInfo.index}
+        lockID={handleInfo.lockID}
+        lpTokenAddress={lpTokenAddress}
+        decimals={handleInfo.decimals}
         close={() => {
           setWithdrawModalState(false);
         }}

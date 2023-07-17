@@ -4,6 +4,10 @@ import DialogContent from "../Dialog/DialogContent.js";
 import { EthereumLoadingLogo, SuccessLog } from "../../assets/Icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import "./tokenlocker.css";
+
+const SuccessDialog = ({ dialogStatus, close, state }) => {
+  const { font, fontHolder, background } = useSelector((state) => state.theme);
 
 const SuccessDialog = ({ dialogStatus, close }) => {
   const { font, fontHolder, background } = useSelector((state) => state.theme);
@@ -13,11 +17,17 @@ const SuccessDialog = ({ dialogStatus, close }) => {
       <DialogContent
         className={`flex flex-col gap-3 border-y-[1px] rounded-lg text-center bg-[${background}] text-[${fontHolder}] p-10`}
       >
-        {!success_status ? (
+        {!state ? (
           <>
             <div className="relative w-[120px] mx-auto">
-              <EthereumLoadingLogo />
-              <span className={`loader`} />
+              <EthereumLoadingLogo className={`w-28 h-28 relative`} />
+              <span
+                className={`token_loader text-slat`}
+                style={{
+                  borderBottomColor:
+                    "rgb(148 163 184 / var(--tw-text-opacity))",
+                }}
+              />
             </div>
             <p className={`text-[${font}]`}>
               Confirm this transaction in your wallet
@@ -27,14 +37,6 @@ const SuccessDialog = ({ dialogStatus, close }) => {
               Sometimes it helps close the mobile app and restart it. If the
               transaction is not shown in the wallet.
             </p>
-            <button
-              className="duration-500 ease-in-out"
-              onClick={() => {
-                setSuccessStatus(true);
-              }}
-            >
-              {"->"}
-            </button>
           </>
         ) : (
           <>

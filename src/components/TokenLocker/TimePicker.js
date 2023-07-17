@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const TimePicker = () => {
+const TimePicker = ({ dateMoment, setDateMoment }) => {
   const { font, background, border, hover } = useSelector(
     (state) => state.theme
   );
@@ -126,14 +126,18 @@ const TimePicker = () => {
   };
 
   return (
-    <Datetime
-      renderInput={renderInput}
-      renderView={renderView}
-      inputProps={inputProps}
-      renderDay={renderDay}
-      renderYear={renderYear}
-      renderMonth={renderMonth}
-    />
+    <>
+      <Datetime
+        renderInput={renderInput}
+        renderView={renderView}
+        inputProps={inputProps}
+        renderDay={renderDay}
+        renderYear={renderYear}
+        renderMonth={renderMonth}
+        value={dateMoment}
+        onChange={setDateMoment}
+      />
+    </>
   );
 };
 

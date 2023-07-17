@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import WalletConnectDialog from "../WalletConnectDialog";
 import SearchResult from "./SearchResult";
 
-function NewLockContents({ temp }) {
+function NewLockContents({ temp, pairAddress }) {
   const {
     font,
     fontHolder,
@@ -46,7 +46,10 @@ function NewLockContents({ temp }) {
           placeholder="Lookymoon V2 – Goerli pair address…"
           className={` mt-4 bg-[${mainBg}]  text-[${fontHolder}] text-sm rounded-lg  block w-full p-2.5 bg-[${backgroundHolder}]`}
           value={searchQuery}
-          onChange={(e) => setsearchQuery(e.target.value)}
+          onChange={(e) => {
+            setsearchQuery(e.target.value);
+            pairAddress(e.target.value);
+          }}
         />
         {searchQuery.length === 42 ? (
           <SearchResult pairAddress={searchQuery} temp={temp} />

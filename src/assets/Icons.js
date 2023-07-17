@@ -2219,8 +2219,6 @@ export const Tokenlocker = ({ width, height }) => {
 export const EthereumLoadingLogo = ({ className }) => {
   return (
     <svg
-      width="117"
-      height="117"
       viewBox="0 0 117 117"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

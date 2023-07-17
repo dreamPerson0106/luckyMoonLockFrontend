@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loading = ({ className, style }) => {
+const Loading = ({ className, style, text = "Loading" }) => {
   return (
     <div className={"loader_body " + className} style={style}>
       <div
@@ -16,7 +16,9 @@ const Loading = ({ className, style }) => {
         <div className="dot" style={{ "--index": 6 }}></div>
         <div className="dot" style={{ "--index": 7 }}></div>
       </div>
-      <p className="text-[#6c6764] -ml-12  mt-44 text-xl">Loading...</p>
+      <p className="text-[#6c6764] -ml-12  mt-44 text-xl text-center">
+        {text}...
+      </p>
     </div>
   );
 };

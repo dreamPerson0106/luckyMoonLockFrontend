@@ -88,6 +88,7 @@ function App() {
           element: <TokenLocker />,
         },
         {
+
           path: "/ex-token",
           element: <TokenLocker />,
         },

@@ -2,19 +2,14 @@ import {
   ADD_ADDRESS,
   REMOVE_ADDRESS,
   CHANGE_CHAIN,
-  CHANGE_PAIRINFO,
+  CHANGE_CONTRACT,
   CONV_ADDRESS,
 } from "../actions/types";
 
 const initialState = {
   wallet_address: "",
   chain: "0x1",
-  pairInfo: {
-    balanceOf: "0",
-    token0: "",
-    token1: "",
-    pairAddress: "",
-  },
+  contract: null,
 };
 
 const web3Reducer = (state = initialState, action) => {
@@ -30,8 +25,8 @@ const web3Reducer = (state = initialState, action) => {
     case CHANGE_CHAIN:
       return { ...state, chain: payload };
 
-    case CHANGE_PAIRINFO:
-      return { ...state, pairInfo: payload };
+    case CHANGE_CONTRACT:
+      return { ...state, contract: payload };
 
     case CONV_ADDRESS:
       return { ...state, conv_address: payload };
