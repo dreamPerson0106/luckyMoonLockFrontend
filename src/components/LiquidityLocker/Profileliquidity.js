@@ -35,7 +35,7 @@ function Profileliquidity() {
       />
       <hr className={`my-3 border-[${border}]`}></hr>
       <div className="mx-auto flex items-center gap-8">
-        <div className="flex mx-auto">
+        <div className="flex mx-auto items-center">
           <button
             className={`duration-500 ease-in-out w-20 flex items-center justify-center px-3 h-8 mr-3 text-sm font-medium text-[${font}] bg-[${button}] border-[1px] border-[${border}] rounded-md hover:bg-[${buttonHolder}] hover:text-[${fontHolder}]`}
           >
@@ -129,7 +129,7 @@ function Profileliquidity() {
       </button>
       <hr className={`my-3 border-[${border}]`}></hr>
       <div className="mx-auto flex items-center gap-8">
-        <div className="flex mx-auto">
+        <div className="flex mx-auto items-center">
           <button
             className={`duration-500 ease-in-out w-20 flex items-center justify-center px-3 h-8 mr-3 text-sm font-medium text-[${font}] bg-[${button}] border-[1px] border-[${border}] rounded-md hover:bg-[${buttonHolder}] hover:text-[${fontHolder}]`}
           >

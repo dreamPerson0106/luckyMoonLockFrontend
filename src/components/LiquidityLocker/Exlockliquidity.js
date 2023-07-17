@@ -10,7 +10,7 @@ function Exlockliquidity() {
   return (
     <div
       id="myTabContent "
-      className={`mx-auto max-w-xl bg-[${background}] border-[${border}] border-[1px] rounded-xl mb-16`}
+      className={`mx-auto max-w-5xl bg-[${background}] border-[${border}] border-[1px] rounded-xl mb-16`}
       style={{
         boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)",
       }}

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
+import { SwitchNetButton, SwitchNetDialog } from "../SwitchNet";
+import { Link, useParams } from "react-router-dom";
+import NewTokenLock from "../LiquidityLocker/NewTokenLock";
+import LockLiquidityTab from "../LiquidityLocker/LockLiquidityTab";
 import { useSelector } from "react-redux";
-import LockedPanel from "./LockedPanel";
-import NewTokenLock from "./NewTokenLock";
-import SwitchNetDialog from "../SwitchNet/SwitchNetDialog";
-import { SwitchNetButton } from "../SwitchNet";
-import { ethers } from "ethers";
-import { PairABI } from "../../assets/ABIs";
-import LockLiquidityTab from "./LockLiquidityTab";
-import { Link } from "react-router-dom";
+import NewLockedToken from "./NewLockedToken";
 
-const LiquidityLocker = () => {
-  const [tokenTab, setTokenTab] = useState(true);
+function LockedTokens() {
+  const { locked_token_address } = useParams();
+
+  const [specificToken, setSpecificToken] = useState(true);
+  const [tokenTab, setTokenTab] = useState(false);
   const [liquidityTab, setLiquidityTab] = useState(false);
   const [launchpadTab, setLaunchPadTab] = useState(false);
   const [innerLockStatus, setInnerLockStatus] = useState(true);
@@ -44,21 +44,23 @@ const LiquidityLocker = () => {
   }, [ref]);
 
   return (
-    <div className={`container mx-auto pt-10 pb-7 text-[${font}] max-w-xl`}>
-      <SwitchNetButton
-        className={`bg-[${background}] w-full justify-between text-[${fontHolder}] text-lg hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
-        state={() => {
-          setSeleterStatus(!selecterStatus);
-        }}
-        ref={btnref}
-      />
+    <div className={`container mx-auto pt-10 pb-7 text-[${font}] w-full`}>
+      <div className="flex justify-center">
+        <SwitchNetButton
+          className={`bg-[${background}] w-full justify-between text-[${fontHolder}] max-w-xl text-lg hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+          state={() => {
+            setSeleterStatus(!selecterStatus);
+          }}
+          ref={btnref}
+        />
+      </div>
       <SwitchNetDialog
         modalState={selecterStatus}
         closeModal={() => setSeleterStatus(false)}
         btnref={btnref}
       />
 
-      <div className="mt-10">
+      <div className="mb-4 mt-10 max-w-xl w-full mx-auto">
         <ul
           className={`flex justify-between flex-wrap -mb-px text-lg font-medium text-center`}
           id="myTab"
@@ -68,11 +70,12 @@ const LiquidityLocker = () => {
           <li className="mr-2" role="presentation">
             <Link
               className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
-              to="sushi-v1/ex-token"
+              to="/sushi-v1/ex-token"
               onClick={() => {
                 setTokenTab(true);
                 setLaunchPadTab(false);
                 setLiquidityTab(false);
+                setSpecificToken(false);
               }}
             >
               Tokens
@@ -81,11 +84,12 @@ const LiquidityLocker = () => {
           <li className="mr-2" role="presentation">
             <Link
               className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg  text-[${font}] hover:text-[${fontHolder}]`}
-              to="sushi-v1/ex-lockliquidity"
+              to="/sushi-v1/ex-lockliquidity"
               onClick={() => {
                 setTokenTab(false);
                 setLaunchPadTab(false);
                 setLiquidityTab(true);
+                setSpecificToken(false);
               }}
             >
               Lock Liquidity
@@ -104,6 +108,7 @@ const LiquidityLocker = () => {
                 setTokenTab(false);
                 setLaunchPadTab(true);
                 setLiquidityTab(false);
+                setSpecificToken(false);
               }}
               disabled
             >
@@ -114,7 +119,7 @@ const LiquidityLocker = () => {
       </div>
       <div
         id="myTabContent "
-        className={`bg-[${background}] border-[${border}] border-[1px] rounded-xl`}
+        className={`bg-[${background}] rounded-xl`}
         style={{
           boxShadow: "0 5px 10px rgba(151, 164, 175, 0.05)",
         }}
@@ -202,8 +207,9 @@ const LiquidityLocker = () => {
           <></>
         )}
       </div>
+      {specificToken ? <NewLockedToken /> : <></>}
     </div>
   );
-};
+}
 
-export default LiquidityLocker;
+export default LockedTokens;

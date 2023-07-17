@@ -34,7 +34,7 @@ function Extop() {
 
   return (
     <div>
-      <div className={`container mx-auto pt-10 pb-7 text-[${font}] max-w-xl`}>
+      <div className={`container mx-auto pt-10 pb-1 text-[${font}] max-w-xl`}>
         <SwitchNetButton
           className={`bg-[${background}] w-full justify-between text-[${fontHolder}] text-lg hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
           state={() => {
@@ -48,7 +48,7 @@ function Extop() {
           btnref={btnref}
         />
 
-        <div className="mb-4 mt-10">
+        <div className="mt-10">
           <ul
             className={`flex justify-between flex-wrap -mb-px text-lg font-medium text-center`}
           >
