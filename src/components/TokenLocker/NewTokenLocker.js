@@ -5,7 +5,7 @@ import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
 import { toast } from "react-toastify";
 import { BigNumber, ethers } from "ethers";
-import Input from "../Layout/Input";
+import Input from "../Elements/Input";
 import { TokenLockerABI } from "../../assets/ABIs";
 
 const TOKEN_ADDRESS = "0xe02c1e6eba5e2f189020968f550ed3fb1a6fe7a8";
