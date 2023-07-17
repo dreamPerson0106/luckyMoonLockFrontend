@@ -24,7 +24,7 @@ const Layout = () => {
       <Navbar />
       <div
         style={{
-          backgroundImage: mainBg,
+          background: mainBg,
           minHeight: "85vh",
           paddingLeft: 10,
           paddingRight: 10,

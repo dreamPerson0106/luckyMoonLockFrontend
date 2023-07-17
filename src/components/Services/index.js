@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-  LaunchPadIcon,
   LockedLiquidityTokenIcon,
   Tokenlocker,
   TokenminterIcon,
@@ -10,8 +9,9 @@ import "./service.css";
 import { Link } from "react-router-dom";
 
 const Services = () => {
-  const { font, fontHolder, background, backgroundHolder, border, hover } =
-    useSelector((state) => state.theme);
+  const { font, fontHolder, background, border, hover } = useSelector(
+    (state) => state.theme
+  );
 
   return (
     <div className={`container max-w-2xl text-[${font}] py-12 mx-auto`}>
@@ -52,7 +52,7 @@ const Services = () => {
             </div>
           </div>
         </Link>
-        <hr className={`text-[${backgroundHolder}]`} />
+        <hr className={`border-[${border}]`} />
         <Link to="tokenminter">
           <div
             className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}
@@ -72,7 +72,7 @@ const Services = () => {
             </div>
           </div>
         </Link>
-        <hr className={`text-[${backgroundHolder}]`} />
+        <hr className={`border-[${border}]`} />
         <Link to="/tokenlocker">
           <div
             className={`flex py-2 items-center gap-3 hover:bg-[${hover}] px-2 rounded-lg`}

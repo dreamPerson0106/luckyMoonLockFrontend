@@ -163,7 +163,7 @@ const NewTokenLocker = ({ token_Address }) => {
             </div>
             <div className="mt-2 gap-3 flex">
               <button
-                className={`border-[1px] border-[${border}] rounded-md ${
+                className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 25 ? `bg-[${background}]` : `bg-[${button}]`
                 }  text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
                 onClick={handleToken(25)}
@@ -171,7 +171,7 @@ const NewTokenLocker = ({ token_Address }) => {
                 25%
               </button>
               <button
-                className={`border-[1px] border-[${border}] rounded-md ${
+                className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 50 ? `bg-[${background}]` : `bg-[${button}]`
                 } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
                 onClick={handleToken(50)}
@@ -179,7 +179,7 @@ const NewTokenLocker = ({ token_Address }) => {
                 50%
               </button>
               <button
-                className={`border-[1px] border-[${border}] rounded-md ${
+                className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 75 ? `bg-[${background}]` : `bg-[${button}]`
                 } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
                 onClick={handleToken(75)}
@@ -187,7 +187,7 @@ const NewTokenLocker = ({ token_Address }) => {
                 75%
               </button>
               <button
-                className={`border-[1px] border-[${border}] rounded-md ${
+                className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 100
                     ? `bg-[${background}]`
                     : `bg-[${button}]`
@@ -277,7 +277,11 @@ const NewTokenLocker = ({ token_Address }) => {
           <p className="text-center font-bold">Premature Unlock condition</p>
           <div className="flex justify-center items-center gap-10">
             <button
-              className={!state.condition ? "text-[#1ECD84]" : ""}
+              className={
+                !state.condition
+                  ? "text-[#1ECD84] duration-500 ease-in-out"
+                  : "duration-500 ease-in-out"
+              }
               onClick={() =>
                 setState({ ...state, condition: !state.condition })
               }
@@ -285,7 +289,11 @@ const NewTokenLocker = ({ token_Address }) => {
               No
             </button>
             <button
-              className={state.condition ? "text-[#1ECD84]" : ""}
+              className={
+                state.condition
+                  ? "text-[#1ECD84] duration-500 ease-in-out"
+                  : "duration-500 ease-in-out"
+              }
               onClick={() =>
                 setState({ ...state, condition: !state.condition })
               }
@@ -300,7 +308,9 @@ const NewTokenLocker = ({ token_Address }) => {
           </div>
           <div className="flex justify-between items-center">
             <p className="font-bold">OPTIONAL : Enable free locking</p>
-            <button className="bg-[#1ECD84] px-3 py-1 rounded-md">Max</button>
+            <button className="duration-500 ease-in-out bg-[#1ECD84] px-3 py-1 rounded-md">
+              Max
+            </button>
           </div>
           <div className="flex justify-between items-center">
             <p className="font-bold">Fee:</p>
@@ -347,7 +357,7 @@ const NewTokenLocker = ({ token_Address }) => {
       </div>
       <div className="flex gap-5 text-center my-3">
         <button
-          className={` w-1/2 py-3 rounded-lg ${
+          className={`duration-500 ease-in-out w-1/2 py-3 rounded-lg ${
             !state.approve
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"

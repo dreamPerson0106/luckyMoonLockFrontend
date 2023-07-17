@@ -8,23 +8,13 @@ import ViewUnlocked from "./ViewUnlocked";
 function LockLiquidityTab() {
   const [tabStatus, setTabStatus] = useState("locked");
   const [activeTab, setActiveTab] = useState("locked");
-  const {
-    font,
-    fontHolder,
-    background,
-    backgroundHolder,
-    border,
-    button,
-    hover,
-    wallet_address,
-    mainBg,
-  } = useSelector((state) => state);
+  const { font, fontHolder, border } = useSelector((state) => state);
   return (
     <div className={`text-[${fontHolder}] p-5`}>
       <div className="flex justify-end">
         <button
           id=""
-          className={` flex px-3 py-2 gap-2 bg-green-600 text-[white] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg items-center `}
+          className={`duration-500 ease-in-out flex px-3 py-2 gap-2 bg-green-600 text-[white] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg items-center `}
           type="button"
         >
           <PadLockIcon color={"white"} />
@@ -85,7 +75,7 @@ function LockLiquidityTab() {
           >
             <li className="mr-2" role="presentation">
               <button
-                className={`inline-block p-4 rounded-t-lg  text-[${fontHolder}] hover:text-[${font}] ${
+                className={`duration-500 ease-in-out inline-block p-4 rounded-t-lg  text-[${fontHolder}] hover:text-[${font}] ${
                   activeTab === "locked" && "border-b-4"
                 }`}
                 id="locked-tab"
@@ -104,7 +94,7 @@ function LockLiquidityTab() {
             </li>
             <li className="mr-2" role="presentation">
               <button
-                className={`inline-block p-4 rounded-t-lg  text-[${fontHolder}] hover:text-[${font}] ${
+                className={`duration-500 ease-in-out inline-block p-4 rounded-t-lg  text-[${fontHolder}] hover:text-[${font}] ${
                   activeTab !== "locked" && "border-b-4"
                 }`}
                 id="unlocked-tab"

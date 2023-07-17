@@ -74,7 +74,7 @@ const SearchResult = ({ pairAddress, temp }) => {
     <p className="my-2 text-center text-lg">Pair address does not exist.</p>
   ) : (
     <button
-      className={`slideUpEnter my-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+      className={`duration-500 ease-in-out slideUpEnter my-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${button}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
       type="button"
       onClick={
         Number(pairInfo.balanceOf) === 0

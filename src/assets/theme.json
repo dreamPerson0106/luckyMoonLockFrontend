@@ -5,7 +5,7 @@
     "background": "#fff",
     "backgroundHolder": "#e9ecef",
     "button": "#fff",
-    "mainBg": "linear-gradient(#fafbfd 0,rgba(246,247,248, 0) 85rem)",
+    "mainBg": "#F1F9FB",
     "border": "#e9ecef",
     "hover": "#e9ecef",
     "theme": "light"

@@ -2,9 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Dialog = ({ children, modalState, closeModal, button }) => {
-  const { background, fontHolder, border } = useSelector(
-    (state) => state.theme
-  );
+  const { background } = useSelector((state) => state.theme);
 
   const modal = React.useRef(null);
   const closeBtn = React.useRef(null);
@@ -36,8 +34,8 @@ const Dialog = ({ children, modalState, closeModal, button }) => {
       tabIndex="-1"
       aria-hidden="true"
       className={`${
-        modalState ? "animate-slideUpEnter" : "hidden"
-      } fixed top-0 left-0 right-0  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  max-h-full bg-gray-800/60 backdrop-blur-md z-50`}
+        modalState ? "animate-slideUpEnter" : "hidden "
+      } fixed top-0 left-0 right-0 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  max-h-full bg-black/50 backdrop-blur-sm z-50`}
     >
       <div className=" flex justify-center w-full h-full max-h-[96%]">
         <div className={`relative w-full max-w-2xl py-6`} ref={modal}>

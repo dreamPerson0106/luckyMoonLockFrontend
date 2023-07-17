@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "./store";
 import Dashboard from "./Components/Dashboard";
 import LiqLock from "./Components/LiquidityLock";
@@ -13,6 +13,11 @@ import TokenLocks from "./Components/TokenLocker/TokenLocks";
 import CommintSoon from "./Components/Layout/CommingSoon";
 import "./font.css";
 import Account from "./Components/Account";
+import Extop from "./Components/LiquidityLocker/Extop";
+import Extoken from "./Components/LiquidityLocker/Extoken";
+import Exlockliquidity from "./Components/LiquidityLocker/Exlockliquidity";
+import LatestLockedTokens from "./Components/Account/LatestLockedTokens";
+import LockedTokens from "./Components/Account/LockedTokens";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +44,38 @@ function App() {
           element: <LiqLock />,
         },
         {
+          path: "sushi-v1",
+          element: <Extop />,
+          children: [
+            {
+              path: "ex-token",
+              element: <Extoken />,
+            },
+            {
+              path: "ex-lockliquidity",
+              element: <Exlockliquidity />,
+            },
+          ],
+        },
+        // {
+        //   path: "sushi-v1/ex-token",
+        //   element: (
+        //     <>
+        //       <Extop />
+        //       <Extoken />
+        //     </>
+        //   ),
+        // },
+        // {
+        //   path: "sushi-v1/ex-lockliquidity",
+        //   element: (
+        //     <>
+        //       <Extop />
+        //       <Exlockliquidity />
+        //     </>
+        //   ),
+        // },
+        {
           path: "sushi-v1/locker",
           element: <LiquidityLocker />,
         },
@@ -51,8 +88,25 @@ function App() {
           element: <TokenLocker />,
         },
         {
+
+          path: "/ex-token",
+          element: <TokenLocker />,
+        },
+        {
+          path: "/tokenlocker/:lock",
+          element: <TokenLocks />,
+        },
+        {
           path: "/profile",
           element: <Account />,
+        },
+        {
+          path: "/latest_locked_tokens/:locked_token_address",
+          element: <LatestLockedTokens />,
+        },
+        {
+          path: "/locked_tokens/:locked_token_address",
+          element: <LockedTokens />,
         },
         {
           path: "*",

@@ -143,7 +143,7 @@ export const Setting = ({ width, height, color }) => {
     <svg
       width={width}
       height={height}
-      viewBox={`0 0 ${width} ${height}`}
+      viewBox={`-2 -3 ${width} ${height}`}
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >

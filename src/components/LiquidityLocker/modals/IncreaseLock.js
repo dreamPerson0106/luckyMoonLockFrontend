@@ -84,7 +84,7 @@ function IncreaseLock({
           <h3 className={`mb-4 text-xl font-medium text-[${font}]`}>
             Increase Lock
           </h3>
-          <hr className={`text-[${fontHolder}] mb-5`}></hr>
+          <hr className={`border-[${border}] mb-5`}></hr>
           <form className="space-y-6" action="#">
             <div>
               <div
@@ -108,7 +108,7 @@ function IncreaseLock({
                   />
                   <button
                     id=""
-                    className={`  justify-between text-[${fontHolder}] text-lg bg-[#1ECD84] hover:bg-[${hover}] focus:outline-none  font-medium rounded-md text-sm px-4 h-10 text-center inline-flex items-center `}
+                    className={` duration-500 ease-in-out justify-between text-[${fontHolder}] text-lg bg-[#1ECD84] hover:bg-[${hover}] focus:outline-none  font-medium rounded-md text-sm px-4 h-10 text-center inline-flex items-center `}
                     type="button"
                   >
                     <div

@@ -76,7 +76,7 @@ const SwitchNetDialog = ({ modalState, closeModal, btnref }) => {
               return (
                 <li key={index}>
                   <button
-                    className={`w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
+                    className={`duration-500 ease-in-out w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg bg-[${button}] hover:bg-[${hover}] hover:text-[${fontHolder}] group hover:shadow`}
                     chain-data={item.chain}
                     onClick={SwitchChainToPolygon(item.chain)}
                   >

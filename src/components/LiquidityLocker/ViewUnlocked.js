@@ -2,17 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function ViewUnlocked() {
-  const {
-    font,
-    fontHolder,
-    background,
-    backgroundHolder,
-    border,
-    button,
-    hover,
-    wallet_address,
-    mainBg,
-  } = useSelector((state) => state);
+  const { font, fontHolder, backgroundHolder } = useSelector(
+    (state) => state.theme
+  );
   return (
     <>
       <div className="flex justify-between gap-36 px-2">

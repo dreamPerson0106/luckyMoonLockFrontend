@@ -15,12 +15,24 @@ module.exports = {
             transform: "translateY(-20px)",
           },
           "100%": {
-            opacity: 100,
+            opacity: 1,
             transform: "translateY(0px)",
+          },
+        },
+        slideDownEnter: {
+          "0%": {
+            opacity: 1,
+            transform: "translateY(0px)",
+          },
+          "100%": {
+            opacity: 0,
+            transform: "translateY(-20px)",
+            display: "none",
           },
         },
       },
       animation: {
+        slideDownEnter: "slideDownEnter .3s ease-in-out",
         slideUpEnter: "slideUpEnter .3s ease-in-out",
       },
     },
@@ -34,6 +46,7 @@ module.exports = {
     "bg-[#1b1b1b]",
     "bg-[#3a4759]",
     "bg-[#252525]",
+    "bg-[#F1F9FB]",
     "bg-[#162138]",
     "bg-[#151515]",
     "text-[#212529]",

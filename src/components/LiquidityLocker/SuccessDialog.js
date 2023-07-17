@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Dialog from "../Dialog";
-import DialogHeader from "../Dialog/DialogHeader.js";
 import DialogContent from "../Dialog/DialogContent.js";
 import { EthereumLoadingLogo, SuccessLog } from "../../assets/Icons";
 import { useSelector } from "react-redux";
@@ -10,6 +9,9 @@ import "./tokenlocker.css";
 const SuccessDialog = ({ dialogStatus, close, state }) => {
   const { font, fontHolder, background } = useSelector((state) => state.theme);
 
+const SuccessDialog = ({ dialogStatus, close }) => {
+  const { font, fontHolder, background } = useSelector((state) => state.theme);
+  const [success_status, setSuccessStatus] = useState(false);
   return (
     <Dialog modalState={dialogStatus} closeModal={close}>
       <DialogContent

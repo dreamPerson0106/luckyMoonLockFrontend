@@ -11,8 +11,10 @@ import {
 } from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
 import { toast } from "react-toastify";
+import { TERipple } from "tw-elements-react";
+import RippleButton from "../../Elements/RippleButton";
 
-function Connect() {
+function Connect({ className }) {
   const [walletDialogStatus, setWalletDialogStatus] = useState(false);
   const [walletAddress, setWalletAddress] = useState("CONNECT");
   const [connection, setConnection] = useState(null);
@@ -20,8 +22,7 @@ function Connect() {
   const [firstLoginTime, setFirstLoginTime] = useState();
   const btnSelf = useRef(null);
   const { ethereum } = window;
-  const { button, hover, font, background, backgroundHolder, border } =
-    useSelector((state) => state.theme);
+  const { button, hover, font, border } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
   let provider;
@@ -117,15 +118,17 @@ function Connect() {
     setWalletDialogStatus(!walletDialogStatus);
   };
   return (
-    <>
-      <button
-        className={`conbtn bg-[${button}] text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md gap-2`}
+    <div {...className}>
+      <RippleButton
+        ButtonTitle={walletAddress}
+        className={`ripple focus:ring-0 transition duration-500 ease-in-out conbtn bg-[${button} text-[${font}] border-[${border}] hover:bg-[${hover}] rounded-md`}
         onClick={connectWallet}
         ref={btnSelf}
       >
         <Cryptologo width={11} height={18} color={font} />
         {walletAddress}
-      </button>
+      </RippleButton>
+
       <WalletConnectDialog
         className="z-20"
         modalState={walletDialogStatus}
@@ -134,7 +137,7 @@ function Connect() {
         }}
         buttonRef={btnSelf}
       />
-    </>
+    </div>
   );
 }
 

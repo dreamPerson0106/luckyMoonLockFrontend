@@ -3,6 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import theme from "./assets/theme.json";
+
 // import setAuthToken from './utils/setAuthToken';
 
 const initialState = {

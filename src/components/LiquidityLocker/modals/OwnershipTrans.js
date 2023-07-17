@@ -61,7 +61,7 @@ function OwnershipTrans({
           <h3 className={`mb-4 text-xl font-medium text-[${font}]`}>
             Transfer Ownership
           </h3>
-          <hr className={`text-[${fontHolder}] mb-5`}></hr>
+          <hr className={`border-[${border}] mb-5`}></hr>
           <form className="space-y-6" action="#">
             <div>
               <label

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Dialog from "../Dialog";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
@@ -10,18 +10,11 @@ import { addAddress, convAddress } from "../../actions";
 import { MetaMask, Coinbase, WalletConnect } from "../../assets/Icons";
 
 const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
-  const {
-    font,
-    fontHolder,
-    background,
-    backgroundHolder,
-    button,
-    border,
-    hover,
-  } = useSelector((state) => state.theme);
+  const { font, fontHolder, background, backgroundHolder, button, hover } =
+    useSelector((state) => state.theme);
   const { wallet_address } = useSelector((state) => state.web3);
   const { ethereum } = window;
-  const [walletAddress, setWalletAddress] = useState("CONNECT");
+  // const [walletAddress, setWalletAddress] = useState("CONNECT");
   // const [currentWalletAddress, setCurrentWalletAddress] = useState("");
 
   const dispatch = useDispatch();
@@ -102,7 +95,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
                       }, 300);
                       connectMetaMask();
                     }}
-                    className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                    className={`duration-500 ease-in-out w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
                   >
                     <MetaMask></MetaMask>
                     <span className="flex-1 ml-3 whitespace-nowrap text-start">
@@ -113,7 +106,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
                 <li>
                   <button
                     href="#"
-                    className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg  group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                    className={`duration-500 ease-in-out w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg  group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
                   >
                     <Coinbase></Coinbase>
                     <span className="flex-1 ml-3 whitespace-nowrap text-start">
@@ -124,7 +117,7 @@ const WalletConnectDialog = ({ modalState, closeModal, buttonRef }) => {
                 <li>
                   <button
                     href="#"
-                    className={` w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
+                    className={`duration-500 ease-in-out w-full flex items-center p-3 text-base font-bold text-[${font}] rounded-lg group bg-[${button}] hover:bg-[${hover}] hover:shadow`}
                   >
                     <WalletConnect></WalletConnect>
                     <span className="flex-1 ml-3 whitespace-nowrap text-start">

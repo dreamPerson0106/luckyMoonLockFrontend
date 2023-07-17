@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import BrowserMenu from "./BrowserMenu.js";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";
-import { changeChain } from "../../../actions";
+import { changeChain, changeTheme } from "../../../actions";
+import themes from "../../../assets/theme.json";
 import { ethers } from "ethers";
 
 function Navbar() {
@@ -24,6 +25,35 @@ function Navbar() {
       }
     }
     fetchData();
+    let bright_mode = localStorage.getItem("BRIGHT_MODE");
+    console.log(bright_mode);
+    switch (bright_mode) {
+      case "light":
+        dispatch(changeTheme(themes.light));
+        break;
+      case "dark":
+        dispatch(changeTheme(themes.dark));
+        break;
+      case "dim":
+        dispatch(changeTheme(themes.dark));
+        break;
+
+      default:
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches
+        ) {
+          console.log("lighttttttttttt");
+          localStorage.setItem("BRIGHT_MODE", "light");
+          dispatch(changeTheme("light"));
+        } else {
+          // Windows is in dark mode
+          console.log("darkkkkkkkkkk");
+          localStorage.setItem("BRIGHT_MODE", "dark");
+          dispatch(changeTheme("dark"));
+        }
+        break;
+    }
   }, []);
 
   return (

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
-import Input from "../Layout/Input";
+import Input from "../Elements/Input";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { LPTokenLockerABI } from "../../assets/ABIs";
+
 
 const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
 
@@ -170,7 +171,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
     <div className={`text-[${font}]`}>
       <button
         onClick={temp}
-        className={`border-[1px] border-[${border}] px-3 py-2 mx-2 rounded-lg text-[${fontHolder}] hover:bg-[${backgroundHolder}]`}
+        className={`duration-500 ease-in-out border-[1px] border-[${border}] px-3 py-2 mx-2 rounded-lg text-[${fontHolder}] hover:bg-[${backgroundHolder}]`}
       >
         Back
       </button>
@@ -208,23 +209,25 @@ const LiquidityLock = ({ temp, pairAddress }) => {
                 : "Invalid LP token amount"
             }
           />
+
           <p className="w-2/12">LP Token</p>
+
         </div>
         <div className="mt-2 gap-3 flex">
           <button
-            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
             onClick={handleLptokenAmount(25)}
           >
             25%
           </button>
           <button
-            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
             onClick={handleLptokenAmount(50)}
           >
             50%
           </button>
           <button
-            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            className={`duration-500 ease-in-out border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
             onClick={handleLptokenAmount(75)}
           >
             75%
@@ -268,7 +271,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
       <p className="text-center mt-7 mb-2">Who can withdraw the tokens?</p>
       <div className={`flex justify-center`}>
         <button
-          className={`px-4 py-2 rounded-md ${
+          className={`duration-500 ease-in-out px-4 py-2 rounded-md ${
             !state.unlock_address_state ? "bg-[#1ECD84]" : ""
           }`}
           onClick={() => {
@@ -281,7 +284,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
           Me
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${
+          className={`duration-500 ease-in-out px-4 py-2 rounded-md ${
             state.unlock_address_state ? "bg-[#1ECD84]" : ""
           }`}
           onClick={() => {
@@ -318,7 +321,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
 
       <p className="mt-7 mb-2 text-center">Free options</p>
       <div className="flex justify-center">
-        <button className="bg-[#1ECD84] px-4 py-2 rounded-md text-[#e3e9f1]">
+        <button className="duration-500 ease-in-out bg-[#1ECD84] px-4 py-2 rounded-md text-[#e3e9f1]">
           0.01 ETH
           <br />
           (+1% UNIV)
@@ -334,7 +337,7 @@ const LiquidityLock = ({ temp, pairAddress }) => {
       </p>
       <div className="flex justify-around text-center my-3">
         <button
-          className={` w-1/3 py-3 rounded-lg ${
+          className={`duration-500 ease-in-out w-1/3 py-3 rounded-lg ${
             !state.approve && isValid
               ? !approveState
                 ? "bg-[#1ECD84] text-[#e3e9f1] hover:bg-emerald-500 active:bg-emerald-700"

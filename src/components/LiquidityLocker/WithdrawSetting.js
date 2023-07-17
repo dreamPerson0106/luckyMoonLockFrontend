@@ -1,17 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function WithdrawSetting() {
-  const {
-    font,
-    fontHolder,
-    button,
-    hover,
-    background,
-    backgroundHolder,
-    border,
-    theme,
-  } = useSelector((state) => state.theme);
+  // const {
+  //   font,
+  //   fontHolder,
+  //   button,
+  //   hover,
+  //   background,
+  //   backgroundHolder,
+  //   border,
+  //   theme,
+  // } = useSelector((state) => state.theme);
 
   const optionsArray = [
     {

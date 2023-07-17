@@ -75,7 +75,7 @@ const NewTokenLock = ({ innerLockStatus }) => {
             <div className="flex justify-center">
               <button
                 type="button"
-                className={`inline-block  py-2.5 px-5 mt-10 font-medium text-[${font}] bg-[${background} hover:bg-[${hover}] hover:text-[${fontHolder}]] rounded-lg border border-[${border}]-200 hover:bg-{${backgroundHolder}} hover:text-[${fontHolder}]`}
+                className={`duration-500 ease-in-out inline-block  py-2.5 px-5 mt-10 font-medium text-[${font}] bg-[${background} hover:bg-[${hover}] hover:text-[${fontHolder}]] rounded-lg border border-[${border}]-200 hover:bg-{${backgroundHolder}} hover:text-[${fontHolder}]`}
                 onClick={() => setWalletStatus(true)}
               >
                 Connect Wallet
