@@ -11,7 +11,6 @@ import {
 } from "../../../actions";
 import WalletConnectDialog from "../../WalletConnectDialog";
 import { toast } from "react-toastify";
-import { TERipple } from "tw-elements-react";
 import RippleButton from "../../Elements/RippleButton";
 
 function Connect({ className }) {

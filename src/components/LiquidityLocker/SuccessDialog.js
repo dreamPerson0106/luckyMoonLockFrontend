@@ -8,9 +8,6 @@ import "./tokenlocker.css";
 
 const SuccessDialog = ({ dialogStatus, close, state }) => {
   const { font, fontHolder, background } = useSelector((state) => state.theme);
-
-const SuccessDialog = ({ dialogStatus, close }) => {
-  const { font, fontHolder, background } = useSelector((state) => state.theme);
   const [success_status, setSuccessStatus] = useState(false);
   return (
     <Dialog modalState={dialogStatus} closeModal={close}>

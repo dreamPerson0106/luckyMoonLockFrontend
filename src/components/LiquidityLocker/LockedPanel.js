@@ -11,10 +11,12 @@ import {
   TimeleftIcon,
   UserIcon,
   WayIcon,
+  Setting,
 } from "../../assets/Icons";
 import { BigNumber, ethers } from "ethers";
 import { toast } from "react-toastify";
 import { LPTokenLockerABI, TokenABI } from "../../assets/ABIs";
+import Loading from "../Layout/Loading";
 
 const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
 
@@ -114,7 +116,13 @@ function LockedPanel({ lpTokenAddress, back }) {
     }
     getPairInfo();
     return () => {};
-  }, []);
+  }, [
+    WithdrawModalState,
+    SplitModalState,
+    RelockModalState,
+    OwnershipTransModalState,
+    IncreaseLockModalState,
+  ]);
 
   const handleRelock = (lockID, index) => () => {
     setHandleInfo({ ...handleInfo, index, lockID });
@@ -144,12 +152,8 @@ function LockedPanel({ lpTokenAddress, back }) {
       >
         Back
       </button>
-      <p className={`text-[${font}]`}>Withdraw Liquidity</p>
-      <p className={`text-[${fontHolder}] text-center`}>WETH / USDT</p>
-      <p className={`text-[${fontHolder}] text-center`}>
-        <span>0.536..97</span> - <span>Look page</span>
-      </p>
-      {lpTokens.length !== 0 &&
+      <p className={`text-[${font}] my-2 mx-2`}>Withdraw Liquidity</p>
+      {lpTokens.length !== 0 ? (
         lpTokens.map((lpToken, index) => {
           return (
             <div
@@ -203,49 +207,6 @@ function LockedPanel({ lpTokenAddress, back }) {
                       <PlusIcon width={16} height={16} />
                       Increment Lock
                     </button>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        <button
-          id=""
-          className={`duration-500 ease-in-out my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
-          type="button"
-          onClick={() => {
-            setWithdrawModalState(true);
-          }}
-        >
-          Withdraw
-        </button>
-      </div>
-      <div
-        className={`my-6 bg-[${backgroundHolder}] border-[${border}] border-[1px] rounded-md`}
-      >
-        <div className="grid grid-cols-12 h-20">
-          <div className="col-span-11">
-            <p className={`mt-5 ml-5 text-[${font}]`}>0.03% UNLOCKED</p>
-            <p className={`my-1 ml-5 text-[${fontHolder}]`}>
-              0.000000000004568962
-            </p>
-          </div>
-          <div className="relative">
-            <button
-              className="duration-500 ease-in-out col-span-1 mt-7"
-              ref={btn_self2}
-              onClick={() => {
-                setOptionStatus2(!OptionState2);
-              }}
-            >
-              <OptionsIcon width={30} height={30} />
-            </button>
-            <div
-              className={`${
-                OptionState2 ? "animate-slideUpEnter" : "hidden"
-              } absolute top-16 -left-5 bg-[${background}] border-[1px] border-[${border}] border-[${border}] w-60 rounded-md shadow`}
-              ref={option_menu2}
-            >     
                     <button
                       className={`menu_rows text-[${font}] hover:bg-[${hover}] `}
                       onClick={handleSplit(lpToken.lockID, index)}
@@ -265,21 +226,15 @@ function LockedPanel({ lpTokenAddress, back }) {
                 Withdraw
               </button>
             </div>
-          </div>
-        </div>
-        <button
-          id=""
-          className={`duration-500 ease-in-out my-6 w-[90%]  bg-green-600  ml-[5%] text-[${font}] text-center text-lg  hover:bg-green-400 focus:outline-none  font-medium rounded-lg px-4 py-2.5 items-center `}
-          type="button"
-          onClick={() => {
-            setWithdrawModalState(true);
-          }}
-        >
-          Withdraw
-        </button>
-      </div>
           );
-        })}
+        })
+      ) : (
+        <Loading
+          className="slideUpEnter"
+          style={{ minHeight: "100px" }}
+          text={`Loading`}
+        />
+      )}
       <RelockLiquidity
         states={RelockModalState}
         index={handleInfo.index}
