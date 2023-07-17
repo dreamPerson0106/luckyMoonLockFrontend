@@ -2,5 +2,5 @@ export const ADD_ADDRESS = "ADD_ADDRESS";
 export const REMOVE_ADDRESS = "REMOVE_ADDRESS";
 export const CHANGE_THEME = "CHANGE_THEME";
 export const CONV_ADDRESS = "CONV_ADDRESS";
-export const CHANGE_PAIRINFO = "CHANGE_PAIRINFO";
+export const CHANGE_CONTRACT = "CHANGE_CONTRACT";
 export const CHANGE_CHAIN = "CHANGE_CHAIN";

@@ -1,61 +1,172 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { CheckIcon, InfoIcon } from "../../assets/Icons";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
+import { toast } from "react-toastify";
+import { BigNumber, ethers } from "ethers";
+import Input from "../Layout/Input";
+import { TokenLockerABI } from "../../assets/ABIs";
 
-const NewTokenLocker = () => {
+const TOKEN_ADDRESS = "0xe02c1e6eba5e2f189020968f550ed3fb1a6fe7a8";
+
+const NewTokenLocker = ({ token_Address }) => {
   const { fontHolder, border, background, hover, backgroundHolder, button } =
     useSelector((state) => state.theme);
+  const { wallet_address, contract } = useSelector((state) => state.web3);
 
   const [state, setState] = useState({
-    unlock_address: false,
+    balanceOf: "0",
+    allowance: "0",
+    symbol: "",
+    token: "",
+    date: "",
+    unlock_address: "",
+    unlock_address_state: true,
     condition: false,
     approve: false,
-    lptoken: 25,
     unlockovertime: false,
     dialogStatus: false,
   });
 
-  const handleLock = () => {
+  const [approveState, setApproveState] = useState(false);
+
+  const handleToken = (num) => () => {
     setState({
       ...state,
-      dialogStatus: true,
+      token: state.balanceOf * (num / 100),
     });
   };
 
-  const handleLpToken = (num) => () => {
-    setState({
-      ...state,
-      lptoken: num,
-    });
+  useEffect(() => {
+    async function getTokenInfo() {
+      const { ethereum } = window;
+      if (ethereum && token_Address.length === 42) {
+        try {
+          const balanceOf = await contract.balanceOf(wallet_address);
+          const symbol = await contract.symbol();
+          const allowance = await contract.allowance(
+            wallet_address,
+            TOKEN_ADDRESS
+          );
+          const decimals = await contract.decimals();
+          setState({
+            ...state,
+            balanceOf: ethers.utils.formatUnits(balanceOf, decimals),
+            symbol,
+            allowance: ethers.utils.formatUnits(allowance, decimals),
+          });
+        } catch (err) {
+          toast.error(err.message.split("(")[0].split("[")[0]);
+        }
+      }
+    }
+
+    getTokenInfo();
+    return () => {};
+  }, []);
+
+  // SECTION - handle lock with web3 integration
+
+  const handleLock = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        setState({
+          ...state,
+          dialogStatus: true,
+        });
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const lockerContract = new ethers.Contract(
+          TOKEN_ADDRESS,
+          TokenLockerABI,
+          signer
+        );
+        const unlock_date = state.date;
+        const now = new Date();
+        const unlocks_time = unlock_date - now;
+        const decimals = await contract.decimals();
+        const lockToken = await lockerContract.lock(token_Address, [
+          {
+            owner: wallet_address,
+            amount: parseInt(state.token * 10 ** decimals),
+            startEmission: 0,
+            endEmission: unlocks_time,
+            condition: "0x0000000000000000000000000000000000000000",
+          },
+        ]);
+        await lockToken.wait(1);
+        if (lockToken.status === 1) {
+          toast.success("Lock Success!");
+        } else {
+          toast.error("Lock Failed!");
+        }
+      } catch (err) {
+        setState({ ...state, dialogStatus: false });
+        toast.error(err.message.split("(")[0].split("[")[0]);
+      }
+    } else {
+      toast.error("Metamask is not detected");
+    }
   };
+
+  // !SECTION - handle lock with web3 integration
+
+  //SECTION - handle approve
+
+  const handleApprove = async () => {
+    const { ethereum } = window;
+    const { token } = state;
+    if (ethereum) {
+      try {
+        const decimals = await contract.decimals();
+        const approve = await contract.approve(
+          TOKEN_ADDRESS,
+          parseInt(token * 10 ** decimals)
+        );
+        await approve.wait(1);
+        let allowance = await contract.allowance(wallet_address, TOKEN_ADDRESS);
+        const symbol = await contract.symbol();
+        allowance = ethers.utils.formatUnits(allowance, decimals);
+        toast.success(`${allowance} of ${symbol} is approved!`);
+        if (approve) {
+          setState({ ...state, allowance: allowance });
+        }
+      } catch (err) {
+        toast.error(err.message.split("(")[0].split("[")[0]);
+      }
+    }
+  };
+  //!SECTION
 
   return (
     <>
       <div className={`box_1 p-0 bg-[${background}] border-[${border}]`}>
         <div className="p-5 gap-5 flex flex-col">
-          {/* Lock how many LP tokens? */}
+          {/* SECTION Lock how many LP tokens? */}
+
           <p className="text-center font-bold pt-5">Lock how many LP tokens?</p>
           <div
             className={`border-[${border}] rounded-md border-[1px] bg-[${backgroundHolder}] p-5`}
           >
-            <p className="text-right">Balance : 0</p>
+            <p className="text-right">Balance : {state.balanceOf}</p>
             <div className="flex w-full items-center gap-3">
               <input
                 type="decimal"
                 placeholder="How much LP tokens?"
                 className={`bg-[${backgroundHolder}] p-3 border-b-[1px] border-[${border}] w-11/12`}
+                value={state.token}
+                onChange={(e) => setState({ ...state, token: e.target.value })}
               />
-              <span>UNIV2</span>
-              <button className="bg-[#1ECD84] px-3 py-1 rounded-md">Max</button>
+              <span>{state.symbol}</span>
             </div>
             <div className="mt-2 gap-3 flex">
               <button
                 className={`border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 25 ? `bg-[${background}]` : `bg-[${button}]`
                 }  text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
-                onClick={handleLpToken(25)}
+                onClick={handleToken(25)}
               >
                 25%
               </button>
@@ -63,7 +174,7 @@ const NewTokenLocker = () => {
                 className={`border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 50 ? `bg-[${background}]` : `bg-[${button}]`
                 } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
-                onClick={handleLpToken(50)}
+                onClick={handleToken(50)}
               >
                 50%
               </button>
@@ -71,7 +182,7 @@ const NewTokenLocker = () => {
                 className={`border-[1px] border-[${border}] rounded-md ${
                   state.lptoken === 75 ? `bg-[${background}]` : `bg-[${button}]`
                 } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
-                onClick={handleLpToken(75)}
+                onClick={handleToken(75)}
               >
                 75%
               </button>
@@ -81,45 +192,14 @@ const NewTokenLocker = () => {
                     ? `bg-[${background}]`
                     : `bg-[${button}]`
                 } text-[${fontHolder}] px-2 py-1 hover:bg-[${hover}]`}
-                onClick={handleLpToken(100)}
+                onClick={handleToken(100)}
               >
                 100%
               </button>
             </div>
           </div>
-          {/* Who can withdraw the tokens */}
-          <p className="text-center font-bold">Who can withdraw the tokens?</p>
-          <div className={`flex justify-center`}>
-            <button
-              className={`px-4 py-2 rounded-md ${
-                !state.unlock_address ? "bg-[#1ECD84]" : ""
-              }`}
-              onClick={() => {
-                setState({ ...state, unlock_address: !state.unlock_address });
-              }}
-            >
-              Me
-            </button>
-            <button
-              className={`px-4 py-2 rounded-md ${
-                state.unlock_address ? "bg-[#1ECD84]" : ""
-              }`}
-              onClick={() => {
-                setState({ ...state, unlock_address: !state.unlock_address });
-              }}
-            >
-              Someone else
-            </button>
-          </div>
-          {state.unlock_address ? (
-            <input
-              type="text"
-              placeholder="Unlock address"
-              className={`bg-[${backgroundHolder}] py-3 px-4 border-[1px] rounded-md border-[${border}] w-full `}
-            />
-          ) : (
-            <></>
-          )}
+          {/* !SECTION */}
+
           <div className="flex justify-around items-center mx-16">
             <button
               className={!state.unlockovertime ? "text-[#1ECD84]" : ""}
@@ -139,7 +219,61 @@ const NewTokenLocker = () => {
             </button>
           </div>
 
-          <TimePicker />
+          <TimePicker
+            dateMoment={state.date}
+            setDateMoment={(moment) =>
+              setState({ ...state, date: new Date(moment) })
+            }
+          />
+
+          {/* SECTION Who can withdraw the tokens */}
+
+          <p className="text-center font-bold">Who can withdraw the tokens?</p>
+          <div className={`flex justify-center`}>
+            <button
+              className={`px-4 py-2 rounded-md ${
+                !state.unlock_address_state ? "bg-[#1ECD84]" : ""
+              }`}
+              onClick={() => {
+                setState({
+                  ...state,
+                  unlock_address_state: !state.unlock_address_state,
+                });
+              }}
+            >
+              Me
+            </button>
+            <button
+              className={`px-4 py-2 rounded-md ${
+                state.unlock_address_state ? "bg-[#1ECD84]" : ""
+              }`}
+              onClick={() => {
+                setState({
+                  ...state,
+                  unlock_address_state: !state.unlock_address_state,
+                });
+              }}
+            >
+              Someone else
+            </button>
+          </div>
+          {state.unlock_address_state ? (
+            <Input
+              type="text"
+              placeholder="Unlock address"
+              className={`bg-[${backgroundHolder}] py-3 px-10 border-[1px] rounded-md border-[${border}] w-full my-3`}
+              value={state.unlock_address}
+              onChange={(e) => {
+                setState({ ...state, unlock_address: e.target.value });
+              }}
+              invalid={state.unlock_address.length !== 42}
+              invalidText={`Address Length must 42.`}
+            />
+          ) : (
+            <></>
+          )}
+
+          {/* !SECTION  */}
           <p className="text-center font-bold">Premature Unlock condition</p>
           <div className="flex justify-center items-center gap-10">
             <button
@@ -219,17 +353,20 @@ const NewTokenLocker = () => {
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
           disabled={state.approve}
-          onClick={() => setState({ ...state, approve: true })}
+          onClick={handleApprove}
         >
           Approve
         </button>
         <button
           className={` w-1/2 py-3 rounded-lg ${
-            state.approve
+            Number(state.allowance).toFixed(4) >= Number(state.token).toFixed(4)
               ? "bg-[#1ECD84] text-[#e3e9f1]"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
-          disabled={!state.approve}
+          disabled={
+            !Number(state.allowance).toFixed(4) >=
+            Number(state.token).toFixed(4)
+          }
           onClick={handleLock}
         >
           Lock

@@ -37,7 +37,7 @@ const Dialog = ({ children, modalState, closeModal, button }) => {
       aria-hidden="true"
       className={`${
         modalState ? "animate-slideUpEnter" : "hidden"
-      } fixed top-0 left-0 right-0 z-20 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  max-h-full bg-gray-800/60 backdrop-blur-md z-50`}
+      } fixed top-0 left-0 right-0  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  max-h-full bg-gray-800/60 backdrop-blur-md z-50`}
     >
       <div className=" flex justify-center w-full h-full max-h-[96%]">
         <div className={`relative w-full max-w-2xl py-6`} ref={modal}>

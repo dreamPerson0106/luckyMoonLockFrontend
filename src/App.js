@@ -51,10 +51,6 @@ function App() {
           element: <TokenLocker />,
         },
         {
-          path: "/tokenlocker/:lock",
-          element: <TokenLocks />,
-        },
-        {
           path: "/profile",
           element: <Account />,
         },

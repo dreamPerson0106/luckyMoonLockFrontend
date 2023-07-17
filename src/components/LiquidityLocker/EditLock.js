@@ -1,23 +1,83 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { EthLogo } from "../../assets/Icons";
 import LockedPanel from "./LockedPanel";
+import { ethers, BigNumber } from "ethers";
+import { toast } from "react-toastify";
+import { LPTokenLockerABI, PairABI, TokenABI } from "../../assets/ABIs";
+import Loading from "../Layout/Loading";
+import { changeContract } from "../../actions/index";
+
+const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
 
 function EditLock() {
-  const {
-    background,
-    font,
-    fontHolder,
-    backgroundHolder,
-    mainBg,
-    hover,
-    border,
-  } = useSelector((state) => state.theme);
+  const { font, fontHolder, backgroundHolder, mainBg, hover } = useSelector(
+    (state) => state.theme
+  );
   const { wallet_address } = useSelector((state) => state.web3);
+  const dispatch = useDispatch();
 
-  const [panelStatus, setPanelStatus] = useState(false);
+  const [panelStatus, setPanelStatus] = useState({ address: "", state: false });
+  const [lpToken, setLPToken] = useState([]);
 
-  return !panelStatus ? (
+  //SECTION - get token address
+  useEffect(() => {
+    async function getLockedLPTokenList() {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+
+        const LockInstance = new ethers.Contract(
+          LOCKER_ADDRESS,
+          LPTokenLockerABI,
+          provider
+        );
+        const lockedLPTokenNumber = await LockInstance.getUserNumLockedTokens(
+          wallet_address
+        );
+
+        const indexes = BigNumber.from(lockedLPTokenNumber).toNumber();
+        const lockedLPTokens = [];
+        for (let i = 0; i < indexes; i++) {
+          const address = await LockInstance.getUserLockedTokenAtIndex(
+            wallet_address,
+            i
+          );
+          const LPTokenInstance = new ethers.Contract(
+            address,
+            PairABI,
+            provider
+          );
+          const token0Address = await LPTokenInstance.token0();
+          const token1Address = await LPTokenInstance.token1();
+
+          const token0Instance = new ethers.Contract(
+            token0Address,
+            TokenABI,
+            provider
+          );
+          const token0 = await token0Instance.symbol();
+
+          const token1Instance = new ethers.Contract(
+            token1Address,
+            TokenABI,
+            provider
+          );
+          const token1 = await token1Instance.symbol();
+          lockedLPTokens.push({ address, token0, token1 });
+        }
+        setLPToken(lockedLPTokens);
+      } else {
+        toast.warn("Metamask is not detected!");
+      }
+    }
+    getLockedLPTokenList();
+    return () => {};
+  }, [lpToken.length]);
+
+  //!SECTION
+
+  return !panelStatus.state ? (
     <div className="p-4">
       <p
         className={`text-sm font-medium text-[${font}] dark:text-[${fontHolder}]`}
@@ -38,23 +98,57 @@ function EditLock() {
           e.g. 0xc70556952asdfasd2sfsdf5sdf5sdfsdfsd4fsd6fsdfsd
         </label>
       </div>
-      <button
-        id=""
-        className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
-        type="button"
-        onClick={() => {
-          setPanelStatus(true);
-        }}
-      >
-        <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
-          <EthLogo className={`w-9 h-9`} />
-          WETH / USDT
-        </div>
-        <p>0x563865....2356</p>
-      </button>
+      {lpToken.length !== 0 ? (
+        lpToken.map((item, index) => {
+          return (
+            <button
+              className={` mb-6 w-full justify-between text-[${fontHolder}] text-lg bg-[${backgroundHolder}] hover:bg-[${hover}] focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center `}
+              type="button"
+              key={index}
+              onClick={() => {
+                const { ethereum } = window;
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                const pairInstance = new ethers.Contract(
+                  item.address,
+                  PairABI,
+                  signer
+                );
+                dispatch(changeContract(pairInstance));
+                setPanelStatus({ address: item.address, state: true });
+              }}
+            >
+              <div className={`text-lg flex gap-2 items-center text-[${font}]`}>
+                <EthLogo className={`w-9 h-9`} />
+                {`${item.token0} / ${item.token1}`}
+              </div>
+              <p>
+                {item.address.slice(0, 5) +
+                  "..." +
+                  item.address.slice(
+                    item.address.length - 4,
+                    item.address.length
+                  )}
+              </p>
+            </button>
+          );
+        })
+      ) : (
+        <Loading
+          className="slideUpEnter"
+          style={{ minHeight: "100px" }}
+          text={`Searching`}
+        />
+      )}
     </div>
   ) : (
-    <LockedPanel />
+    <LockedPanel
+      lpTokenAddress={panelStatus.address}
+      back={() => {
+        setLPToken([]);
+        setPanelStatus({ address: "", state: false });
+      }}
+    />
   );
 }
 

@@ -3,28 +3,76 @@ import { useSelector } from "react-redux";
 import TimePicker from "./TimePicker";
 import SuccessDialog from "./SuccessDialog";
 import Input from "../Layout/Input";
+import { ethers } from "ethers";
+import { toast } from "react-toastify";
+import { LPTokenLockerABI } from "../../assets/ABIs";
 
-const LiquidityLock = ({ temp }) => {
+const LOCKER_ADDRESS = "0xfc2a975b8576d8bd57dbc3d55c10795de9944a82";
+
+const LiquidityLock = ({ temp, pairAddress }) => {
   const { font, fontHolder, border, background, backgroundHolder } =
     useSelector((state) => state.theme);
+  const { contract, wallet_address } = useSelector((state) => state.web3);
+  const [pairBalanceOf, setPairBalanceOf] = useState("0");
+  const [transferState, setTransferState] = useState(false);
+  const [approveState, setApproveState] = useState(false);
 
-  const { pairInfo } = useSelector((state) => state.web3);
   const [isValid, setIsValid] = useState(false);
+  const [allowance, setAllowance] = useState(null);
+
   const [state, setState] = useState({
     lptoken: "",
     date: "",
     unlock_address: "",
+    fee: false,
     unlock_address_state: false,
     approve: false,
     dialogStatus: false,
   });
-  // SECTION - handle lock with web3 intergration
 
-  const handleLock = () => {
-    setState({
-      ...state,
-      dialogStatus: true,
-    });
+  // SECTION - handle lock with web3 integration
+
+  const handleLock = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        setState({
+          ...state,
+          dialogStatus: true,
+        });
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const lockerContract = new ethers.Contract(
+          LOCKER_ADDRESS,
+          LPTokenLockerABI,
+          signer
+        );
+        const unlock_date = state.date;
+        const now = new Date();
+        const unlocks_time = unlock_date - now;
+
+        const lockLPToken = await lockerContract.lockLPToken(
+          pairAddress,
+          state.lptoken * 10 ** 18,
+          unlocks_time,
+          "0x0000000000000000000000000000000000000000",
+          state.fee,
+          state.unlock_address.length !== 0
+            ? state.unlock_address
+            : wallet_address,
+          { value: ethers.utils.parseEther("0.001") }
+        );
+        const receipt = await lockLPToken.wait(3);
+        if (lockLPToken) {
+          setTransferState(true);
+        }
+      } catch (err) {
+        setState({ ...state, dialogStatus: false });
+        toast.error(err.message.split("(")[0].split("[")[0]);
+      }
+    } else {
+      toast.error("Metamask is not detected");
+    }
   };
 
   // !SECTION - handle lock with web3 intergration
@@ -32,19 +80,63 @@ const LiquidityLock = ({ temp }) => {
   const handleLptokenAmount = (rate) => () => {
     setState({
       ...state,
-      lptoken: ((pairInfo.balanceOf * rate) / 100).toFixed(20),
+      lptoken: (pairBalanceOf * (rate / 100)).toFixed(18),
     });
   };
+
+  //SECTION - handle approve
+
+  const handleApprove = async () => {
+    const { ethereum } = window;
+    const { lptoken } = state;
+    if (ethereum) {
+      try {
+        setApproveState(true);
+        const approve = await contract.approve(
+          LOCKER_ADDRESS,
+          lptoken * 10 ** 18
+        );
+        const receipt = await approve.wait(3);
+        setApproveState(false);
+        if (approve) {
+          setState({ ...state, approve: true });
+        }
+      } catch (err) {
+        toast.error(err.message.split("(")[0]);
+        setApproveState(false);
+      }
+    }
+  };
+  //!SECTION
+
+  useEffect(() => {
+    const { ethereum } = window;
+    if (ethereum) {
+      async function getPairContractInfo() {
+        let balanceOf = await contract.balanceOf(wallet_address);
+
+        balanceOf = ethers.utils.formatEther(balanceOf);
+        setPairBalanceOf(balanceOf);
+      }
+      try {
+        getPairContractInfo();
+      } catch (err) {
+        toast.error(err.split("[")[0]);
+      }
+    }
+    return () => {};
+  }, []);
 
   //SECTION - isValid
 
   useEffect(() => {
     setIsValid(
-      (Number(state.lptoken) <= Number(pairInfo.balanceOf) &&
+      (Number(state.lptoken) <= Number(pairBalanceOf) &&
         state.lptoken.length !== 0 &&
         state.date.length !== 0 &&
+        new Date(state.date) > new Date() &&
         !state.unlock_address_state) ||
-        (Number(state.lptoken) <= Number(pairInfo.balanceOf) &&
+        (Number(state.lptoken) <= Number(pairBalanceOf) &&
           state.lptoken.length !== 0 &&
           state.date.length !== 0 &&
           state.unlock_address_state &&
@@ -54,6 +146,26 @@ const LiquidityLock = ({ temp }) => {
   }, [state]);
 
   //!SECTION - isValid
+
+  //SECTION - approve state from allowance
+
+  useEffect(() => {
+    const { ethereum } = window;
+    if (ethereum) {
+      async function getPairAllowance() {
+        const allowance = await contract.allowance(
+          wallet_address,
+          LOCKER_ADDRESS
+        );
+        setAllowance(ethers.utils.formatEther(allowance));
+      }
+      getPairAllowance();
+    }
+    return () => {};
+  }, []);
+
+  //!SECTION
+
   return (
     <div className={`text-[${font}]`}>
       <button
@@ -73,14 +185,12 @@ const LiquidityLock = ({ temp }) => {
       <div
         className={`border-[${border}] rounded-md border-[1px] bg-[${backgroundHolder}] p-5`}
       >
-        <p className={`text-right text-[${font}]`}>
-          Balance : {pairInfo.balanceOf}
-        </p>
+        <p className={`text-right text-[${font}]`}>Balance : {pairBalanceOf}</p>
         <div className="flex w-full items-center gap-3">
           <Input
             type="decimal"
             placeholder="How much LP tokens?"
-            className={`bg-[${backgroundHolder}] p-3 border-b-[1px] border-[${border}] w-11/12`}
+            className={`bg-[${backgroundHolder}] px-3 py-2 border-b-[1px] border-[${border}] w-full`}
             onChange={(e) => {
               setState({
                 ...state,
@@ -89,24 +199,16 @@ const LiquidityLock = ({ temp }) => {
             }}
             value={state.lptoken}
             invalid={
-              Number(state.lptoken) > Number(pairInfo.balanceOf) ||
+              Number(state.lptoken) > Number(pairBalanceOf) ||
               state.lptoken.length === 0
             }
             invalidText={
-              Number(state.lptoken) > Number(pairInfo.balanceOf)
+              Number(state.lptoken) > Number(pairBalanceOf)
                 ? `The amount must be smaller than LP token's balance.`
                 : "Invalid LP token amount"
             }
-            // step={"any"}
           />
-          <span>USDT</span>
-          {/* NOTE - Max button */}
-          <button
-            className="bg-[#1ECD84] p-3 rounded-md"
-            onClick={handleLptokenAmount(100)}
-          >
-            Max
-          </button>
+          <p className="w-2/12">LP Token</p>
         </div>
         <div className="mt-2 gap-3 flex">
           <button
@@ -126,6 +228,12 @@ const LiquidityLock = ({ temp }) => {
             onClick={handleLptokenAmount(75)}
           >
             75%
+          </button>
+          <button
+            className={`border-[1px] border-[${border}] rounded-md bg-[${background}] text-[${fontHolder}] px-2 py-1 `}
+            onClick={handleLptokenAmount(100)}
+          >
+            100%
           </button>
         </div>
       </div>
@@ -228,21 +336,34 @@ const LiquidityLock = ({ temp }) => {
         <button
           className={` w-1/3 py-3 rounded-lg ${
             !state.approve && isValid
-              ? "bg-[#1ECD84] text-[#e3e9f1]"
+              ? !approveState
+                ? "bg-[#1ECD84] text-[#e3e9f1] hover:bg-emerald-500 active:bg-emerald-700"
+                : "bg-[#1ECD84] text-[#e3e9f1] cursor-not-allowed"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
-          disabled={state.approve}
-          onClick={() => setState({ ...state, approve: true })}
+          disabled={(state.approve && isValid) || approveState}
+          onClick={handleApprove}
         >
-          Approve
+          {!approveState ? (
+            "Approve"
+          ) : (
+            <div className=" flex justify-center items-center">
+              <span className="dot-pulse" />
+            </div>
+          )}
         </button>
         <button
           className={` w-1/3 py-3 rounded-lg ${
-            state.approve && isValid
-              ? "bg-[#1ECD84] text-[#e3e9f1]"
+            (state.approve && isValid) ||
+            (Number(state.lptoken) <= Number(allowance) && isValid)
+              ? "bg-[#1ECD84] text-[#e3e9f1] hover:bg-emerald-500 active:bg-emerald-700 cursor-pointer"
               : "bg-[#C8C9CE] cursor-not-allowed"
           }`}
-          disabled={!state.approve}
+          disabled={
+            !state.approve &&
+            isValid &&
+            Number(state.lptoken) > Number(allowance)
+          }
           onClick={handleLock}
         >
           Lock
@@ -253,6 +374,7 @@ const LiquidityLock = ({ temp }) => {
         close={() => {
           setState({ ...state, dialogStatus: false });
         }}
+        state={transferState}
       />
     </div>
   );
